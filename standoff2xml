@@ -123,7 +123,7 @@ def merge_xml(text, annotation, out):
                 curpos += i['skip']
                 
 
-def merge_annotations(origann, newann, breakable=None, allowmerge=False, no_betweenspan_elements=False):
+def merge_annotations(origann, newann, breakable=None, nest_elements=[], allowmerge=False, no_betweenspan_elements=False):
     """
     Merge original annotation with a new annotation into one stream
     
@@ -202,7 +202,7 @@ def merge_annotations(origann, newann, breakable=None, allowmerge=False, no_betw
         # 1) spans starting before the new span starts
         while xptr < len(origann) and origann[xptr]['start'] <= t['start']:
             x = origann[xptr]
-            if x['end'] <= t['start'] and x['end'] < t['end']:  # spans preceding the new (non-empty) span completely
+            if x['end'] <= t['start'] and x['end'] < t['end'] and x['name'] not in nest_elements:  # spans preceding the new (non-empty) span completely
                 order += 1
                 x['order'] = order
                 outann.append(x)
@@ -297,6 +297,8 @@ if __name__ == '__main__':
 
              '-kb' Keep broken elements also between sentences (usually pointless for highlighting etc.)
              
+             `-ne <elements>` comma-separated list of element names to be preferably nested within the merged
+             annotation spans incl. tokens, e.g. `-ne del,choice`
     """
     
     parser = argparse.ArgumentParser(description="Re-create XML from a plain text file and its standoff annotation(s)")
@@ -305,8 +307,10 @@ if __name__ == '__main__':
     parser.add_argument("-Wb", "--warn-breaking-except", type=str,
                         help="raise warning when breaking elements other than the specified ones (comma-separated list of element names, e.g. `-Wb hi,stage,foreign`)")
     parser.add_argument("-kb", "--keep-between-sentences", help="keep broken elements between sentences", action="store_true")
+    parser.add_argument("-ne", "--nest-elements", help="elements to be preferably nested inside the annotation elements", type=str, default='')
     args = parser.parse_args()
     breakable = args.warn_breaking_except.split(',') if args.warn_breaking_except else None
+    nest_elements = args.nest_elements.split(',')
     
     # input/output files
     txtin = Path(args.infile)
@@ -338,9 +342,10 @@ if __name__ == '__main__':
             sentence_level = (level == 1)
             if sentence_level:
                 if not args.tokens_only:
-                    xmlann = merge_annotations(xmlann, spans, breakable, no_betweenspan_elements=not args.keep_between_sentences)
+                    xmlann = merge_annotations(xmlann, spans, breakable, nest_elements=nest_elements,
+                                                no_betweenspan_elements=not args.keep_between_sentences)
             else:
-                xmlann = merge_annotations(xmlann, spans, breakable)
+                xmlann = merge_annotations(xmlann, spans, breakable, nest_elements=nest_elements)
     else:
         # sort by XML element order attribute (`merge_annotations` already does this)
         xmlann = sorted(xmlann, key=itemgetter('order'))
