@@ -70,6 +70,8 @@ def ann2standoff(vrtann, reftext, config, replacements=[], matchlist=[]):
     attrnames = config.get('attributes', '').replace(',',' ').split()
     token_element = config.get('token_element', 'w')
     sentence_element = config.get('sentence_element', 's')
+    virtual_token = config.get('virtual_tokens', None)
+    virtual_token_attr = config.get('virtual_token_attr', None)
     linecnt = 0 
     curpos = 0
     annotation = []
@@ -90,6 +92,12 @@ def ann2standoff(vrtann, reftext, config, replacements=[], matchlist=[]):
         word = pattrs[0]
         attrcnt = 1
         attrs = []
+
+        if not word and virtual_token:
+            pattrs.pop(0)
+            attr = virtual_token_attr+'="'+html.escape(pattrs[0], quote=True)+'"'
+            attrs.append(attr)
+
         while len(pattrs) > attrcnt:
             if attrcnt > len(attrnames):
                 attrname = 'attr_' + str(attrcnt)
@@ -99,6 +107,12 @@ def ann2standoff(vrtann, reftext, config, replacements=[], matchlist=[]):
             attrs.append(attr)
             attrcnt += 1
         attrstr = " ".join(attrs)
+
+        # virtual subtoken (if enabled)
+        if not word and virtual_token:
+            token = {"name": virtual_token, "contents": attrstr+'/', "start": curpos, "end": curpos, "level": 3, 'order': linecnt}
+            annotation.append(token)
+            continue
 
         # skip any whitespace between tokens and store it in "pre"
         pre = ''
@@ -172,6 +186,7 @@ def preprocess_conllu(input, config):
     """
     #strip = " \t\r\n" if config.getboolean('ascii_strip') else None
     multitoken = re.compile("([0-9]+)-([0-9]+)")
+    virtual_token = config.get('virtual_tokens', None)
     # create list of separators for all configured atrributes using either default or their specific separator if defined
     default_sep = config.get('multi_separator', '|')
     separators = [config.get(f'multi_separator_{name}', default_sep) for name in config.get('attributes', '').replace(',',' ').split()]
@@ -190,7 +205,10 @@ def preprocess_conllu(input, config):
                 attrs = [attrs[1], *attrs]
             yield("\t".join(attrs))
         else:
-            # multitoken: concatenate/merge all subtoken attributes using configured separators and return
+            # multitokens: virtual tokens or merged attributes
+            if virtual_token:
+                attrs = [attrs[1], *attrs]
+                yield("\t".join(attrs))
             first = int(match.group(1))
             last = int(match.group(2))
             word = attrs[1]
@@ -202,10 +220,16 @@ def preprocess_conllu(input, config):
                 if int(attrs[0]) != id:
                     raise Exception("Token ID mismatch at line {0}: expected {1}, got {2}.".format(cnt, id, attrs[0]))
                 attr_buffer.append(attrs)
-            # separators[i:i+1]+[default_sep])[0] yields safe default in case there are more attributes than configured
-            merged_attrs = [(separators[i:i+1]+[default_sep])[0].join(x) for i, x in enumerate(list(zip(*attr_buffer)))]
-            merged_attrs = [word, *merged_attrs]
-            yield("\t".join(merged_attrs))
+                if virtual_token:
+                    # prepend empty string to indicate virtual token
+                    attrs = ['', attrs[1], *attrs]
+                    yield("\t".join(attrs))
+            if not virtual_token:
+                # concatenate/merge all subtoken attributes using configured separators and return
+                # separators[i:i+1]+[default_sep])[0] yields safe default in case there are more attributes than configured
+                merged_attrs = [(separators[i:i+1]+[default_sep])[0].join(x) for i, x in enumerate(list(zip(*attr_buffer)))]
+                merged_attrs = [word, *merged_attrs]
+                yield("\t".join(merged_attrs))
 
 
 if __name__ == '__main__':
@@ -260,6 +284,11 @@ if __name__ == '__main__':
              '-se <element_name>' Name of the resulting XML elemenent for sentences.
              Config setting: 'sentence_element'.
              Default: 's'.
+
+             '-vt <name>' Name of virtual subtokens to carry second level tokenization from CoNLL-U two level 
+             tokenization/annotation.
+             Config setting: 'virtual_tokens'.
+             Default: no virtual subtokens created
     """
     
     import os
@@ -284,6 +313,8 @@ if __name__ == '__main__':
     parser.add_argument("-a", "--attributes", help="attribute names (except first position, separated by comma)", type=str)
     parser.add_argument("-te", "--token-element", help="name of token element", type=str)
     parser.add_argument("-se", "--sentence-element", help="name of sentence element", type=str)
+    parser.add_argument("-vt", "--virtual-tokens", help="name of virtual subtokens for CoNLL-U second level tokenization", type=str)
+    parser.add_argument("-va", "--virtual-token-attr", help="name of virtual subtoken attribute to capture form", type=str, default='form')
     args = parser.parse_args()
 
     # read configuration from files

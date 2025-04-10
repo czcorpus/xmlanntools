@@ -166,23 +166,23 @@ def merge_annotations(origann, newann, breakable=None, allowmerge=False, no_betw
     order = 0
     # iterate over the new annotation spans
     for t in newann:
-
+        lastlevel = 0
         # reopen spans that started inside the previous new span and were therefore broken
         for x in restartspans:
             order += 1
             x['order'] = order
             if not no_betweenspan_elements or x['end']>=t['end']:
                 # really append only if it does not end within the current new span again (or if requested)
+                lastlevel = x['level']
                 outann.append(x)
 
         restartspans = []
         inbuffer = []
-        lastlevel = 0
 
         # A) first check whether some of the previously inserted spans do not end inside the new span
         stillopen = []
         for x in openspans:
-            if x['end'] <= t['start']:  # forget about spans ending before the new span, they do not cause problems
+            if x['end'] <= t['start'] and x['end'] < t['end']:  # forget about spans ending before the new span, they do not cause problems
                 continue
             if x['end'] < t['end']:  # span ending inside the new span must be split:
                 if breakable and x['name'] not in breakable:
@@ -192,10 +192,9 @@ def merge_annotations(origann, newann, breakable=None, allowmerge=False, no_betw
                 x['end'] = t['start']  # a) cut the original span end at the start of the new span
                 xc['start'] = t['start']  # b) the rest has to be placed inside the new span (a copy restarted inside)
                 inbuffer.append(xc)
-            elif x['end'] > t['end']:  # spans that just go on... keep them for later revision
-                stillopen.append(x)
-            if x['end'] >= t['end']:
+            elif x['end'] >= t['end']:  # spans that just go on... keep them for later revision
                 lastlevel = x['level']
+                stillopen.append(x)
         openspans = stillopen
 
         # B) now look at other spans concerning the new span (starting before or inside it)
@@ -203,7 +202,7 @@ def merge_annotations(origann, newann, breakable=None, allowmerge=False, no_betw
         # 1) spans starting before the new span starts
         while xptr < len(origann) and origann[xptr]['start'] <= t['start']:
             x = origann[xptr]
-            if x['end'] <= t['start']:  # spans preceding the new span completely
+            if x['end'] <= t['start'] and x['end'] < t['end']:  # spans preceding the new (non-empty) span completely
                 order += 1
                 x['order'] = order
                 outann.append(x)
@@ -227,7 +226,7 @@ def merge_annotations(origann, newann, breakable=None, allowmerge=False, no_betw
                     t['csep'] = x.get('csep',' ')
                 else:
                     lastlevel = x['level']
-                    if x['end'] != t['end']:  # spans not ending yet must be revised by later new spans as well
+                    if x['end'] >= t['end']:  # spans not ending yet must be revised by later new spans as well
                         openspans.append(x)
                     order += 1
                     x['order'] = order
@@ -268,6 +267,13 @@ def merge_annotations(origann, newann, breakable=None, allowmerge=False, no_betw
             ispan['order'] = order
             outann.append(ispan)
 
+    while xptr < len(origann):
+        x = origann[xptr]
+        order += 1
+        x['order'] = order
+        outann.append(x)
+        xptr += 1
+
     return outann
 
 
@@ -289,12 +295,6 @@ if __name__ == '__main__':
              one of the listed ones (comma-separated list of element names, e.g. `-Wb hi,stage,foreign`);
              no warnings are issued if `-Wb` is omitted
 
-             `-te <element_name>` Name of the XML elemenent for tokens.
-             Default: 'w'.
-
-             '-se <element_name>' Name of the XML elemenent for sentences.
-             Default: 's'.
-
              '-kb' Keep broken elements also between sentences (usually pointless for highlighting etc.)
              
     """
@@ -304,8 +304,6 @@ if __name__ == '__main__':
     parser.add_argument("-t", "--tokens-only", help="ignore sentence boundaries from the `.ann.json` annotation", action="store_true")
     parser.add_argument("-Wb", "--warn-breaking-except", type=str,
                         help="raise warning when breaking elements other than the specified ones (comma-separated list of element names, e.g. `-Wb hi,stage,foreign`)")
-    parser.add_argument("-te", "--token-element", help="name of token element", type=str, default='w')
-    parser.add_argument("-se", "--sentence-element", help="name of sentence element", type=str, default='s')
     parser.add_argument("-kb", "--keep-between-sentences", help="keep broken elements between sentences", action="store_true")
     args = parser.parse_args()
     breakable = args.warn_breaking_except.split(',') if args.warn_breaking_except else None
@@ -328,16 +326,21 @@ if __name__ == '__main__':
     if annjsonin.exists():
         with annjsonin.open(encoding='utf-8') as jsonfile:
             annotation = json.load(jsonfile)
-        # extract word-level/token annotation (tagging)
-        tokens = [i for i in annotation if i['name'] == args.token_element]
-        # extract sentence segmentation (unless it shuold be ignored)
-        if not args.tokens_only:
-            sentences = [i for i in annotation if i['name'] == args.sentence_element]
-            # merge sentence segmentation (if any) with the original XML mark-up
-            if len(sentences):
-                xmlann = merge_annotations(xmlann, sentences, breakable, no_betweenspan_elements=not args.keep_between_sentences)
-        # merge with the token level annotation 
-        xmlann = merge_annotations(xmlann, tokens, breakable)
+        levels = {}
+        # group new annotation by levels
+        for i in annotation:
+            if i['level'] in levels:
+                levels[i['level']].append(i)
+            else:
+                levels[i['level']] = [i]
+        # merge each annotation level separately
+        for level, spans in sorted(levels.items()):
+            sentence_level = (level == 1)
+            if sentence_level:
+                if not args.tokens_only:
+                    xmlann = merge_annotations(xmlann, spans, breakable, no_betweenspan_elements=not args.keep_between_sentences)
+            else:
+                xmlann = merge_annotations(xmlann, spans, breakable)
     else:
         # sort by XML element order attribute (`merge_annotations` already does this)
         xmlann = sorted(xmlann, key=itemgetter('order'))
