@@ -68,6 +68,7 @@ def ann2standoff(vrtann, reftext, config, replacements=[], matchlist=[]):
         
     """
     attrnames = config.get('attributes', '').replace(',',' ').split()
+    excluded_attrs = config.get('exclude_attributes', '').replace(',',' ').split()
     token_element = config.get('token_element', 'w')
     sentence_element = config.get('sentence_element', 's')
     virtual_token = config.get('virtual_tokens', None)
@@ -103,6 +104,9 @@ def ann2standoff(vrtann, reftext, config, replacements=[], matchlist=[]):
                 attrname = 'attr_' + str(attrcnt)
             else:
                 attrname = attrnames[attrcnt-1]
+            if attrname in excluded_attrs:
+                attrcnt += 1
+                continue
             attr = attrname+'="'+html.escape(pattrs[attrcnt], quote=True)+'"'
             attrs.append(attr)
             attrcnt += 1
@@ -262,6 +266,10 @@ if __name__ == '__main__':
              by its number as 'attr_N'.
              Config setting: 'attributes' (may also be separated by spaces, commas, linebreaks or
              a combination thereof)
+
+             '-ea <list_of_attributes>' comma separated list of positional attribute names to be excluded.
+             Config setting: 'exclude_attributes' (may also be separated by spaces, commas, linebreaks or
+             a combination thereof)
               
              '-r <filename>' File with a table of replacement rules. It should be TSV (TAB separated)
              file with two columns: 1) regular expression, 2) replacement. The rules are then applied to
@@ -311,6 +319,7 @@ if __name__ == '__main__':
     parser.add_argument("-r", "--replacements", help="file with replacements (TSV)", type=str)
     parser.add_argument("-m", "--matches", help="file with matches (TSV)", type=str)
     parser.add_argument("-a", "--attributes", help="attribute names (except first position, separated by comma)", type=str)
+    parser.add_argument("-ea", "--exclude-attributes", help="attribute names (except first position, separated by comma)", type=str)
     parser.add_argument("-te", "--token-element", help="name of token element", type=str)
     parser.add_argument("-se", "--sentence-element", help="name of sentence element", type=str)
     parser.add_argument("-vt", "--virtual-tokens", help="name of virtual subtokens for CoNLL-U second level tokenization", type=str)
