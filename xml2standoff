@@ -349,15 +349,15 @@ if __name__ == '__main__':
     
     Output: creates two new files with the same base name as the input file, but with the extension `.txt` and `.json`
     
-    Options: '-t <text_elements>' List of comma separated names of basic text elements (e.g. paragraph lebvel elements). Turns
-             on content aware extraction where only text contents from the specified elements is extracted into the plain text
-             output. Provisional line breaks are added to the plain text output between the text fragments, which will be removed 
-             later by `standoff2xml`. The text elements may also be nested within each other.
+    Options: '-t <text_elements>' List of comma separated constraints (see documentation for details) on basic text elements
+             (e.g. paragraph level elements). Turns on content aware extraction where only text contents from the specified elements
+             is extracted into the plain text output. Provisional line breaks are added to the plain text output between the text
+             fragments, which will be removed later by `standoff2xml`. The text elements may also be nested within each other.
              
              '-kl' Keep line breaks within the specified text elements. By default, line breaks within the text elements are
              (irreversibly) converted to spaces. (This option has thus no effect if `-t` is not used!)
              
-             '-e <element_names>' List of comma separated names of elements to ignore/skip when extracting plain text contents.
+             '-e <element_names>' List of comma separated constraints on elements to ignore/skip when extracting plain text contents.
              Anything within their scope is ignored, even nested elements of the type specified by `-t`.
     """
 
