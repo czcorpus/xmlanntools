@@ -80,6 +80,90 @@ def re_partition(pattern, string):
         return string, '', ''
     return string[:match.start()], match.group(0), string[match.end():]
 
+def parse_constraints(description):
+    """
+    Parse additional constraints on textelements (or excluded elements)
+
+    Parameters:
+    -----------
+    description: str
+        string reptresentation of the constraints
+
+    Returns:
+    --------
+    constraints: dict
+        constraints on the name, attributes and/or parents (recursive) of the element
+
+    Supported format example:
+    - anyparent//direct_parent/element_name[@attr1="value1"][@attr2="value2"]
+    (all attribute constraints must be satisfied (AND logic))
+
+    """
+    name = ''
+    parents, element = description.rsplit('/', 1) if '/' in description else ('', description)
+
+    direct = not parents.endswith('/')
+    if not direct:
+        parents = parents[:-1]
+
+    name, *attr_constraints = element.split('[')
+
+    attrs = []
+    for constr in attr_constraints:
+        assert constr[-1] == ']', "Missing end bracket in constraint: ["+constr
+        aname, avalue = constr[:-1].split('=')
+        attrs.append({
+            'name': aname.lstrip('@ ').rstrip(),
+            'value': avalue.strip("\" ")
+        })
+
+    parent = None if not parents else parse_constraints(parents)
+    if parent:
+        parent['direct'] = direct
+
+    return {
+        'name': name,
+        'parent': parent,
+        'attrs': attrs
+    }
+
+def matches_constraint(constraint, heap):
+    """
+    Test whether the current element (last on the heap) matches the given constraint
+    (see `parse_constraints` above for details)
+    """
+    if not len(heap):
+        return False
+    ptr = -1
+    current = heap[ptr]
+    # compare current element name with name requested
+    if current['name'] != constraint['name'] and current['name'] != constraint['name']+'/':
+        return False
+    # test for attribute constraints
+    for attr_constr in constraint['attrs']:
+        expr = re.compile("(?<!\S)"+attr_constr['name']+"\s*=\s*\""+attr_constr['value']+"\"")
+        if not expr.search(current['contents']):
+            return False
+    # test for parent constraints
+    parent_constr = constraint['parent']
+    if parent_constr:
+        while True:
+            parent_test = matches_constraint(parent_constr, heap[:ptr])
+            if parent_test:
+                return True
+            ptr -= 1
+            if parent_constr['direct'] or abs(ptr) >= len(heap):
+                return False
+    return True
+
+def matches_any_constraints(constraints, heap):
+    """
+    Test whether the current element (last on the heap) matches any of the constraints in the list
+    """
+    for constr in constraints:
+        if matches_constraint(constr, heap):
+            return True
+    return False
 
 def split_xml(text, txtelements=None, excludes=None, keep_linebreaks=False):
     """
@@ -188,7 +272,7 @@ def split_xml(text, txtelements=None, excludes=None, keep_linebreaks=False):
                 markup.append(last)
                 # is the ending element a text element or an excluded element?
                 if txtelements is not None:
-                    if ename in txtelements:
+                    if matches_any_constraints(txtelements, heap + [last]):
                         txtel_depth -= 1
                         if exclude_depth == 0:
                             # insert provisional line break into the plain text that will be cut in the reverse conversion (unless within excluded scope)
@@ -200,7 +284,7 @@ def split_xml(text, txtelements=None, excludes=None, keep_linebreaks=False):
                     if txtel_depth == 0:
                         text_store = (last, 'tail')
                 if excludes is not None:
-                    if ename in excludes:
+                    if matches_any_constraints(excludes, heap + [last]):
                         exclude_depth -= 1
                     # still within the scope of excluded elements: no text extraction
                     if exclude_depth > 0:
@@ -216,7 +300,7 @@ def split_xml(text, txtelements=None, excludes=None, keep_linebreaks=False):
                     if csep and csep != ' ':
                         eldesc['csep'] = csep
                     # should the empty element add a provisional line break?
-                    if txtelements is not None and exclude_depth == 0 and ename.endswith("/") and ename[:-1] in txtelements:
+                    if txtelements is not None and exclude_depth == 0 and ename.endswith("/") and matches_any_constraints(txtelements, heap + [eldesc]):
                         charcnt += 1
                         plaintext.write("\n")
                         eldesc['skip'] = 1
@@ -231,7 +315,7 @@ def split_xml(text, txtelements=None, excludes=None, keep_linebreaks=False):
                         eldesc['csep'] = csep
                     # if included elements are defined, check whether we shall extract the text contents or store/keep them within the mark-up description
                     if txtelements is not None:
-                        if ename in txtelements:
+                        if matches_any_constraints(txtelements, heap + [eldesc]):
                             txtel_depth  += 1
                             text_store = None
                             if exclude_depth == 0:
@@ -243,7 +327,7 @@ def split_xml(text, txtelements=None, excludes=None, keep_linebreaks=False):
                             text_store = (eldesc, 'text')
                     # if excluded elements are defined, keep text contents within their description and do not extract them
                     if excludes is not None:
-                        if ename in excludes:
+                        if matches_any_constraints(excludes, heap + [eldesc]):
                             exclude_depth += 1
                         if exclude_depth > 0:
                             text_store = (eldesc, 'text')
@@ -297,8 +381,8 @@ if __name__ == '__main__':
     txtout = xmlin.with_suffix('.txt')
     jsonout = xmlin.with_suffix('.json')
 
-    includes = args.text_elements.split(',') if args.text_elements else None
-    excludes = args.exclude_elements.split(',') if args.exclude_elements else None
+    includes = [parse_constraints(i) for i in args.text_elements.split(',')] if args.text_elements else None
+    excludes = [parse_constraints(i) for i in args.exclude_elements.split(',')] if args.exclude_elements else None
 
     # read the whole input file
     with xmlin.open(encoding='utf-8') as infile:
