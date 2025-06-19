@@ -19,7 +19,7 @@ import requests
 # LINDAT service
 UDPIPE_API_URL = "http://lindat.mff.cuni.cz/services/udpipe/api/process"
 
-def udpipe_lindat(model, text, syn = True):
+def udpipe_lindat(model, text, tokenizer="", tagger="", parser="", input=None, output=None):
     """
     Send a text to UDPipe2 web service and return the result
     
@@ -27,8 +27,16 @@ def udpipe_lindat(model, text, syn = True):
         text to analyze
     model : str
         language model to apply
-    syn : bool
-        perform dependency parsing
+    tokenizer : str | None
+        tokenize as plain text?
+    tagger : str | None
+        perform analysis (lemmatization and tagging)?
+    parser : str | None
+        perform dependency parsing?
+    input : str | None
+        if the tokenizer is not used, the input is assumed to be in the specified input format
+    output : str | None
+        The output format (eventually with options) to use
 
     See also:
      * <http://lindat.mff.cuni.cz/services/udpipe/api-reference.php>
@@ -38,26 +46,32 @@ def udpipe_lindat(model, text, syn = True):
     
     params = {
         "model": model,
-        "data": text,
-        "tokenizer": "",
-        "tagger": "",
+        "data": text
     }
-    if syn:
-        params["parser"] = ""
+    if tokenizer is not None:
+        params["tokenizer"] = tokenizer
+    if tagger is not None:
+        params["tagger"] = tagger
+    if parser is not None:
+        params["parser"] = parser
+    if input is not None:
+        params["input"] = input
+    if output is not None:
+        params["output"] = output
     response = requests.post(UDPIPE_API_URL, params)
     if not response.ok:
         error_type = (
             "TAGGER NOT AVAILABLE: "
             if response.status_code == http.HTTPStatus.SERVICE_UNAVAILABLE
-            else "TAGGING FAILED: "
+            else f"TAGGING FAILED [{response.status_code}]: "
             )
-        raise Exception(error_type + str(response))
+        raise Exception(error_type + response.text)
     return response.json()["result"]
 
 
 if __name__ == '__main__':
     """
-    Analyze text with UDPipe 2 (using LINDAT REST API)
+    Analyze text with UDPipe 2 (using LINDAT REST API: http://lindat.mff.cuni.cz/services/udpipe/api-reference.php)
     
     Input: STDIN by default
     
@@ -68,30 +82,63 @@ if __name__ == '__main__':
              
              '-f <filename>' Read input from file instead of from STDIN.
 
+             '-i <format>' Input format.
+
+             '-o <format>' Output format.
+
              '-b <number>' Specify batch size, i.e. number of lines to be send to the API at once.
              The REST API has a limit for maximal request size, probably around 1.3MB.
              Default: 1000
+
+             '-na' Do not perform any analysis, just segmentation and tokenization.
+
+             '-np' Do not perform syntactic parsing.
+
+             '-t' Additional options for the tokenizer.
+
+             '-a' Additional options for the tagger (analysis).
+
+             '-p' Additional options for the parser.
              
              '-v' Report progress to STDERR.
     
     """
     import sys
     import argparse
-    parser = argparse.ArgumentParser(description="Analyze text with UD-pipe")
-    parser.add_argument("-m", "--model", help="UD language model to use", type=str, default="czech-fictree-ud-2.6-200830")
+
+    DEFAULT_MODEL = 'cs'
+
+    parser = argparse.ArgumentParser(description="Analyze text with UD-pipe (http://lindat.mff.cuni.cz/services/udpipe/api-reference.php)")
+    parser.add_argument("-m", "--model", help="UD language model to use", type=str, default=DEFAULT_MODEL)
     parser.add_argument("-f", "--file", help="input file (default=STDIN)", type=str)
+    parser.add_argument("-i", "--input", help="input format (if pre-tokenized; by default just plaintext to be tokenized internally)", type=str, default="plaintext")
+    parser.add_argument("-o", "--output", help="output format (default: connlu v2)", type=str, default="conllu")
     parser.add_argument("-b", "--batch", help="batch size in lines (default=1000)", type=int, default=1000)
+    parser.add_argument("-na", "--no-analysis", help="do NOT perform any analysis (lemmatization, tagging or parsing); perform just segmentation and tokenization", action="store_true")
+    parser.add_argument("-np", "--no-parsing", help="do NOT perform dependency parsing (syntax)", action="store_true")
+    parser.add_argument("-t", "--tokenizer", help="additional options for the tokenizer", type=str, default="")
+    parser.add_argument("-a", "--analysis", help="additional options for the tagger (ignored if --no-analysis is used)", type=str, default="")
+    parser.add_argument("-p", "--parser", help="additional options for the parser (ignored if --no-analysis or --no-parsing is used)", type=str, default="")
     parser.add_argument("-v", "--verbose", help="report progress", action="store_true")
     args = parser.parse_args()
     
     buffer = []
 
-    def analyze(buffer):
+    def analyze(buffer, args):
         analyze.counter += 1
         if args.verbose:
             sys.stderr.write(f"[{analyze.counter}] Sending {len(buffer)} lines to UD-pipe. ")
             sys.stderr.flush()
-        print(udpipe_lindat(args.model, "\n".join(buffer)+"\n"))
+        print(udpipe_lindat(
+            model=args.model, 
+            text="".join(buffer),
+            tokenizer= args.tokenizer,
+            tagger= None if args.no_analysis else args.analysis,
+            parser= None if args.no_parsing or args.no_analysis else args.parser,
+            input= None if args.input=='plaintext' else args.input,
+            output= args.output
+            )
+        )
         if args.verbose:
             sys.stderr.write(f"Analyzed.\n")
 
@@ -103,4 +150,4 @@ if __name__ == '__main__':
                 analyze(buffer)
                 buffer.clear()
             buffer.append(line)
-        analyze(buffer)
+        analyze(buffer, args)

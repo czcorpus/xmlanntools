@@ -150,9 +150,11 @@ In the reverse conversion within `standoff2xml`, the corresponding method [`html
 
 A simple feeder sending the input text in batches to the LINDAT online analyzer for Universal Dependencies (UDPipe 2). By default, it reads the standard input (STDIN), but using the option `-f <filename>`, the input can be read from the specified file. The option `-m <model>` specifies the UD language model to be applied for analysis. The default batch size of 1000 lines can be changed to any custom number using the option `-b <number>` (the API has some limit for a maximal request size, so it can't process arbitrarily large texts at once). See the [UDPipe website](https://lindat.mff.cuni.cz/services/udpipe/) for more details about the process and the REST API.
 
-The resulting CoNLL-U vertical is output to the standard output (STDOUT). Use redirection to save it into a file, e.g. `tag_ud -m english-ewt-ud-2.12-230717 -f document.txt >document.conllu`.
+The resulting CoNLL-U vertical is output to the standard output (STDOUT). Use redirection to save it into a file, e.g. `tag_ud -m en -f document.txt >document.conllu`.
 
 The option `-v` reports some basic information about the progress to the standard error output (STDERR).
+
+The script supports [all documented features](http://lindat.mff.cuni.cz/services/udpipe/api-reference.php) of the LINDAT UDPipe REST API: any analysis of the input can be suppressed by using the option `-na` (`--no-analysis`) and then only segmentation and tokenization will be performed; syntactic (dependency) parsing can be suppressed using the option `-np` (`--no-parsing`); input or output format can be set by the options `-i <format>` (`--input`) and `-o <format>` (`--output`); additional options may be passed to the tokenizer, tagger (=analysis) and parser using the corresponding options `-t <options>` (`--tokenizer`), `-a` (`--analysis`) and `-p` (`--parser`).
 
 ### xml2vrt
 
