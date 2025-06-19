@@ -104,7 +104,7 @@ def ann2standoff(vrtann, reftext, config, replacements=[], matchlist=[]):
                 attrname = 'attr_' + str(attrcnt)
             else:
                 attrname = attrnames[attrcnt-1]
-            if attrname in excluded_attrs:
+            if attrname in excluded_attrs or attrname == '_':
                 attrcnt += 1
                 continue
             attr = attrname+'="'+html.escape(pattrs[attrcnt], quote=True)+'"'

@@ -71,16 +71,18 @@ The configuration files may contain several profiles for several types of annota
 
 The names of configuration settings are either mentioned here or they are equal to the long names of corresponding command line options (with the initial minus signs removed and the intermediary ones replaced by underscores, e.g.: option `-te/--token-element` can be set as `token_element` in a configuration file). Binary configuration options can have their values set to `true`/`false`, `yes`/`no`, `on`/`off` or `1`/`0`.
 
-For annotation in the **general vertical format**, a list of names of attributes should be provided. These names will be used as attribute names (of the resulting element `<w>`) for the corresponding values obtained from the vertical format in the same order. The first column must always be the string of the annotated token itself. From the second column on, the specified names will be applied as attribute names to carry the consequent values. If the vertical contains more values (TAB separated columns) than the number of attribute names provided, the attributes will be automatically named as `attr_N` (where `N` is the number of the column,counted from the second one).
+For annotation in the **general vertical format**, a list of names of attributes should be provided. These names will be used as attribute names (of the resulting element `<w>`) for the corresponding values obtained from the vertical format in the same order. The first column must always be the string of the annotated token itself. From the second column on, the specified names will be applied as attribute names to carry the consequent values. If the vertical contains more values (TAB separated columns) than the number of attribute names provided, the attributes will be automatically named as `attr_N` (where `N` is the number of the column - counted from the second one).
 
 For example, if the names of attributes provided contain `lemma, pos, tag` and the vertical contains the line:
 `token    value1    value2  value3  value4`
 then the resulting XML will contain the following annotation:
 `<w lemma="value1" pos="value2" tag="value3" attr_4="value4">token</w>`
 
+If a single underscore (`_`) is used as attribute name, the corresponding attribute will be omitted (ignored), i.e. the effect is the same as using the option `-ea` (`--exclude-attributes`) below. (Note: the attribute column will still be counted, so it still affects the numbering of any possible additional attributes with the automatical names `attr_N` - see above).
+
 N.B.: When specifying the attribute names on the command-line, the names must be written in a single string separated only by commas, with no spaces! When specified in the configuration file, the names of attributes may be separated by commas, whitespace or both.
 
-If you want to *exclude* some attributes provided by the analysis from the resulting annotation, they can be listed by the option `-ea <attribute_names>` (configuration option `exclude_attributes`). E.g. the option `-ea misc,feats,head,deprel,deps` will discard the attributes `misc`, `feats`, `head`, `deprel` and `deps` from the UD annotation and only keep the attributes `id`, `synword`, `lemma`, `upos` and `xpos`.
+If you want to *exclude* some attributes provided by the analysis from the resulting annotation, they can be listed by the option `-ea <attribute_names>` (configuration option `exclude_attributes`). E.g. the option `-ea misc,feats,head,deprel,deps` will discard the attributes `misc`, `feats`, `head`, `deprel` and `deps` from the UD annotation and only keep the attributes `id`, `synword`, `lemma`, `upos` and `xpos`. The same effect can also be achieved by providing underscore instead of the name of the attributes to be excluded in the list of attribute names, which may be more convenient for permanent configurations (see above).
 
 Names of the elements for tokens (`w`) and sentences (`s`) may be specified using the options `-te <element_name>` and `-se <element_name>` (or configuration options `token_element` and `sentence_element`).
 

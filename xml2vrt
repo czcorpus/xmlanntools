@@ -126,7 +126,9 @@ class TaggedXMLContentHandler(xml.sax.ContentHandler):
             attrcnt = 1
             # append all confugured (named) attributes
             for attrname in self.attrnames:
-                if attrname in self.token:
+                if attrname == '_':
+                    attrcnt += 1
+                elif attrname in self.token:
                     print("\t" + self.token[attrname], end="")
                     attrcnt += 1
                 else:
