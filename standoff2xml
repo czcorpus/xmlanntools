@@ -222,10 +222,12 @@ def merge_annotations(origann, newann, breakable=None, nest_elements=[], allowme
                     outann.append(x)
                     xc['start'] = t['start']  # b2) the rest (copy) to be placed inside the new span
                     inbuffer.append(xc)
-            else:
+            else:  # spans ending at the same position as the new span or later
                 if allowmerge and x['end'] == t['end'] and x['name'] == t['name']:  # merge spans with the same name and length
                     t['contents'] = x['contents'] + t.get('csep',' ') + t['contents']
                     t['csep'] = x.get('csep',' ')
+                elif x['end'] == t['end'] and x['name'] in nest_elements: # nest requested elements with the same length
+                    inbuffer.append(x)
                 else:
                     lastlevel = x['level']
                     if x['end'] >= t['end']:  # spans not ending yet must be revised by later new spans as well
