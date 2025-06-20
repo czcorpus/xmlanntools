@@ -364,7 +364,7 @@ if __name__ == "__main__":
              
              '-e <element_names>' Comma separated list of element names to be excluded from the output vertical
              (no spaces!).
-             Config setting: 'exclude_elements' (may also be separated by spaces, commas, linebreaks or
+             Config setting: 'skip_elements' (may also be separated by spaces, commas, linebreaks or
              a combination thereof)
         
              '-F' Input file is a XML fragment (needing a wrapping root element).

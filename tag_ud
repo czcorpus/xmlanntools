@@ -94,11 +94,11 @@ if __name__ == '__main__':
 
              '-np' Do not perform syntactic parsing.
 
-             '-t' Additional options for the tokenizer.
+             '--tokenizer' Additional options for the tokenizer.
 
-             '-a' Additional options for the tagger (analysis).
+             '--tagger' Additional options for the tagger (analysis).
 
-             '-p' Additional options for the parser.
+             '--parser' Additional options for the parser.
              
              '-v' Report progress to STDERR.
     
@@ -120,9 +120,9 @@ if __name__ == '__main__':
     parser.add_argument("-b", "--batch", help="batch size in lines (default=1000)", type=int)
     parser.add_argument("-na", "--no-analysis", help="do NOT perform any analysis (lemmatization, tagging or parsing); perform just segmentation and tokenization", action="store_true")
     parser.add_argument("-np", "--no-parsing", help="do NOT perform dependency parsing (syntax)", action="store_true")
-    parser.add_argument("-t", "--tokenizer", help="additional options for the tokenizer", type=str)
-    parser.add_argument("-a", "--analysis", help="additional options for the tagger (ignored if --no-analysis is used)", type=str)
-    parser.add_argument("-s", "--syntax", help="additional options for the syntactic parser (ignored if --no-analysis or --no-parsing is used)", type=str)
+    parser.add_argument("--tokenizer", help="additional options for the tokenizer", type=str)
+    parser.add_argument("--tagger", help="additional options for the tagger (ignored if --no-analysis is used)", type=str)
+    parser.add_argument("--parser", help="additional options for the syntactic parser (ignored if --no-analysis or --no-parsing is used)", type=str)
     parser.add_argument("-v", "--verbose", help="report progress", action="store_true")
     args = parser.parse_args()
 
@@ -156,7 +156,7 @@ if __name__ == '__main__':
             model= config.get('model', DEFAULT_MODEL),
             text= "".join(buffer),
             tokenizer= config.get('tokenizer', ''),
-            tagger= None if config.getboolean('no_analysis') else config.get('analysis', ''),
+            tagger= None if config.getboolean('no_analysis') else config.get('tagger', ''),
             parser= None if config.getboolean('no_parsing') or config.getboolean('no_analysis') else config.get('parser', ''),
             input= None if config.get('input', 'plaintext')=='plaintext' else config.get('input'),
             output= config.get('output')
