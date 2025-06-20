@@ -71,8 +71,8 @@ def ann2standoff(vrtann, reftext, config, replacements=[], matchlist=[]):
     excluded_attrs = config.get('exclude_attributes', '').replace(',',' ').split()
     token_element = config.get('token_element', 'w')
     sentence_element = config.get('sentence_element', 's')
-    virtual_token = config.get('virtual_tokens', None)
-    virtual_token_attr = config.get('virtual_token_attr', None)
+    virtual_token = config.get('virtual_tokens')
+    virtual_token_attr = config.get('virtual_token_attr', 'form')
     linecnt = 0 
     curpos = 0
     annotation = []
@@ -96,8 +96,9 @@ def ann2standoff(vrtann, reftext, config, replacements=[], matchlist=[]):
 
         if not word and virtual_token:
             pattrs.pop(0)
-            attr = virtual_token_attr+'="'+html.escape(pattrs[0], quote=True)+'"'
-            attrs.append(attr)
+            if virtual_token_attr != '_':
+                attr = virtual_token_attr+'="'+html.escape(pattrs[0], quote=True)+'"'
+                attrs.append(attr)
 
         while len(pattrs) > attrcnt:
             if attrcnt > len(attrnames):
@@ -190,7 +191,7 @@ def preprocess_conllu(input, config):
     """
     #strip = " \t\r\n" if config.getboolean('ascii_strip') else None
     multitoken = re.compile("([0-9]+)-([0-9]+)")
-    virtual_token = config.get('virtual_tokens', None)
+    virtual_token = config.get('virtual_tokens')
     # create list of separators for all configured atrributes using either default or their specific separator if defined
     default_sep = config.get('multi_separator', '|')
     separators = [config.get(f'multi_separator_{name}', default_sep) for name in config.get('attributes', '').replace(',',' ').split()]
@@ -247,7 +248,7 @@ if __name__ == '__main__':
     
     Output: creates a new file with the same name as the input file(s), but with the extension '.ann.json'.
     
-    Options: '-c <filename>' Read additional configuration. By default, the file 'vrt2standoff.ini' is
+    Options: '-c <filename>' Read additional configuration. By default, the file 'xmlanntools.ini' is
              searched and loaded both from the directory with the scripts and the current working dir.
              Later configuration files override previous settings. Command-line arguments override all.
               
@@ -323,14 +324,15 @@ if __name__ == '__main__':
     parser.add_argument("-te", "--token-element", help="name of token element", type=str)
     parser.add_argument("-se", "--sentence-element", help="name of sentence element", type=str)
     parser.add_argument("-vt", "--virtual-tokens", help="name of virtual subtokens for CoNLL-U second level tokenization", type=str)
-    parser.add_argument("-va", "--virtual-token-attr", help="name of virtual subtoken attribute to capture form", type=str, default='form')
+    parser.add_argument("-va", "--virtual-token-attr", help="name of virtual subtoken attribute to capture form", type=str)
     args = parser.parse_args()
 
     # read configuration from files
     scriptpath = path = os.path.dirname(os.path.realpath(__file__))
     curpath = os.getcwd()
     profiles = configparser.ConfigParser()
-    profiles.read([scriptpath+'/ann2standoff.ini', curpath+'/ann2standoff.ini'])
+    profiles.read([scriptpath+'/xmlanntools.ini', scriptpath+'/ann2standoff.ini',
+                    curpath+'/xmlanntools.ini', curpath+'/ann2standoff.ini'])
     if args.config:
         read = profiles.read(args.config)
         if read != [args.config]:
@@ -342,7 +344,7 @@ if __name__ == '__main__':
         cur_profile = profiles[cur_profile].get('profile')
 
     # evt. update/override currently selected profile configuration with values from command-line arguments
-    profiles.read_dict({cur_profile: {k: v for k, v in vars(args).items() if v is not None}})
+    profiles.read_dict({cur_profile: {k: v for k, v in vars(args).items() if v is not None and v != False}})
     config = profiles[cur_profile]
     
     # input and output files

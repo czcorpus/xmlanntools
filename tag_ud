@@ -104,39 +104,62 @@ if __name__ == '__main__':
     
     """
     import sys
+    import os
     import argparse
+    import configparser
 
     DEFAULT_MODEL = 'cs'
 
     parser = argparse.ArgumentParser(description="Analyze text with UD-pipe (http://lindat.mff.cuni.cz/services/udpipe/api-reference.php)")
-    parser.add_argument("-m", "--model", help="UD language model to use", type=str, default=DEFAULT_MODEL)
+    parser.add_argument("-c", "--config", help="additional config file", type=str)
+    parser.add_argument("-p", "--profile", help="config profile to use", type=str, default='DEFAULT')
+    parser.add_argument("-m", "--model", help="UD language model to use", type=str)
     parser.add_argument("-f", "--file", help="input file (default=STDIN)", type=str)
     parser.add_argument("-i", "--input", help="input format (if pre-tokenized; by default just plaintext to be tokenized internally)", type=str, default="plaintext")
-    parser.add_argument("-o", "--output", help="output format (default: connlu v2)", type=str, default="conllu")
-    parser.add_argument("-b", "--batch", help="batch size in lines (default=1000)", type=int, default=1000)
+    parser.add_argument("-o", "--output", help="output format (default: connlu v2)", type=str)
+    parser.add_argument("-b", "--batch", help="batch size in lines (default=1000)", type=int)
     parser.add_argument("-na", "--no-analysis", help="do NOT perform any analysis (lemmatization, tagging or parsing); perform just segmentation and tokenization", action="store_true")
     parser.add_argument("-np", "--no-parsing", help="do NOT perform dependency parsing (syntax)", action="store_true")
-    parser.add_argument("-t", "--tokenizer", help="additional options for the tokenizer", type=str, default="")
-    parser.add_argument("-a", "--analysis", help="additional options for the tagger (ignored if --no-analysis is used)", type=str, default="")
-    parser.add_argument("-p", "--parser", help="additional options for the parser (ignored if --no-analysis or --no-parsing is used)", type=str, default="")
+    parser.add_argument("-t", "--tokenizer", help="additional options for the tokenizer", type=str)
+    parser.add_argument("-a", "--analysis", help="additional options for the tagger (ignored if --no-analysis is used)", type=str)
+    parser.add_argument("-s", "--syntax", help="additional options for the syntactic parser (ignored if --no-analysis or --no-parsing is used)", type=str)
     parser.add_argument("-v", "--verbose", help="report progress", action="store_true")
     args = parser.parse_args()
-    
+
+    # read configuration from files
+    scriptpath = path = os.path.dirname(os.path.realpath(__file__))
+    curpath = os.getcwd()
+    profiles = configparser.ConfigParser()
+    profiles.read([scriptpath+'/xmlanntools.ini', curpath+'/xmlanntools.ini'])
+    if args.config:
+        read = profiles.read(args.config)
+        if read != [args.config]:
+            raise Exception("Failed reading configuration file: '{0}'".format(args.config))
+
+    # if no profile was specified, check whether the DEFAULT profile specifies a default profile
+    cur_profile = args.profile
+    if cur_profile == 'DEFAULT' and profiles[cur_profile].get('profile'):
+        cur_profile = profiles[cur_profile].get('profile')
+
+    # evt. update/override currently selected profile configuration with values from command-line arguments
+    profiles.read_dict({cur_profile: {k: v for k, v in vars(args).items() if v is not None and v != False}})
+    config = profiles[cur_profile]
+
     buffer = []
 
-    def analyze(buffer, args):
+    def analyze(buffer):
         analyze.counter += 1
         if args.verbose:
             sys.stderr.write(f"[{analyze.counter}] Sending {len(buffer)} lines to UD-pipe. ")
             sys.stderr.flush()
         print(udpipe_lindat(
-            model=args.model, 
-            text="".join(buffer),
-            tokenizer= args.tokenizer,
-            tagger= None if args.no_analysis else args.analysis,
-            parser= None if args.no_parsing or args.no_analysis else args.parser,
-            input= None if args.input=='plaintext' else args.input,
-            output= args.output
+            model= config.get('model', DEFAULT_MODEL),
+            text= "".join(buffer),
+            tokenizer= config.get('tokenizer', ''),
+            tagger= None if config.getboolean('no_analysis') else config.get('analysis', ''),
+            parser= None if config.getboolean('no_parsing') or config.getboolean('no_analysis') else config.get('parser', ''),
+            input= None if config.get('input', 'plaintext')=='plaintext' else config.get('input'),
+            output= config.get('output')
             )
         )
         if args.verbose:
@@ -146,8 +169,8 @@ if __name__ == '__main__':
 
     with open(args.file) if args.file else sys.stdin as infile:
         for line in infile:
-            if len(buffer) >= args.batch:
+            if len(buffer) >= config.getint('batch', 1000):
                 analyze(buffer)
                 buffer.clear()
             buffer.append(line)
-        analyze(buffer, args)
+        analyze(buffer)
