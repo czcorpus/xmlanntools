@@ -156,7 +156,7 @@ The resulting CoNLL-U vertical is output to the standard output (STDOUT). Use re
 
 The option `-v` reports some basic information about the progress to the standard error output (STDERR).
 
-The script supports [all documented features](http://lindat.mff.cuni.cz/services/udpipe/api-reference.php) of the LINDAT UDPipe REST API: any analysis of the input can be suppressed by using the option `-na` (`--no-analysis`) and then only segmentation and tokenization will be performed; syntactic (dependency) parsing can be suppressed using the option `-np` (`--no-parsing`); input or output format can be set by the options `-i <format>` (`--input`) and `-o <format>` (`--output`); additional options may be passed to the tokenizer, tagger (=analysis) and syntactic parser using the corresponding options `-t <options>` (`--tokenizer`) for the tokenizer, `-a` (`--analysis`) for the tagger and `-s` (`--syntax`) for the parser.
+The script supports [all documented features](http://lindat.mff.cuni.cz/services/udpipe/api-reference.php) of the LINDAT UDPipe REST API: any analysis of the input can be suppressed by using the option `-na` (`--no-analysis`) and then only segmentation and tokenization will be performed; syntactic (dependency) parsing can be suppressed using the option `-np` (`--no-parsing`); input or output format can be set by the options `-i <format>` (`--input`) and `-o <format>` (`--output`); additional options may be passed to the tokenizer, tagger and syntactic parser using the corresponding options `--tokenizer`, `--tagger` and `--parser`.
 
 ### xml2vrt
 

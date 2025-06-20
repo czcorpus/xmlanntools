@@ -19,7 +19,7 @@ xml2standoff -t p,head,quote,l -e teiHeader,front,foreign TEI_example1.xml
 We get the extracted plain text file `TEI_example.txt` and a separate standoff description of the original XML mark-up in the file `TEI_example.json`. We can now pass the former file (option `-f`) to the tagger, e.g. to the UD Pipe using an appropriate language model (option `-m`), and send the resulting output to the file `TEI_example.conllu`:
 
 ```
-tag_ud -f TEI_example1.txt -m english-ewt-ud-2.15-241121 >TEI_example1.conllu
+tag_ud -f TEI_example1.txt -m en >TEI_example1.conllu
 ```
 
 Now, we can convert the resulting analysis from `TEI_example1.conllu` into another standoff XML-type mark-up by matching it to the original `TEI_example1.txt`. This can be done by the script `ann2standoff` using its CoNLL-U parser, i.e. the profile `conllu` (option `-p`):
@@ -59,7 +59,7 @@ xml2standoff -t p,head,lb Simple_poetry1.xml
 The rest of the process will be very similar as above, just simpler:
 
 ```
-tag_ud -f Simple_poetry1.txt -m czech-pdt-ud-2.15-241121 >Simple_poetry1.conllu
+tag_ud -f Simple_poetry1.txt -m cs >Simple_poetry1.conllu
 ann2standoff -p conllu Simple_poetry1.conllu
 standoff2xml Simple_poetry1.txt
 ```
