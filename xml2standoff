@@ -137,7 +137,7 @@ def matches_constraint(constraint, heap):
     ptr = -1
     current = heap[ptr]
     # compare current element name with name requested
-    if current['name'] != constraint['name'] and current['name'] != constraint['name']+'/':
+    if constraint['name'] != '*' and current['name'] != constraint['name'] and current['name'] != constraint['name']+'/':
         return False
     # test for attribute constraints
     for attr_constr in constraint['attrs']:
