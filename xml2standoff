@@ -174,9 +174,9 @@ def split_xml(text, txtelements=None, excludes=None, keep_linebreaks=False):
 
     text : str
         XML input as text string
-    txtelements : list of str
+    txtelements : list of element constraints
         list of names of elements containg text to be extracted
-    excludes : list of str
+    excludes : list of element constraints
         list of names of elements to be skipped
     keep_linebreaks : boolean
         keep linebreaks within text elements or remove them?
@@ -198,6 +198,7 @@ def split_xml(text, txtelements=None, excludes=None, keep_linebreaks=False):
         - tail (str): (optional) text contents at the end of the element (have not been extracted into plain text file)
         - skip (int): (optional) skip following plain text contents at the start of the element (provisional line break) 
         - cut (int): (optional) cut plain text contents from the end of the element (provisional line break)
+        - csep (string): content separator (whitespace) between element name and other contents (attributes) if more than just the common single space character
     """
 
     # buffer for the extracted plaintext
