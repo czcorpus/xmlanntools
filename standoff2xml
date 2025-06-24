@@ -122,7 +122,7 @@ def merge_xml(text, annotation, out):
                 curpos += i['skip']
                 
 
-def merge_annotations(origann, newann, breakable=None, nest_elements=[], allowmerge=False, no_betweenspan_elements=False):
+def merge_annotations(origann, newann, breakable=None, nest_elements=[], merge_elements=[], no_betweenspan_elements=False):
     """
     Merge original annotation with a new annotation into one stream
     
@@ -139,8 +139,8 @@ def merge_annotations(origann, newann, breakable=None, nest_elements=[], allowme
     breakable : list of strings or None
         if this is a list, issue warning whenever a span (whose name is not in this list) is broken 
         by a new span (Default: None [i.e. no warnings at all])
-    allowmerge : bool
-        allow merge of spans with the same name, start and end position (Default: False)
+    merge_elements : list of str
+        allow merge of spans (elements) with the given name, and with the same start and end position
     no_betweenspan_elements : bool
         do NOT restart broken elements between spans of the new annotation if they end within the following span again (usually pointless highlighting between sentences)
 
@@ -223,7 +223,7 @@ def merge_annotations(origann, newann, breakable=None, nest_elements=[], allowme
                     xc['start'] = t['start']  # b2) the rest (copy) to be placed inside the new span
                     inbuffer.append(xc)
             else:  # spans ending at the same position as the new span or later
-                if allowmerge and x['end'] == t['end'] and x['name'] == t['name']:  # merge spans with the same name and length
+                if ('*' in merge_elements or x['name'] in merge_elements) and x['end'] == t['end'] and x['name'] == t['name']:  # merge spans with the same name and length
                     t['contents'] = x['contents'] + t.get('csep',' ') + t['contents']
                     t['csep'] = x.get('csep',' ')
                 elif x['end'] == t['end'] and x['name'] in nest_elements: # nest requested elements with the same length
@@ -330,6 +330,7 @@ if __name__ == '__main__':
                         help="raise warning when breaking elements other than the specified ones (comma-separated list of element names, e.g. `-Wb hi,stage,foreign`)")
     parser.add_argument("-kb", "--keep-between-sentences", help="keep broken elements between sentences", action="store_true")
     parser.add_argument("-ne", "--nest-elements", help="elements to be preferably nested inside the annotation elements", type=str)
+    parser.add_argument("-me", "--merge-elements", help="contraints on elements to be merged wherever possible", type=str)
     args = parser.parse_args()
 
     # read configuration from files
@@ -351,6 +352,7 @@ if __name__ == '__main__':
     profiles.read_dict({cur_profile: {k: v for k, v in vars(args).items() if v is not None and v != False}})
     config = profiles[cur_profile]
 
+    merge_elements = config.get('merge_elements', '').replace(',',' ').split()
     breakable = config.get('warn_breaking_except').replace(',',' ').split() if config.get('warn_breaking_except') else None
     nest_elements = config.get('nest_elements', '').replace(',',' ').split()
     
@@ -384,10 +386,10 @@ if __name__ == '__main__':
             sentence_level = (level == 1)
             if sentence_level:
                 if not config.getboolean('tokens_only'):
-                    xmlann = merge_annotations(xmlann, spans, breakable, nest_elements=nest_elements,
+                    xmlann = merge_annotations(xmlann, spans, breakable, merge_elements=merge_elements, nest_elements=nest_elements,
                                                 no_betweenspan_elements=not config.getboolean('keep_between_sentences'))
             else:
-                xmlann = merge_annotations(xmlann, spans, breakable, nest_elements=nest_elements)
+                xmlann = merge_annotations(xmlann, spans, breakable, merge_elements=merge_elements, nest_elements=nest_elements)
     else:
         # sort by XML element order attribute (`merge_annotations` already does this)
         xmlann = sorted(xmlann, key=itemgetter('order'))
