@@ -285,6 +285,51 @@ def merge_annotations(origann, newann, breakable=None, nest_elements=[], merge_e
 
     return outann
 
+def process(config, txtin, jsonin=None, annjsonin=None, xmlout=None):
+    jsonin = jsonin or txtin.with_suffix('.json')
+    annjsonin = annjsonin or txtin.with_suffix('.ann.json')
+    xmlout = xmlout or txtin.with_suffix('.ann.xml')
+
+    merge_elements = config.get('merge_elements', '').replace(',',' ').split()
+    breakable = config.get('warn_breaking_except').replace(',',' ').split() if config.get('warn_breaking_except') else None
+    nest_elements = config.get('nest_elements', '').replace(',',' ').split()
+
+    # read original plaintext, do NOT normalize line-break characters (default python behaviour)!
+    with txtin.open(encoding='utf-8', newline='') as f:
+        text = f.read()
+
+    # read original XML mark-up description/annotation
+    with open(jsonin, encoding='utf-8') as jsonfile:
+        xmlann = json.load(jsonfile)
+
+    # read tagger annotation (if found)
+    if annjsonin.exists():
+        with annjsonin.open(encoding='utf-8') as jsonfile:
+            annotation = json.load(jsonfile)
+        levels = {}
+        # group new annotation by levels
+        for i in annotation:
+            if i['level'] in levels:
+                levels[i['level']].append(i)
+            else:
+                levels[i['level']] = [i]
+        # merge each annotation level separately
+        for level, spans in sorted(levels.items()):
+            sentence_level = (level == 1)
+            if sentence_level:
+                if not config.getboolean('tokens_only'):
+                    xmlann = merge_annotations(xmlann, spans, breakable, merge_elements=merge_elements, nest_elements=nest_elements,
+                                                no_betweenspan_elements=not config.getboolean('keep_between_sentences'))
+            else:
+                xmlann = merge_annotations(xmlann, spans, breakable, merge_elements=merge_elements, nest_elements=nest_elements)
+    else:
+        # sort by XML element order attribute (`merge_annotations` already does this)
+        xmlann = sorted(xmlann, key=itemgetter('order'))
+
+    with xmlout.open('w', encoding='utf-8') as xmlfile:
+        # merge original plaintext with the annotation and write out
+        merge_xml(text, xmlann, xmlfile)
+
 
 if __name__ == '__main__':
     """
@@ -315,6 +360,10 @@ if __name__ == '__main__':
              
              `-ne <elements>` comma-separated list of element names to be preferably nested within the merged
              annotation spans incl. tokens, e.g. `-ne del,choice`
+
+             `-me <elements>` comma-separated list of element names to be merged if they appear with identical
+             name and span both in the original XML and the added annotation, e.g. `-me w`; use asterisk `*` to
+             match all element names
     """
     
     import os
@@ -352,48 +401,4 @@ if __name__ == '__main__':
     profiles.read_dict({cur_profile: {k: v for k, v in vars(args).items() if v is not None and v != False}})
     config = profiles[cur_profile]
 
-    merge_elements = config.get('merge_elements', '').replace(',',' ').split()
-    breakable = config.get('warn_breaking_except').replace(',',' ').split() if config.get('warn_breaking_except') else None
-    nest_elements = config.get('nest_elements', '').replace(',',' ').split()
-    
-    # input/output files
-    txtin = Path(args.infile)
-    jsonin = txtin.with_suffix('.json')
-    annjsonin = txtin.with_suffix('.ann.json')
-    xmlout = txtin.with_suffix('.ann.xml')
-
-    # read original plaintext, do NOT normalize line-break characters (default python behaviour)!
-    with txtin.open(encoding='utf-8', newline='') as f:
-        text = f.read()
-
-    # read original XML mark-up description/annotation
-    with open(jsonin, encoding='utf-8') as jsonfile:
-        xmlann = json.load(jsonfile)
-
-    # read tagger annotation (if found)
-    if annjsonin.exists():
-        with annjsonin.open(encoding='utf-8') as jsonfile:
-            annotation = json.load(jsonfile)
-        levels = {}
-        # group new annotation by levels
-        for i in annotation:
-            if i['level'] in levels:
-                levels[i['level']].append(i)
-            else:
-                levels[i['level']] = [i]
-        # merge each annotation level separately
-        for level, spans in sorted(levels.items()):
-            sentence_level = (level == 1)
-            if sentence_level:
-                if not config.getboolean('tokens_only'):
-                    xmlann = merge_annotations(xmlann, spans, breakable, merge_elements=merge_elements, nest_elements=nest_elements,
-                                                no_betweenspan_elements=not config.getboolean('keep_between_sentences'))
-            else:
-                xmlann = merge_annotations(xmlann, spans, breakable, merge_elements=merge_elements, nest_elements=nest_elements)
-    else:
-        # sort by XML element order attribute (`merge_annotations` already does this)
-        xmlann = sorted(xmlann, key=itemgetter('order'))
-
-    with xmlout.open('w', encoding='utf-8') as xmlfile:
-        # merge original plaintext with the annotation and write out
-        merge_xml(text, xmlann, xmlfile)
+    process(config, Path(args.infile))

@@ -16,7 +16,7 @@
 import sys
 import html
 import re
-
+import json
 
 def apply_replacements(str, replacements):
     """
@@ -237,6 +237,52 @@ def preprocess_conllu(input, config):
                 yield("\t".join(merged_attrs))
 
 
+PREPROCESSORS = {
+    'none': preprocess_none,
+    'conllu': preprocess_conllu
+}
+
+def load_replacements(config):
+    # load replacement table (if provided)
+    replacements = []
+    if 'replacements' in config:
+        with Path(config.get('replacements')).open() as csvfile:
+            csvreader = csv.reader(csvfile, delimiter="\t")
+            for row in csvreader:
+                if len(row) > 0:
+                    replacements.append((re.compile(row[0]), row[1]))
+    return replacements
+
+def load_matchlist(config):
+    # load table of matches (if provided)
+    matchlist = []
+    if 'matches' in config:
+        with Path(config.get('matches')).open() as csvfile:
+            csvreader = csv.reader(csvfile, delimiter="\t", quoting=csv.QUOTE_NONE)
+            for row in csvreader:
+                if len(row) < 2:
+                    continue
+                token = row.pop(0)
+                matchlist[token] = row
+                matchlist[token].sort(key=len)
+    return matchlist
+
+def process(config, infile, txtin=None, jsonout=None, replacements=[], matchlist=[]):
+    txtin = txtin or infile.with_suffix('.txt')
+    jsonout = jsonout or infile.with_suffix(".ann.json")
+
+    # process annotation and match it with the original text file
+    preprocessor = PREPROCESSORS[config.get('preprocess', 'none')]
+    with infile.open(encoding='utf-8') as annotation:
+        with txtin.open(encoding='utf-8', newline='') as text:
+            input = preprocessor(annotation, config)
+            data = ann2standoff(input, text, config, replacements, matchlist)
+
+    # write out the resulting annotation data
+    with jsonout.open(mode='w', encoding='utf-8') as jsonfile:
+        json.dump(data, jsonfile, indent=0)
+
+
 if __name__ == '__main__':
     """
     Convert tagger annotation into stand-off annotation against a reference plain text file
@@ -304,19 +350,13 @@ if __name__ == '__main__':
     import argparse
     import configparser
     import csv
-    import json
     from pathlib import Path
-
-    preprocessors = {
-        'none': preprocess_none,
-        'conllu': preprocess_conllu
-    }
 
     parser = argparse.ArgumentParser(description="Convert tagger annotation into standoff annotation against a reference plain text file")
     parser.add_argument("infile", help="input file name (annotation output from the tagger)")
     parser.add_argument("-c", "--config", help="additional config file", type=str)
     parser.add_argument("-p", "--profile", help="config profile to use", type=str, default='DEFAULT')
-    parser.add_argument("-P", "--preprocess", help="preprocessing to use", type=str, choices=preprocessors.keys())
+    parser.add_argument("-P", "--preprocess", help="preprocessing to use", type=str, choices=PREPROCESSORS.keys())
     parser.add_argument("-r", "--replacements", help="file with replacements (TSV)", type=str)
     parser.add_argument("-m", "--matches", help="file with matches (TSV)", type=str)
     parser.add_argument("-a", "--attributes", help="attribute names (except first position, separated by comma)", type=str)
@@ -331,8 +371,8 @@ if __name__ == '__main__':
     scriptpath = path = os.path.dirname(os.path.realpath(__file__))
     curpath = os.getcwd()
     profiles = configparser.ConfigParser()
-    profiles.read([scriptpath+'/xmlanntools.ini', scriptpath+'/ann2standoff.ini',
-                    curpath+'/xmlanntools.ini', curpath+'/ann2standoff.ini'])
+    profiles.read([scriptpath+'/ann2standoff.ini', scriptpath+'/xmlanntools.ini',
+                    curpath+'/ann2standoff.ini', curpath+'/xmlanntools.ini'])
     if args.config:
         read = profiles.read(args.config)
         if read != [args.config]:
@@ -346,40 +386,8 @@ if __name__ == '__main__':
     # evt. update/override currently selected profile configuration with values from command-line arguments
     profiles.read_dict({cur_profile: {k: v for k, v in vars(args).items() if v is not None and v != False}})
     config = profiles[cur_profile]
-    
-    # input and output files
-    infile = Path(config.get('infile'))
-    txtin = infile.with_suffix('.txt')
-    jsonout = infile.with_suffix(".ann.json")
 
-    # load replacement table (if provided)
-    replacements = []
-    if 'replacements' in config:
-        with Path(config.get('replacements')).open() as csvfile:
-            csvreader = csv.reader(csvfile, delimiter="\t")
-            for row in csvreader:
-                if len(row) > 0:
-                    replacements.append((re.compile(row[0]), row[1]))
+    replacements = load_replacements(config)
+    matchlist = load_matchlist(config)
 
-    # load table of matches (if provided)
-    matchlist = []
-    if 'matches' in config:
-        with Path(config.get('matches')).open() as csvfile:
-            csvreader = csv.reader(csvfile, delimiter="\t", quoting=csv.QUOTE_NONE)
-            for row in csvreader:
-                if len(row) < 2:
-                    continue
-                token = row.pop(0)
-                matchlist[token] = row
-                matchlist[token].sort(key=len)
-
-    # process annotation and match it with the original text file
-    preprocessor = preprocessors[config.get('preprocess', 'none')]
-    with infile.open(encoding='utf-8') as annotation:
-        with txtin.open(encoding='utf-8', newline='') as text:
-            input = preprocessor(annotation, config)
-            data = ann2standoff(input, text, config, replacements, matchlist)
-
-    # write out the resulting annotation data
-    with jsonout.open(mode='w', encoding='utf-8') as jsonfile:
-        json.dump(data, jsonfile, indent=0)
+    process(config, Path(args.infile), replacements=replacements, matchlist=matchlist)

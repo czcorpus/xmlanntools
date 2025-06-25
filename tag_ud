@@ -15,9 +15,11 @@
 
 import http
 import requests
+from pathlib import Path
 
 # LINDAT service
 UDPIPE_API_URL = "http://lindat.mff.cuni.cz/services/udpipe/api/process"
+DEFAULT_MODEL = 'cs'
 
 def udpipe_lindat(model, text, tokenizer="", tagger="", parser="", input=None, output=None):
     """
@@ -68,6 +70,40 @@ def udpipe_lindat(model, text, tokenizer="", tagger="", parser="", input=None, o
         raise Exception(error_type + response.text)
     return response.json()["result"]
 
+def process(config, infile, outfile, verbose=False):
+    output = outfile.open('w', encoding='utf-8') if outfile else sys.stdout
+    buffer = []
+
+    def analyze(buffer):
+        analyze.counter += 1
+        if verbose:
+            sys.stderr.write(f"[{analyze.counter}] Sending {len(buffer)} lines to UD-pipe. ")
+            sys.stderr.flush()
+        print(udpipe_lindat(
+            model= config.get('model', DEFAULT_MODEL),
+            text= "".join(buffer),
+            tokenizer= config.get('tokenizer_options', ''),
+            tagger= None if config.getboolean('no_analysis') else config.get('tagger_options', ''),
+            parser= None if config.getboolean('no_parsing') or config.getboolean('no_analysis') else config.get('parser_options', ''),
+            input= None if config.get('tagger_input', 'plaintext')=='plaintext' else config.get('tagger_input'),
+            output= config.get('tagger_output')
+            )
+        , file = output)
+        if verbose:
+            sys.stderr.write(f"Analyzed.\n")
+
+    analyze.counter = 0
+
+    with infile.open() if infile else sys.stdin as input_file:
+        for line in input_file:
+            if len(buffer) >= config.getint('tagger_batch', 1000):
+                analyze(buffer)
+                buffer.clear()
+            buffer.append(line)
+        analyze(buffer)
+
+    output.close()
+
 
 if __name__ == '__main__':
     """
@@ -80,11 +116,13 @@ if __name__ == '__main__':
     Options: '-m <model>' Use the specified language model.
              See http://ufal.mff.cuni.cz/udpipe/2/models for a list of currently available models)
              
-             '-f <filename>' Read input from file instead of from STDIN.
+             '-i <filename>' Read input from file instead of STDIN.
 
-             '-i <format>' Input format.
+             '-o <filename>' Write output to file instead of STDOUT.
 
-             '-o <format>' Output format.
+             '-if <format>' Input format.
+
+             '-of <format>' Output format.
 
              '-b <number>' Specify batch size, i.e. number of lines to be send to the API at once.
              The REST API has a limit for maximal request size, probably around 1.3MB.
@@ -108,21 +146,20 @@ if __name__ == '__main__':
     import argparse
     import configparser
 
-    DEFAULT_MODEL = 'cs'
-
     parser = argparse.ArgumentParser(description="Analyze text with UD-pipe (http://lindat.mff.cuni.cz/services/udpipe/api-reference.php)")
     parser.add_argument("-c", "--config", help="additional config file", type=str)
     parser.add_argument("-p", "--profile", help="config profile to use", type=str, default='DEFAULT')
     parser.add_argument("-m", "--model", help="UD language model to use", type=str)
-    parser.add_argument("-f", "--file", help="input file (default=STDIN)", type=str)
-    parser.add_argument("-i", "--input", help="input format (if pre-tokenized; by default just plaintext to be tokenized internally)", type=str, default="plaintext")
-    parser.add_argument("-o", "--output", help="output format (default: connlu v2)", type=str)
-    parser.add_argument("-b", "--batch", help="batch size in lines (default=1000)", type=int)
+    parser.add_argument("-i", "-f", "--infile", help="input file (default=STDIN)", type=str)
+    parser.add_argument("-o", "--outfile", help="output file (default=STDOUT)", type=str)
+    parser.add_argument("-if", "--input-format", help="input format (if pre-tokenized; by default just plaintext to be tokenized internally)", type=str, default="plaintext", dest="tagger_input")
+    parser.add_argument("-of", "--output-format", help="output format (default: connlu v2)", type=str, dest="tagger_output")
+    parser.add_argument("-b", "--batch", help="batch size in lines (default=1000)", type=int, dest="tagger_batch")
     parser.add_argument("-na", "--no-analysis", help="do NOT perform any analysis (lemmatization, tagging or parsing); perform just segmentation and tokenization", action="store_true")
     parser.add_argument("-np", "--no-parsing", help="do NOT perform dependency parsing (syntax)", action="store_true")
-    parser.add_argument("--tokenizer", help="additional options for the tokenizer", type=str)
-    parser.add_argument("--tagger", help="additional options for the tagger (ignored if --no-analysis is used)", type=str)
-    parser.add_argument("--parser", help="additional options for the syntactic parser (ignored if --no-analysis or --no-parsing is used)", type=str)
+    parser.add_argument("--tokenizer", help="additional options for the tokenizer", type=str, dest="tokenizer_options")
+    parser.add_argument("--tagger", help="additional options for the tagger (ignored if --no-analysis is used)", type=str, dest="tagger_options")
+    parser.add_argument("--parser", help="additional options for the syntactic parser (ignored if --no-analysis or --no-parsing is used)", type=str, dest="parser_options")
     parser.add_argument("-v", "--verbose", help="report progress", action="store_true")
     args = parser.parse_args()
 
@@ -145,32 +182,7 @@ if __name__ == '__main__':
     profiles.read_dict({cur_profile: {k: v for k, v in vars(args).items() if v is not None and v != False}})
     config = profiles[cur_profile]
 
-    buffer = []
+    infile = Path(args.infile) if args.infile else None
+    outfile = Path(args.outfile) if args.outfile else None
 
-    def analyze(buffer):
-        analyze.counter += 1
-        if args.verbose:
-            sys.stderr.write(f"[{analyze.counter}] Sending {len(buffer)} lines to UD-pipe. ")
-            sys.stderr.flush()
-        print(udpipe_lindat(
-            model= config.get('model', DEFAULT_MODEL),
-            text= "".join(buffer),
-            tokenizer= config.get('tokenizer', ''),
-            tagger= None if config.getboolean('no_analysis') else config.get('tagger', ''),
-            parser= None if config.getboolean('no_parsing') or config.getboolean('no_analysis') else config.get('parser', ''),
-            input= None if config.get('input', 'plaintext')=='plaintext' else config.get('input'),
-            output= config.get('output')
-            )
-        )
-        if args.verbose:
-            sys.stderr.write(f"Analyzed.\n")
-
-    analyze.counter = 0
-
-    with open(args.file) if args.file else sys.stdin as infile:
-        for line in infile:
-            if len(buffer) >= config.getint('batch', 1000):
-                analyze(buffer)
-                buffer.clear()
-            buffer.append(line)
-        analyze(buffer)
+    process(config, infile, outfile, args.verbose)

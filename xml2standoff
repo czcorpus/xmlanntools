@@ -15,7 +15,9 @@
 
 import html
 import re
+import json
 from io import StringIO
+from pathlib import Path
 
 
 def scan_to(text, ptr, mark):
@@ -339,6 +341,30 @@ def split_xml(text, txtelements=None, excludes=None, keep_linebreaks=False):
             break
     return plaintext.getvalue(), markup
 
+def process(config, xmlin, txtout=None, jsonout=None):
+    txtout = txtout or xmlin.with_suffix('.txt')
+    jsonout = jsonout or xmlin.with_suffix('.json')
+
+    includes = [parse_constraints(i) for i in config.get('text_elements').replace(',',' ').split()] if config.get('text_elements') else None
+    excludes = [parse_constraints(i) for i in config.get('exclude_elements').replace(',',' ').split()] if config.get('exclude_elements') else None
+
+    # read the whole input file
+    with xmlin.open(encoding='utf-8') as infile:
+        text = infile.read()
+
+    # generate separated plain text contents and mark-up description
+    plaintext, markup = split_xml(text, includes, excludes, config.getboolean('keep_linebreaks'))
+
+    # write out plain text contents
+    with txtout.open('w', encoding='utf-8') as txtfile:
+        txtfile.write(plaintext)
+        txtfile.close()
+
+    # write out XML mark-up description as JSON
+    with jsonout.open('w', encoding='utf-8') as jsonfile:
+        json.dump(markup, jsonfile, indent=0)
+        jsonfile.close()
+
 
 if __name__ == '__main__':
     """
@@ -373,8 +399,6 @@ if __name__ == '__main__':
     import os
     import argparse
     import configparser
-    import json
-    from pathlib import Path
 
     parser = argparse.ArgumentParser(description="Split XML into plain text and stand-off XML mark-up")
     parser.add_argument("infile", help="input XML file name (UTF-8)")
@@ -408,26 +432,4 @@ if __name__ == '__main__':
         sys.stderr.write("WARNING: Option '-kl/--keep-linebreaks' has no effect unless text elements are specified.\n")
         exit(1)
 
-    xmlin = Path(args.infile)
-    txtout = xmlin.with_suffix('.txt')
-    jsonout = xmlin.with_suffix('.json')
-
-    includes = [parse_constraints(i) for i in config.get('text_elements').replace(',',' ').split()] if config.get('text_elements') else None
-    excludes = [parse_constraints(i) for i in config.get('exclude_elements').replace(',',' ').split()] if config.get('exclude_elements') else None
-
-    # read the whole input file
-    with xmlin.open(encoding='utf-8') as infile:
-        text = infile.read()
-
-    # generate separated plain text contents and mark-up description
-    plaintext, markup = split_xml(text, includes, excludes, config.getboolean('keep_linebreaks'))
-
-    # write out plain text contents
-    with txtout.open('w', encoding='utf-8') as txtfile:
-        txtfile.write(plaintext)
-        txtfile.close()
-
-    # write out XML mark-up description as JSON
-    with jsonout.open('w', encoding='utf-8') as jsonfile:
-        json.dump(markup, jsonfile, indent=0)
-        jsonfile.close()
+    process(config, Path(args.infile))
