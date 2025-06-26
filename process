@@ -19,6 +19,7 @@ from pathlib import Path
 import argparse
 import configparser
 from threading import Thread
+from queue import Queue
 
 from importlib.util import spec_from_loader, module_from_spec
 from importlib.machinery import SourceFileLoader 
@@ -28,12 +29,19 @@ scriptpath = path = os.path.dirname(os.path.realpath(__file__))+'/'
 DEFAULT_THREADS = 10
 
 def load_module(name):
+    """
+    Load externals scripts as modules
+    (they don't the extension `.py`, so they can't be simply imported)
+    """
     spec = spec_from_loader(name, SourceFileLoader(name, scriptpath+name))
     module = module_from_spec(spec)
     spec.loader.exec_module(module)
     return module
 
-def process_single(config, infile):
+def process_single(config, filename):
+    """
+    Process single file
+    """
     # load modules
     xml2standoff = load_module('xml2standoff')
     tagger = load_module('tag_'+config.get('tagger', 'ud'))
@@ -41,6 +49,7 @@ def process_single(config, infile):
     standoff2xml = load_module('standoff2xml')
     xml2vrt = load_module('xml2vrt')
     
+    infile = Path(filename)
     tmp_path = Path(config.get('temp_dir', '/tmp'), infile.name)
     out_path = Path(config.get('output_path', infile.parent), infile.name)
     
@@ -71,27 +80,40 @@ def process_single(config, infile):
         annfile.unlink()
         annjsonfile.unlink()
 
-class NgramCreatorThread(Thread):
+def process_batch(config, files, batch_size):
+    """
+    Process batch of files
+    """
 
-    def __init__(self, filename, config):
-        super().__init__()
-        self.filename = filename
-        self.config = config
-        self._return = None
+    def processing_worker(q):
+        while True:
+            file = q.get()
+            if file is None:
+                break
+            process_single(config, file)
 
-    def run(self):
-        self._return = process_single(self.config, self.filename)
+    queue = Queue()
+    # populate the queue
+    for file in files:
+        queue.put(file)
+    workers = [Thread(target=processing_worker, args=(queue,)) for _ in range(batch_size)]
+    # add a None signal for each worker
+    for worker in workers:
+        queue.put(None)
+    # start all workers
+    for worker in workers:
+        worker.start()
+    # wait for all workers to finish
+    for worker in workers:
+        worker.join()
 
-    def join(self, *args):
-        Thread.join(self, *args)
-        return self._return
 
 if __name__ == '__main__':
     """
     Pipeline processing
     """
     parser = argparse.ArgumentParser(description="Process XML files by the toolchain")
-    parser.add_argument("infile", help="input XML file name (UTF-8)")
+    parser.add_argument("infiles", help="input XML file names (UTF-8)", nargs='*')
     parser.add_argument("-c", "--config", help="additional config file", type=str)
     parser.add_argument("-p", "--profile", help="config profile to use", type=str, default='DEFAULT')
     parser.add_argument("-m", "--model", help="UD language model to use", type=str)
@@ -99,7 +121,7 @@ if __name__ == '__main__':
     parser.add_argument("-O", "--output-path", help="output annotated files to the specified directory", type=str)
     parser.add_argument("-V", "--vrt-path", help="run also xml2vrt and output vertical files to the specified directory", type=str)
     parser.add_argument("-T", "--temp-dir", help="temporary directory to use", type=str)
-    parser.add_argument("-N", "--threads", help="number of threads to use (default=10)", type=int)
+    parser.add_argument("-W", "--workers", help="number of workers (threads) to use (default=10)", type=int)
     parser.add_argument("-K", "--keep-temp-files", help="keep intermediate (temporary) files (default: delete them)", action="store_true")
     
     args = parser.parse_args()
@@ -121,4 +143,4 @@ if __name__ == '__main__':
     profiles.read_dict({cur_profile: {k: v for k, v in vars(args).items() if v is not None and v != False}})
     config = profiles[cur_profile]
     
-    process_single(config, Path(args.infile))
+    process_batch(config, args.infiles, config.get('workers', 10))
