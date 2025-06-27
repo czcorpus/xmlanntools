@@ -28,8 +28,10 @@ The final merged XML file will contain additional XML mark-up according to the r
 
 ## Typical usage
 
+The provided wrapper `process` runs the following chain of tools automatically for any amount of files, but you can also run them manually according to your needs:
+
 1) run `xml2standoff document.xml` to create `document.txt` and `document.json` files containg the plain text contents and description of the removed XML mark-up in a JSON format respectively
-2) analyze the `document.txt` file using a PoS/morphological tagger resulting in a vertical/CoNLL-U file (e.g. using the provided script utilizing the online LINDAT UDPipe 2 tagger API: `tag_ud -m english-ewt-ud-2.12-230717 -f document.txt > document.conllu`)
+2) analyze the `document.txt` file using a PoS/morphological tagger resulting in a vertical/CoNLL-U file (e.g. using the provided script utilizing the online LINDAT UDPipe 2 tagger API: `tag_ud -m en -i document.txt > document.conllu`)
 3) run `ann2standoff document.conllu` to convert the resulting vertical/CoNLL-U annotation into secondary standoff mark-up saved (in the JSON format) as `document.ann.json`
 4) run `standoff2xml document.txt` to generate a new XML file named `document.ann.xml`, containg both the original XML mark-up and the results of the analysis in the form of added XML tags
 
@@ -37,11 +39,21 @@ The final merged XML file will contain additional XML mark-up according to the r
 
 All scripts provide a quick help on their usage with the option `-h`. More details can be found in the form of comments in the code. The principles, options and aims are explained here as follows.
 
-The scripts are configurable either using a config file or by explictly provided command-line options. By default, the configuration file `xmlanntoolsf.ini` is applied from the same location where the scripts are stored (if found), and possibly overriden by a configuration file with same name, located in the same directory as the processed files (if found). Additional configuration file name may be specified on the command-line (using the option `-c <file_name>`), which would override any previously found configuration. Explicit command-line options override the individual configuration settings obtained from the configuration files.
+The scripts are configurable either using a config file or by explictly provided command-line options. By default, the configuration file `xmlanntools.ini` is applied from the same location where the scripts are stored (if found), and possibly extended (or overriden, in case of conflicts) by a configuration file with same name, located in the same directory as the processed files (if found). Additional configuration file name may be specified on the command-line (using the option `-c <file_name>`), which would extend (or override) any previously found configuration. Explicit command-line options override the individual configuration settings obtained from the configuration files.
 
-The configuration files may contain several profiles for several types of annotation. By default, options from the section `[DEFAULT]` are applied, overriden by any other profile explicitly specified by the command-line option `-p <profile_name>`. The section `[DEFAULT]` may also specify name of the consecutive profile to be applied by default (i.e. in case no particular profile is specified on the command-line). See the included `xmlanntools.ini` for example.
+The configuration files may contain several profiles (in the form of INI file sections) for several types of annotation or text types. By default, options from the section `[DEFAULT]` are applied, extended (or overriden) by any other profile explicitly specified by the command-line option `-p <profile_name>`. The section `[DEFAULT]` may also specify name of the consecutive profile to be applied by default (i.e. in case no particular profile is specified on the command-line). See the included `xmlanntools.ini` for example.
 
 The names of configuration settings are either mentioned here or they are equal to the long names of corresponding command line options (with the initial minus signs removed and the intermediary ones replaced by underscores, e.g.: option `-te/--token-element` can be set as `token_element` in a configuration file). Binary configuration options can have their values set to `true`/`false`, `yes`/`no`, `on`/`off` or `1`/`0`.
+
+### process
+
+Wrapper script to run the full chain of the other tools for the given list of files. The files are processed in threads/workers (number of threads can be specified by the option `-W` or configuration option `workers`, by default set to 10). It accepts the above mentioned options for specification of an additional configuration file (`-c <file_name>`) and selection of particular profile (`-p <profile_name>`).
+
+The tools output their intermediate files into a temporary directory (by default `/tmp`, but it can be specified by the option `-T <path>` or configuration option `temp_dir`) and the temporary files are automatically deleted at the end of the process, unless the option `-K` (or configuration option `keep_temp_files`) is applied. The resulting file will have the same name as the input file and the extension `.ann.xml` and will be saved to the same location as the input file by default (other ouput path may be specified using the option `-O <path>` or configuration option `output_path`). Using the option `-V <path>` (or configuration option `vrt_path`), the additional script `xml2vrt` will be also run and the resulting vertical will be saved with the extension `.vrt` into the path specified in the option.
+
+The script can also override language model configured for the tagger by explicitly specifying the option `-m <model>`.
+
+If you create your own tagger wrapper script called `tag_<tagger_name>`, it can also be caled by `process` instead of the provided `tag_ud` by specifying the option `-t <tagger_name>` or configuration option `tagger`. But it has to mimic the same behaviour and options and fullfill the requirements for taggers described above.
 
 ### xml2standoff
 
