@@ -42,7 +42,6 @@ def progress_bar(iteration, total, prefix='', suffix='', length=30, fill='█'):
     percent = ("{0:.1f}").format(100 * (iteration / float(total)))
     filled_length = int(length * iteration // total)
     bar = fill * filled_length + ' ' * (length - filled_length)
-    sys.stderr.write(' ' * (length+len(prefix)+len(suffix)+len(percent)+6))
     sys.stderr.write(f'\r{prefix} |{bar}| {percent}% {suffix}\r')
     sys.stderr.flush()
 
@@ -94,7 +93,8 @@ def process_single(config, filename):
         sys.stderr.write(infile.name + ': ' + str(e))
         sys.stderr.write("\n")
         sys.stderr.flush()
-        clear()
+        if not config.getboolean('keep_failed_files'):
+            clear()
         return(False)
     else:
         clear()
@@ -164,6 +164,7 @@ if __name__ == '__main__':
     parser.add_argument("-T", "--temp-dir", help="temporary directory to use", type=str)
     parser.add_argument("-W", "--workers", help="number of workers (threads) to use (default=10)", type=int)
     parser.add_argument("-K", "--keep-temp-files", help="keep intermediate (temporary) files (default: delete them)", action="store_true")
+    parser.add_argument("-KF", "--keep-failed-files", help="keep intermediate (temporary) files just in case of processing failure", action="store_true")
     parser.add_argument("-P", "--progress", help="show progress bar", action="store_true")
     
     args = parser.parse_args()

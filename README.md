@@ -49,11 +49,15 @@ The names of configuration settings are either mentioned here or they are equal 
 
 Wrapper script to run the full chain of the other tools for the given list of files. The files are processed in threads/workers (number of threads can be specified by the option `-W` or configuration option `workers`, by default set to 10). It accepts the above mentioned options for specification of an additional configuration file (`-c <file_name>`) and selection of particular profile (`-p <profile_name>`).
 
-The tools output their intermediate files into a temporary directory (by default `/tmp`, but it can be specified by the option `-T <path>` or configuration option `temp_dir`) and the temporary files are automatically deleted at the end of the process, unless the option `-K` (or configuration option `keep_temp_files`) is applied. The resulting file will have the same name as the input file and the extension `.ann.xml` and will be saved to the same location as the input file by default (other ouput path may be specified using the option `-O <path>` or configuration option `output_path`). Using the option `-V <path>` (or configuration option `vrt_path`), the additional script `xml2vrt` will be also run and the resulting vertical will be saved with the extension `.vrt` into the path specified in the option.
+The tools output their intermediate files into a temporary directory (by default `/tmp`, but it can be specified by the option `-T <path>` or configuration option `temp_dir`) and the temporary files are automatically deleted at the end of the process, unless the option `-K` (or configuration option `keep_temp_files`) is applied. Using the option `-KF` (configuration option `keep_failed_files`), temporary files are kept for input files where the processing failed, while temporary files of successfully processed files are still deleted.
+
+The resulting file will have the same name as the input file and the extension `.ann.xml` and will be saved to the same location as the input file by default (other ouput path may be specified using the option `-O <path>` or configuration option `output_path`). Using the option `-V <path>` (or configuration option `vrt_path`), the additional script `xml2vrt` will be also run and the resulting vertical will be saved with the extension `.vrt` into the path specified in the option.
 
 The script can also override language model configured for the tagger by explicitly specifying the option `-m <model>`.
 
 If you create your own tagger wrapper script called `tag_<tagger_name>`, it can also be caled by `process` instead of the provided `tag_ud` by specifying the option `-t <tagger_name>` or configuration option `tagger`. But it has to mimic the same behaviour and options and fullfill the requirements for taggers described above.
+
+The option `-P` (configuration option `progress`) displays a simple progress bar showing the percentage of successfully processed files.
 
 ### xml2standoff
 
