@@ -18,7 +18,7 @@ import sys
 from pathlib import Path
 import argparse
 import configparser
-from threading import Thread
+from threading import Thread, Lock
 from queue import Queue
 
 from importlib.util import spec_from_loader, module_from_spec
@@ -37,6 +37,14 @@ def load_module(name):
     module = module_from_spec(spec)
     spec.loader.exec_module(module)
     return module
+
+def progress_bar(iteration, total, prefix='', suffix='', length=30, fill='█'):
+    percent = ("{0:.1f}").format(100 * (iteration / float(total)))
+    filled_length = int(length * iteration // total)
+    bar = fill * filled_length + ' ' * (length - filled_length)
+    sys.stderr.write(' ' * (length+len(prefix)+len(suffix)+len(percent)+6))
+    sys.stderr.write(f'\r{prefix} |{bar}| {percent}% {suffix}\r')
+    sys.stderr.flush()
 
 def process_single(config, filename):
     """
@@ -80,23 +88,37 @@ def process_single(config, filename):
         annfile.unlink()
         annjsonfile.unlink()
 
+counter = 0
+
 def process_batch(config, files, batch_size):
     """
     Process batch of files
     """
+    global counter
+    counter = 0
 
-    def processing_worker(q):
+    def increment():
+        global counter
+        counter += 1
+        progress_bar(counter, len(files), "Progress:", length=50)
+
+    def processing_worker(q, lock):
         while True:
             file = q.get()
             if file is None:
                 break
             process_single(config, file)
+            if config.getboolean('progress'):
+                lock.acquire()
+                increment()
+                lock.release()
 
     queue = Queue()
+    lock = Lock()
     # populate the queue
     for file in files:
         queue.put(file)
-    workers = [Thread(target=processing_worker, args=(queue,)) for _ in range(batch_size)]
+    workers = [Thread(target=processing_worker, args=(queue, lock)) for _ in range(batch_size)]
     # add a None signal for each worker
     for worker in workers:
         queue.put(None)
@@ -106,6 +128,9 @@ def process_batch(config, files, batch_size):
     # wait for all workers to finish
     for worker in workers:
         worker.join()
+    if config.getboolean('progress'):
+        sys.stderr.write("\n")
+        sys.stderr.flush()
 
 
 if __name__ == '__main__':
@@ -123,6 +148,7 @@ if __name__ == '__main__':
     parser.add_argument("-T", "--temp-dir", help="temporary directory to use", type=str)
     parser.add_argument("-W", "--workers", help="number of workers (threads) to use (default=10)", type=int)
     parser.add_argument("-K", "--keep-temp-files", help="keep intermediate (temporary) files (default: delete them)", action="store_true")
+    parser.add_argument("-P", "--progress", help="show progress bar", action="store_true")
     
     args = parser.parse_args()
 
