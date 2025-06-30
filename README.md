@@ -39,23 +39,23 @@ The provided wrapper `process` runs the following chain of tools automatically f
 
 All scripts provide a quick help on their usage with the option `-h`. More details can be found in the form of comments in the code. The principles, options and aims are explained here as follows.
 
-The scripts are configurable either using a config file or by explictly provided command-line options. By default, the configuration file `xmlanntools.ini` is applied from the same location where the scripts are stored (if found), and possibly extended (or overriden, in case of conflicts) by a configuration file with same name, located in the same directory as the processed files (if found). Additional configuration file name may be specified on the command-line (using the option `-c <file_name>`), which would extend (or override) any previously found configuration. Explicit command-line options override the individual configuration settings obtained from the configuration files.
+The scripts are configurable either using a config file or by explictly provided command-line options. By default, the configuration file `xmlanntools.ini` is applied from the same location where the scripts are stored (if found), and possibly extended (or overriden - in case of conflicts) by a configuration file with same name, located in the same directory as the processed files (if found). Additional configuration file name may be explicitly specified on the command-line (using the option `-c <file_name>`), which would extend (or override) any previously found configuration. Explicit command-line options override the corresponding configuration settings obtained from the configuration files.
 
 The configuration files may contain several profiles (in the form of INI file sections) for several types of annotation or text types. By default, options from the section `[DEFAULT]` are applied, extended (or overriden) by any other profile explicitly specified by the command-line option `-p <profile_name>`. The section `[DEFAULT]` may also specify name of the consecutive profile to be applied by default (i.e. in case no particular profile is specified on the command-line). See the included `xmlanntools.ini` for example.
 
-The names of configuration settings are either mentioned here or they are equal to the long names of corresponding command line options (with the initial minus signs removed and the intermediary ones replaced by underscores, e.g.: option `-te/--token-element` can be set as `token_element` in a configuration file). Binary configuration options can have their values set to `true`/`false`, `yes`/`no`, `on`/`off` or `1`/`0`.
+The names of configuration settings are either mentioned here or they are equal to the long names of the corresponding command line options (with the initial minus signs removed and the intermediary ones replaced by underscores, e.g.: the option `-te/--token-element` can be set as `token_element` in a configuration file). Binary configuration options can have their values set to `true`/`false`, `yes`/`no`, `on`/`off` or `1`/`0`.
 
 ### process
 
 Wrapper script to run the full chain of the other tools for the given list of files. The files are processed in threads/workers (number of threads can be specified by the option `-W` or configuration option `workers`, by default set to 10). It accepts the above mentioned options for specification of an additional configuration file (`-c <file_name>`) and selection of particular profile (`-p <profile_name>`).
 
-The tools output their intermediate files into a temporary directory (by default `/tmp`, but it can be specified by the option `-T <path>` or configuration option `temp_dir`) and the temporary files are automatically deleted at the end of the process, unless the option `-K` (or configuration option `keep_temp_files`) is applied. Using the option `-KF` (configuration option `keep_failed_files`), temporary files are kept for input files where the processing failed, while temporary files of successfully processed files are still deleted.
+It makes the tools output their intermediate files into a temporary directory (by default `/tmp`, but another destination may be specified by the option `-T <path>` or by the configuration option `temp_dir`) and the temporary files are automatically deleted at the end of the process, unless the option `-K` (or configuration option `keep_temp_files`) is applied. Using the option `-KF` (configuration option `keep_failed_files`), temporary files are kept for input files where the processing has failed, while temporary files of successfully processed files are still deleted.
 
 The resulting file will have the same name as the input file and the extension `.ann.xml` and will be saved to the same location as the input file by default (other ouput path may be specified using the option `-O <path>` or configuration option `output_path`). Using the option `-V <path>` (or configuration option `vrt_path`), the additional script `xml2vrt` will be also run and the resulting vertical will be saved with the extension `.vrt` into the path specified in the option.
 
 The script can also override language model configured for the tagger by explicitly specifying the option `-m <model>`.
 
-If you create your own tagger wrapper script called `tag_<tagger_name>`, it can also be caled by `process` instead of the provided `tag_ud` by specifying the option `-t <tagger_name>` or configuration option `tagger`. But it has to mimic the same behaviour and options and fullfill the requirements for taggers described above.
+If you create your own tagger wrapper script called `tag_<tagger_name>`, it can also be called by `process` instead of the provided `tag_ud` by specifying the option `-t <tagger_name>` (or configuration option `tagger`). But it has to mimic the same behaviour and options and fullfill the requirements for taggers described above.
 
 The option `-P` (configuration option `progress`) displays a simple progress bar showing the percentage of successfully processed files.
 
@@ -65,7 +65,7 @@ Parses an XML file, creating two files with the same base name and the extension
 
 By default, the text extraction is purely mechanical: everything between `<` and `>` is separated into the mark-up description and all the rest is extracted into the plain text file, including all whitespace, linebreaks between the elements, aso. However, in many cases, a *context aware extraction* is more desirable:
 
-- the XML source may conatain metadata in the form of text contents, which are not meant to be analyzed (e.g. TEI header)
+- the XML source may contain metadata in the form of text contents, which are not meant to be analyzed (e.g. TEI header)
 - the source may contain other elements or text fragments that should not be analyzed (with the same analyzer) as the rest of the text (e.g. TEI `<foreign>` elements)
 - the tagger should not try to create spans (sentences or even tokens) crossing boundaries of some basic text units (usually paragraphs); in the XML format, these text units are delimited by XML tags, but those are removed by the extraction of plain text contents; taggers usually respect line breaks as hard text element boundaries which should not be crossed under any circumstances (or they can be forced to respect them), but the XML may not necessarily always contain line breaks between the text elements, so that any separation of the text elements disappears when the XML tags are removed (e.g. an XML fragment such as `<p>First paragraph.</p><p>Second paragraph.</p>` would result into plain text contents in the form: `First paragraph.Second paragraph.`)
 
@@ -168,7 +168,7 @@ In the reverse conversion within `standoff2xml`, the corresponding method [`html
 
 ### tag_ud
 
-A simple feeder sending the input text in batches to the LINDAT online analyzer for Universal Dependencies (UDPipe 2). By default, it reads the standard input (STDIN), but using the option `-i <filename>`, the input can be read from the specified file. The option `-m <model>` (configuration option `model`) specifies the UD language model to be applied for analysis. The default batch size of 1000 lines can be changed to any custom number using the option `-b <number>` (the API has some limit for a maximal request size, so it can't process arbitrarily large texts at once) or configuration option `tagger_batch`. See the [UDPipe website](https://lindat.mff.cuni.cz/services/udpipe/) for more details about the process and the REST API.
+A simple feeder sending the input text in batches to the LINDAT online analyzer for Universal Dependencies (UDPipe 2). By default, it reads the standard input (STDIN), but using the option `-i <filename>`, the input can be read from the specified file. The option `-m <model>` (configuration option `model`) specifies the UD language model to be applied for analysis. The default batch size of 1000 lines can be changed to any custom number using the option `-b <number>` (the API has some limit for a maximal request size, so it can't process arbitrarily large texts at once) or the configuration option `tagger_batch`. See the [UDPipe website](https://lindat.mff.cuni.cz/services/udpipe/) for more details about the process and the REST API.
 
 The resulting CoNLL-U vertical is output to the standard output (STDOUT) by default, or to a file specified by the option `-o <filename>`.
 
@@ -180,25 +180,23 @@ The script supports [all documented features](http://lindat.mff.cuni.cz/services
 
 Script to convert the final, complete and fully tagged XML (e.g. `.ann.xml` output from `standoff2xml`) into vertical format.
 
-The extracted type of vertical may be identical to the one produced by the tagger or it may be limited to fewer attributes using the option `-a <list_of_attributes>` or configuration option `vrt_attributes` or just `attributes` (if the former is not defined). If no attribute names are given or their amount is lower than the actual number of attributes present, it tries to automatically include the attributes with default names `attr_N` as generated by `ann2standoff`. In that way, it shouldn't be necessary to provide a list of attribute names (nor their amount) to these two scripts if the only goal is to get the same vertical as produced by the tagger, just with the original XML annotation added. (If there is a combination of both explicitly named *and* automatically numbered attributes, the latter ones will only be included if their numbers follow the amount of the named ones exactly, e.g. `lemma, pos, attr_3, attr_4`.)
+The extracted type of vertical may be identical to the one produced by the tagger or it may be limited to fewer attributes using the option `-a <list_of_attributes>` or  the configuration option `vrt_attributes` (or just `ann2standoff`'s `attributes` - if the former is not defined). If no attribute names are provided or their amount is lower than the actual number of attributes present, it tries to automatically include the attributes with default names `attr_N` as generated by `ann2standoff`. In that way, it shouldn't be necessary to provide a list of attribute names (nor their amount) to `ann2standoff` and `xml2vrt` if the only goal is to get the same vertical as produced by the tagger, just with the original XML annotation added. (If there is a combination of both explicitly named *and* automatically numbered attributes, the latter ones will only be included if their numbers follow the amount of the named ones exactly, e.g. `lemma, pos, attr_3, attr_4`.)
 
-By default, the script will generate the so called "glue" element `<g/>` between tokens, where there was no space separating them in the original text flow (eg. between a word and a punctuation symbol). The name of the glue element can be changed using the option `-g <name>` ('g' by default; configuration option `vrt_glue`). Inserting the glue element can also be disabled using the option `-ng` (or `--no-glue`, configuration option `vrt_no_glue`).
+By default, the script will generate the so called "glue" element `<g/>` between tokens, where there was no space separating them in the original text flow (e.g. between a word and a punctuation symbol). The name of the glue element can be changed using the option `-g <name>` ('g' by default; configuration option `vrt_glue`). Inserting the glue element can also be disabled using the option `-ng` (or `--no-glue`, configuration option `vrt_no_glue`).
 
 By default, the script will automatically remove tags within the token string itself as well as any empty elements anywhere in the vertical (recursively), since such elements are usually not supported by search engines using the vertical format. This behaviour may be suppressed using the options `-kt` (or `--keep-token-tags`, confinguration option `vrt_keep_token_tags`) and `-ke` (or `--keep_empty`, configuration option `vrt_keep_empty`) respectively. The option `-de <element_list>` (configuration option `vrt_discard_empty`) may specify a limited list of particular elements to be discarded if empty.
 
-By default, the script will also **flatten any nested XML structures**, since nesting of elements of the same name is usually not supported by the search engines based on vertical format. At the beginning of any nested element with the same name as one of its parents, the parent element will be closed and a new element will be opened, merging its own attributes with the attributes of its parent: new attributes of the child will be appended and values of identical attributes will be concatenated. In addition, the child will get a new attribute `nesting_level` set to the level of nesting (starting with 1 for the first nested child level) - only the top-most parent will keep its original attributes only (the name can be changed using the configuration option `vrt_flat_level_attribute`). At the end of the nested child element, its immediate parent will be reopened with its original attributes.
-The default separator used for concatenation of attribute values (a single space by default) can be specified using the configuration option `vrt_flat_separator`, or more specifically `vrt_flat_separator_X_Y` for any particular attribute `Y` of any element `X`. Instead of concatenation, the values of children attributes may also override the values of the corresponding attributes of their parent completely. This can be activated generally by setting the configuration option `vrt_flat_override`, or specifically by the option `vrt_flat_override_X_Y` just for particular attributes `Y` of particular elements `X`.
-The flattening can also be completely deactivated using the option `-nf/--no-flattening` (configuration option `vrt_no_flattening`).
+By default, the script will also **flatten any nested XML structures**, since nesting of elements of the same name is usually not supported by the search engines based on vertical format. At the beginning of any nested element with the same name as one of its parents, the parent element will be closed and a new element will be opened, merging its own attributes with the attributes of its parent: new attributes of the child will be appended and values of identical attributes will be concatenated. In addition, the child will get a new attribute `nesting_level` set to the level of nesting (starting with 1 for the first nested child level; the attribute name can be changed using the configuration option `vrt_flat_level_attribute`) - only the top-most parent will keep its original attributes only. At the end of the nested child element, its immediate parent will be reopened with its own attributes again. The default separator used for concatenation of attribute values (a single space by default) can be specified using the configuration option `vrt_flat_separator`, or more specifically `vrt_flat_separator_X_Y` for any particular attribute `Y` of any element `X`. Instead of concatenation, the values of children attributes may also override the values of the corresponding attributes of their parent completely. This can be activated generally by setting the configuration option `vrt_flat_override`, or specifically by the option `vrt_flat_override_X_Y` just for particular attributes `Y` of particular elements `X`. The flattening can also be completely deactivated using the option `-nf/--no-flattening` (configuration option `vrt_no_flattening`).
 
-If there are text contents found within elements other than the specified token element (`w` by default, can be specified using the option `-te <name>`, configuration option `token_element`), the whole fragments are output as single line "tokens" by default. Using the option `-df` (or `--discard-freetext`, configuration option `vrt_discard_freetext`) they will be just discarded from the output.
+If there are text contents found within elements other than the specified token element (`w` by default, can be specified using the option `-te <name>`, configuration option `token_element`), the whole text fragments are output as single line "tokens" by default. Using the option `-df` (or `--discard-freetext`, configuration option `vrt_discard_freetext`) they will be completely discarded from the output.
 
-By default, the whole root element of the XML file will be extracted into the vertical. If just some particular subelements should be extracted, they can be specified using the option `-i <element_names>` (where element names are again listed as a single, comma separated list without spaces) or the configuration option `vrt_include_elements` (here, whitespace is allowed too). These elements are *not* expected to be nested within each other.
+By default, the whole root element of the XML file will be extracted into the vertical. If just some particular subelements should be extracted, they can be specified using the option `-i <element_names>` (where element names are again listed as a single, comma separated list without spaces) or the configuration option `vrt_include_elements` (where whitespace is allowed too). These elements are *not* expected to be nested within each other.
 
 Particular elements can also be skipped, i.e. excluded from the extraction using the option `-e <element_names>` or the configuration option `vrt_exclude_elements`. These elements may also be nested.
 
-The script is also capable of extracting from an XML fragment file (i.e. a document missing a common XML root element) by using the option `-F`. For the purpose of processing, the contents will internally be wrapped into a temporary wrapper root element, which will not appear in the resulting vertical.
+The script is also capable of extracting data from an XML fragment file (i.e. a document missing a common XML root element) by using the option `-F`. (For the purpose of processing, the contents will internally be wrapped into a temporary wrapper root element, which will not appear in the resulting vertical.)
 
-## Errors
+## Processing errors
 
 Errors causing processing failure are usually caused by invalid or problematic input files or issues with the tagger. Of course, they may also indicate a bug in the scripts. 
 
@@ -206,7 +204,7 @@ Errors causing processing failure are usually caused by invalid or problematic i
 
 (reported by `xml2standoff`)
 
-This error indicates an invalid XML input file. It occurs if some element is not correctly nested within its parent - i.e. the parent element tag was reached before the end tag of its child has appeared. Please, validate your XML file and fix it.
+This error indicates an invalid XML input file. It occurs if some XML element is not correctly nested within its parent - i.e. the parent element end tag was reached before the end tag of its child. Please, validate your XML file and fix it.
 
 ### TAGGER NOT AVAILABLE
 
@@ -224,15 +222,15 @@ The LINDAT UD Pipe API returned an error as reported.
 
 (reported by `ann2standoff`)
 
-Mismatch between the annotation produced by the tagger and the reference plain text analyzed: the reference text seems to be shorter; the analysis provides another token 'X', but the end of the reference file has already been reached.
+Mismatch between the annotation produced by the tagger and the plain text: the reference text seems to be shorter; the analysis provides another token 'X', but the end of the reference file has already been reached.
 
-Obviously, something unexpected happened, but there is no universal explanation (unless the tagger produces some additional output after finishing the analysis of the input).
+Obviously, something unexpected happened, but there is no universal explanation (unless the tagger produces some additional output).
 
 ### Warning: Missing annotation for source text: ABCDEFGH...
 
 (reported by `ann2standoff`)
 
-Mismatch between the annotation produced by the tagger and the reference plain text analyzed: the end of the annotation has been reached, but the reference text still continues (with the text "ABCDEFGH"...). This usually means that the tagger crashed (possiblly on some problematic token) and did not finish analyzing the rest of the plain text input.
+Mismatch between the annotation produced by the tagger and the plain text: the end of the annotation has been reached, but the reference text still continues (with the text "ABCDEFGH"...). This usually means that the tagger crashed (possibly on some problematic token) and did not finish analyzing the rest of the plain text.
 
 ### Token 'B' not matching 'A' at line N! Found text: ABCDEFGH...
 
@@ -240,21 +238,21 @@ Mismatch between the annotation produced by the tagger and the reference plain t
 
 Mismatch between the annotation produced by the tagger and the reference plain text analyzed: The annotation provides 'B' as the next token, but the following reference text continues with 'A' (and further on with 'ABCDEFGH'...).
 
-This commonly happens when the tagger does not return the original string in the exactly same form as it was present in the plain text input (now used as reference). If the tagger applies some predictable normalization of particular characters or tokens, this problem can be compensated by manually providing additional files with lists of applicable `replacements` and/or `matches` (see section "Matching annotation with original text" above). Otherwise, the tagger does not fullfill the basic requirement to be used with these scripts.
+This commonly happens when the tagger does not return the original string in the exactly same form as present in the plain text or if it ignores some part of the text (despite it is not classified as white-space characters by the script). If the tagger applies some predictable normalization of particular characters or tokens, this problem can be compensated by manually providing additional files with lists of applicable `replacements` and/or `matches` (see section "Matching annotation with original text" above). Otherwise, the tagger does not fullfill the basic requirement to be used with these scripts.
 
-Another cause can be the case, when the tagger does not produce the expected output format of a vertical with the original annotated string in the first column. In that case, a special preprocessing (or conversion) of the tagger's output is necessary.
+Another possible cause: if the tagger does not produce the expected vertical format with the original tokens in the first column. In that case, a special preprocessing (or conversion) of the tagger's output is necessary.
 
 ### Token ID mismatch at line N: expected X, got Y.
 
 (reported by `ann2standoff`, preprocessor for CoNLL-U)
 
-Rutine check failed: The numbering of subtokens in the CoNLL-U file is not as expected. Please, inform the authors in case this happens.
+Consistency check failed: The numbering of subtokens in the CoNLL-U file is not as expected. Please, inform the authors in case this happens.
 
 ### Element 'X' has started before position N.
 
 (reported by `standoff2xml`)
 
-Mismatch in the JSON data: arrived at an XML element which should already have started before the currently reached text position. This should never happen (unless the JSON files have been manipulated) since the annotation should be sorted by the starting position of elements. Please, report to the authors and provide all the input and temporary files.
+Mismatch in the JSON data: arrived at an XML element which should already have started before the currently reached text position. This should never happen (unless the JSON files have been manipulated). Please, report to the authors and provide all the input and temporary files.
 
 ### Element 'X' ends beyond the end of the text file (length N).
 
