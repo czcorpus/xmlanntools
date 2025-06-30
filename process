@@ -50,6 +50,14 @@ def process_single(config, filename):
     """
     Process single file
     """
+
+    def clear():
+        if not config.get('keep_temp_files'):
+            txtfile.unlink(missing_ok=True)
+            jsonfile.unlink(missing_ok=True)
+            annfile.unlink(missing_ok=True)
+            annjsonfile.unlink(missing_ok=True)
+
     # load modules
     xml2standoff = load_module('xml2standoff')
     tagger = load_module('tag_'+config.get('tagger', 'ud'))
@@ -72,21 +80,25 @@ def process_single(config, filename):
     matchlist = ann2standoff.load_matchlist(config)
 
     # process single file
-    xml2standoff.process(config, infile, txtout=txtfile, jsonout=jsonfile)
-    tagger.process(config, txtfile, annfile)
-    ann2standoff.process(config, annfile, txtin=txtfile, jsonout=annjsonfile,
-                         replacements=replacements, matchlist=matchlist)
-    standoff2xml.process(config, txtfile, jsonin=jsonfile, annjsonin=annjsonfile, xmlout=annxmlfile)
-    
-    if config.get('vrt_path'):
-        vrtfile = Path(config.get('vrt_path'), infile.name).with_suffix('.vrt')
-        xml2vrt.process(config, annxmlfile, vrtfile)
-
-    if not config.get('keep_temp_files'):
-        txtfile.unlink()
-        jsonfile.unlink()
-        annfile.unlink()
-        annjsonfile.unlink()
+    try:
+        xml2standoff.process(config, infile, txtout=txtfile, jsonout=jsonfile)
+        tagger.process(config, txtfile, annfile)
+        ann2standoff.process(config, annfile, txtin=txtfile, jsonout=annjsonfile,
+                            replacements=replacements, matchlist=matchlist)
+        standoff2xml.process(config, txtfile, jsonin=jsonfile, annjsonin=annjsonfile, xmlout=annxmlfile)
+        
+        if config.get('vrt_path'):
+            vrtfile = Path(config.get('vrt_path'), infile.name).with_suffix('.vrt')
+            xml2vrt.process(config, annxmlfile, vrtfile)
+    except Exception as e:
+        sys.stderr.write(infile.name + ': ' + str(e))
+        sys.stderr.write("\n")
+        sys.stderr.flush()
+        clear()
+        return(False)
+    else:
+        clear()
+        return(True)
 
 counter = 0
 
@@ -107,8 +119,8 @@ def process_batch(config, files, batch_size):
             file = q.get()
             if file is None:
                 break
-            process_single(config, file)
-            if config.getboolean('progress'):
+            succ = process_single(config, file)
+            if succ and config.getboolean('progress'):
                 lock.acquire()
                 increment()
                 lock.release()
@@ -130,6 +142,10 @@ def process_batch(config, files, batch_size):
         worker.join()
     if config.getboolean('progress'):
         sys.stderr.write("\n")
+        if counter == len(files):
+            sys.stderr.write("All files successfully processed.\n")
+        else:
+            sys.stderr.write(f"Successfully processed {counter} out of {len(files)} files.\n")
         sys.stderr.flush()
 
 
