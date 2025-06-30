@@ -197,3 +197,67 @@ By default, the whole root element of the XML file will be extracted into the ve
 Particular elements can also be skipped, i.e. excluded from the extraction using the option `-e <element_names>` or the configuration option `vrt_exclude_elements`. These elements may also be nested.
 
 The script is also capable of extracting from an XML fragment file (i.e. a document missing a common XML root element) by using the option `-F`. For the purpose of processing, the contents will internally be wrapped into a temporary wrapper root element, which will not appear in the resulting vertical.
+
+## Errors
+
+Errors causing processing failure are usually caused by invalid or problematic input files or issues with the tagger. Of course, they may also indicate a bug in the scripts. 
+
+### XML parsing error at line N: Element 'A' not closed before end of element 'B'.
+
+(reported by `xml2standoff`)
+
+This error indicates an invalid XML input file. It occurs if some element is not correctly nested within its parent - i.e. the parent element tag was reached before the end tag of its child has appeared. Please, validate your XML file and fix it.
+
+### TAGGER NOT AVAILABLE
+
+(reported by `tag_ud`)
+
+The LINDAT UD Pipe API cannot be reached. Either there is a problem with your network connection or the LINDAT server is down.
+
+### TAGGING FAILED [...]
+
+(reported by `tag_ud`)
+
+The LINDAT UD Pipe API returned an error as reported.
+
+### Unexpected end of reference text file. Expecting token 'X'.
+
+(reported by `ann2standoff`)
+
+Mismatch between the annotation produced by the tagger and the reference plain text analyzed: the reference text seems to be shorter; the analysis provides another token 'X', but the end of the reference file has already been reached.
+
+Obviously, something unexpected happened, but there is no universal explanation (unless the tagger produces some additional output after finishing the analysis of the input).
+
+### Warning: Missing annotation for source text: ABCDEFGH...
+
+(reported by `ann2standoff`)
+
+Mismatch between the annotation produced by the tagger and the reference plain text analyzed: the end of the annotation has been reached, but the reference text still continues (with the text "ABCDEFGH"...). This usually means that the tagger crashed (possiblly on some problematic token) and did not finish analyzing the rest of the plain text input.
+
+### Token 'B' not matching 'A' at line N! Found text: ABCDEFGH...
+
+(reported by `ann2standoff`)
+
+Mismatch between the annotation produced by the tagger and the reference plain text analyzed: The annotation provides 'B' as the next token, but the following reference text continues with 'A' (and further on with 'ABCDEFGH'...).
+
+This commonly happens when the tagger does not return the original string in the exactly same form as it was present in the plain text input (now used as reference). If the tagger applies some predictable normalization of particular characters or tokens, this problem can be compensated by manually providing additional files with lists of applicable `replacements` and/or `matches` (see section "Matching annotation with original text" above). Otherwise, the tagger does not fullfill the basic requirement to be used with these scripts.
+
+Another cause can be the case, when the tagger does not produce the expected output format of a vertical with the original annotated string in the first column. In that case, a special preprocessing (or conversion) of the tagger's output is necessary.
+
+### Token ID mismatch at line N: expected X, got Y.
+
+(reported by `ann2standoff`, preprocessor for CoNLL-U)
+
+Rutine check failed: The numbering of subtokens in the CoNLL-U file is not as expected. Please, inform the authors in case this happens.
+
+### Element 'X' has started before position N.
+
+(reported by `standoff2xml`)
+
+Mismatch in the JSON data: arrived at an XML element which should already have started before the currently reached text position. This should never happen (unless the JSON files have been manipulated) since the annotation should be sorted by the starting position of elements. Please, report to the authors and provide all the input and temporary files.
+
+### Element 'X' ends beyond the end of the text file (length N).
+
+(reported by `standoff2xml`)
+
+Mismatch in the JSON data: either the JSON data or the reference text have been damaged (or truncated). If you are not aware of any possible cause, please, report to the authors and provide all the input and temporary files.

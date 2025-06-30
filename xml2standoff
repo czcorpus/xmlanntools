@@ -225,6 +225,8 @@ def split_xml(text, txtelements=None, excludes=None, keep_linebreaks=False):
     text_store = None
     # shall we remove line breaks within text elements?
     normalize_linebreaks = txtelements is not None and not keep_linebreaks
+    # count lines
+    line_count = 1
 
     lbre = re.compile(r"[\n\r]+")
 
@@ -232,6 +234,7 @@ def split_xml(text, txtelements=None, excludes=None, keep_linebreaks=False):
         # scan to the beginning of next XML mark-up and add the contents to the plain text buffer
         (contents, mark, ptr) = scan_to(text, ptr, "<")
         contents = html.unescape(contents)
+        line_count += contents.count("\n")
 
         if text_store is None:
             # default: extract text contents into the output plain text file
@@ -250,16 +253,19 @@ def split_xml(text, txtelements=None, excludes=None, keep_linebreaks=False):
             if text_continues(text, ptr, '?'):
                 # processing instruction
                 (element, mark, ptr) = scan_to(text, ptr, "?>")
+                line_count += element.count("\n")
                 (ename, csep, econtents) = re_partition(r"(\s+)", element)
                 econtents += '?'
             elif text_continues(text, ptr, '!--'):
                 # XML comment
                 (element, mark, ptr) = scan_to(text, ptr, "-->")
+                line_count += element.count("\n")
                 ename = '!--'
                 econtents = element[3:] + '--'
             else:
                 # XML element
                 (element, mark, ptr) = scan_to(text, ptr, ">")
+                line_count += element.count("\n")
                 (ename, csep, econtents) = re_partition(r"(\s+)", element)
             
             # store the mark-up data into the mark-up buffer
@@ -269,8 +275,8 @@ def split_xml(text, txtelements=None, excludes=None, keep_linebreaks=False):
                 last = heap.pop()
                 slevel -= 1
                 if ename != last['name']:
-                    raise Exception("XML error at char {0}: Element {1} not closed before end of {2}."
-                                    .format(charcnt, last['name'], ename))
+                    raise Exception("XML parsing error at line {0}: Element '{1}' not closed before end of element '{2}'."
+                                    .format(line_count, last['name'], ename))
                 last['end'] = charcnt
                 markup.append(last)
                 # is the ending element a text element or an excluded element?

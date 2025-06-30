@@ -166,10 +166,8 @@ def ann2standoff(vrtann, reftext, config, replacements=[], matchlist=[]):
     token = reftext.read(1)
     while token != '':
         if len(token.strip()):
-            sys.stderr.write("Warning: Missing annotation for source text: ")
-            token += reftext.read(100)
-            sys.stderr.write(token+"...\n")
-            break
+            raise Exception("Missing annotation for source text: {0}..."
+                            .format(token+reftext.read(100)))
         token = reftext.read(1)
     
     return annotation
