@@ -19,9 +19,10 @@ from pathlib import Path
 
 # LINDAT service
 UDPIPE_API_URL = "http://lindat.mff.cuni.cz/services/udpipe/api/process"
-DEFAULT_MODEL = 'cs'
+NAMETAG_API_URL = "http://lindat.mff.cuni.cz/services/nametag/api/recognize"
+DEFAULT_MODEL = 'en'
 
-def udpipe_lindat(model, text, tokenizer="", tagger="", parser="", input=None, output=None):
+def udpipe_lindat(model, text, ner=None, tokenizer="", tagger="", parser="", input=None, output=None):
     """
     Send a text to UDPipe2 web service and return the result
     
@@ -29,6 +30,7 @@ def udpipe_lindat(model, text, tokenizer="", tagger="", parser="", input=None, o
         text to analyze
     model : str
         language model to apply
+    ner : NameTag named entity recognition model to apply (None=do not use NER)
     tokenizer : str | None
         tokenize as plain text?
     tagger : str | None
@@ -68,7 +70,25 @@ def udpipe_lindat(model, text, tokenizer="", tagger="", parser="", input=None, o
             else f"TAGGING FAILED [{response.status_code}]: "
             )
         raise Exception(error_type + response.text)
-    return response.json()["result"]
+    result = response.json()["result"]
+    if ner:
+        # Apply NameTag Named Entity Recognition
+        params = {
+            "model": ner if ner != 'auto' else model,
+            "data": result,
+            "input": "conllu",
+            "output": "conllu-ne"
+        }
+        response = requests.post(NAMETAG_API_URL, params)
+        if not response.ok:
+            error_type = (
+                "NAMETAG NOT AVAILABLE: "
+                if response.status_code == http.HTTPStatus.SERVICE_UNAVAILABLE
+                else f"NAMED ENTITY RECOGNITION FAILED [{response.status_code}]: "
+                )
+            raise Exception(error_type + response.text)
+        result = response.json()["result"]
+    return result
 
 def process(config, infile, outfile, verbose=False):
     output = outfile.open('w', encoding='utf-8') if outfile else sys.stdout
@@ -81,14 +101,15 @@ def process(config, infile, outfile, verbose=False):
             sys.stderr.flush()
         print(udpipe_lindat(
             model= config.get('model', DEFAULT_MODEL),
+            ner = config.get('named_entities'),
             text= "".join(buffer),
             tokenizer= config.get('tokenizer_options', ''),
             tagger= None if config.getboolean('no_analysis') else config.get('tagger_options', ''),
             parser= None if config.getboolean('no_parsing') or config.getboolean('no_analysis') else config.get('parser_options', ''),
             input= None if config.get('tagger_input', 'plaintext')=='plaintext' else config.get('tagger_input'),
             output= config.get('tagger_output')
-            )
-        , file = output)
+            ),
+            file = output)
         if verbose:
             sys.stderr.write(f"Analyzed.\n")
 
@@ -114,7 +135,11 @@ if __name__ == '__main__':
     Output: STDOUT
     
     Options: '-m <model>' Use the specified language model.
-             See http://ufal.mff.cuni.cz/udpipe/2/models for a list of currently available models)
+             (See http://ufal.mff.cuni.cz/udpipe/2/models for a list of currently available models)
+
+             '-ner [<model>]' Apply NameTag Named Entity Recognition using the optionally specified model.
+             By default, the value 'auto' means that the language model of the tagger is used.
+             (See https://lindat.mff.cuni.cz/services/nametag/api/models for a list of currently available models)
              
              '-i <filename>' Read input from file instead of STDIN.
 
@@ -150,6 +175,7 @@ if __name__ == '__main__':
     parser.add_argument("-c", "--config", help="additional config file", type=str)
     parser.add_argument("-p", "--profile", help="config profile to use", type=str, default='DEFAULT')
     parser.add_argument("-m", "--model", help="UD language model to use", type=str)
+    parser.add_argument("-ner", "--named-entities", help="apply NameTag NER with the specified (optional) model", type=str, nargs='?', const='auto')
     parser.add_argument("-i", "-f", "--infile", help="input file (default=STDIN)", type=str)
     parser.add_argument("-o", "--outfile", help="output file (default=STDOUT)", type=str)
     parser.add_argument("-if", "--input-format", help="input format (if pre-tokenized; by default just plaintext to be tokenized internally)", type=str, default="plaintext", dest="tagger_input")

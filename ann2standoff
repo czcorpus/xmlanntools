@@ -73,10 +73,16 @@ def ann2standoff(vrtann, reftext, config, replacements=[], matchlist=[]):
     sentence_element = config.get('sentence_element', 's')
     virtual_token = config.get('virtual_tokens')
     virtual_token_attr = config.get('virtual_token_attr', 'form')
+    # named entities
+    nentities = []
+    # counters
     linecnt = 0 
     curpos = 0
     annotation = []
     sstart = -1
+    last_token_end_pos = 0
+    curlevel = 1
+    order = 1
     # each line in a vertical format corresponds to one annotated token in the reference text
     for line in vrtann:
         line = line.rstrip(" \t\r\n")
@@ -84,7 +90,8 @@ def ann2standoff(vrtann, reftext, config, replacements=[], matchlist=[]):
         if not len(line):
             # empty line: sentence boundary
             if 0 <= sstart < curpos:
-                s = {"name": sentence_element, "contents": "", "start": sstart, "end": curpos, "level": 1, 'order': linecnt}
+                s = {"name": sentence_element, "contents": "", "start": sstart, "end": curpos, "level": 1, 'order': order}
+                order += 1
                 annotation.append(s)
                 sstart = -1
             continue
@@ -115,7 +122,8 @@ def ann2standoff(vrtann, reftext, config, replacements=[], matchlist=[]):
 
         # virtual subtoken (if enabled)
         if not word and virtual_token:
-            token = {"name": virtual_token, "contents": attrstr+'/', "start": curpos, "end": curpos, "level": 3, 'order': linecnt}
+            token = {"name": virtual_token, "contents": attrstr+'/', "start": curpos, "end": curpos, "level": 3, 'order': order}
+            order += 1
             annotation.append(token)
             continue
 
@@ -153,13 +161,36 @@ def ann2standoff(vrtann, reftext, config, replacements=[], matchlist=[]):
         wlen = len(word)
         if sstart < 0:
             sstart = curpos
-        token = {"name": token_element, "contents": attrstr, "start": curpos, "end": curpos+wlen, "level": 2, 'order': linecnt}
+
+        # names entities
+        last_attr = pattrs[attrcnt-1]
+        ne = list(filter(lambda x: x.startswith('NE='), last_attr.split('|')))
+        negroups = ne[0][3:].split('-') if len(ne) else []
+        # entities that ended with the last (=previous) token
+        while len(negroups) < len(nentities):
+            lastent = nentities.pop()
+            lastent['end'] = last_token_end_pos
+            annotation.append(lastent)
+            curlevel -= 1
+        # new entities starting with this token
+        for i in range(len(nentities), len(negroups)):
+            (enttype, entlevel) = negroups[i].split('_')
+            curlevel += 1
+            newent = {"name": "ne", "contents": f'type="{enttype}"', "start": curpos, "level": curlevel, "order": order}
+            order += 1
+            nentities.append(newent)
+
+        token = {"name": token_element, "contents": attrstr, "start": curpos, "end": curpos+wlen, "level": curlevel+1, 'order': order}
+        order += 1
         annotation.append(token)
         curpos += wlen
+        last_token_end_pos = curpos
+
     # add/close final sentence
     if 0 <= sstart < curpos:
         linecnt += 1
-        s = {"name": sentence_element, "contents": "", "start": sstart, "end": curpos, "level": 1, 'order': linecnt}
+        s = {"name": sentence_element, "contents": "", "start": sstart, "end": curpos, "level": 1, 'order': order}
+        order += 1
         annotation.append(s)
     
     # no more annotation available - anything else left in the source text?
