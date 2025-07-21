@@ -59,7 +59,7 @@ def merge_xml(text, annotation, out):
         # got out-of-order element: fail, we cannot fix it anymore (but this should never happen if annotation is sorted!)
         if i['start'] < curpos:
             raise Exception("Element '{0}' has started before position {1}.".format(i, curpos))
-        
+
         # while seeking to the start of the current span, write out all remaining text segments and close all former spans ending before this one starts
         while i['start'] >= curpos and (nextclose or len(openels)):
                 # fetch next open span to be closed
@@ -152,8 +152,6 @@ def merge_annotations(origann, newann, breakable=None, nest_elements=[], merge_e
     
     """
     
-    # sort current annotation spans by their order
-    origann = sorted(origann, key=itemgetter('order'))
     # resulting merged list of annotation spans
     outann = []
     # virtual position in the text
@@ -223,10 +221,12 @@ def merge_annotations(origann, newann, breakable=None, nest_elements=[], merge_e
                     xc['start'] = t['start']  # b2) the rest (copy) to be placed inside the new span
                     inbuffer.append(xc)
             else:  # spans ending at the same position as the new span or later
-                if ('*' in merge_elements or x['name'] in merge_elements) and x['end'] == t['end'] and x['name'] == t['name']:  # merge spans with the same name and length
+                if x['start']==t['start'] and x['end'] == t['end'] and x['name'] == t['name'] and ('*' in merge_elements or x['name'] in merge_elements):
+                    # merge spans with the same name and length
                     t['contents'] = x['contents'] + t.get('csep',' ') + t['contents']
                     t['csep'] = x.get('csep',' ')
-                elif x['end'] == t['end'] and x['name'] in nest_elements: # nest requested elements with the same length
+                elif x['start']==t['start'] and x['end'] == t['end'] and x['name'] in nest_elements:
+                    # nest requested elements with the same length
                     inbuffer.append(x)
                 else:
                     lastlevel = x['level']
@@ -300,7 +300,7 @@ def process(config, txtin, jsonin=None, annjsonin=None, xmlout=None):
 
     # read original XML mark-up description/annotation
     with open(jsonin, encoding='utf-8') as jsonfile:
-        xmlann = json.load(jsonfile)
+        xmlann = sorted(json.load(jsonfile), key=itemgetter('order'))
 
     # read tagger annotation (if found)
     if annjsonin.exists():
@@ -322,9 +322,6 @@ def process(config, txtin, jsonin=None, annjsonin=None, xmlout=None):
                                                 no_betweenspan_elements=not config.getboolean('keep_between_sentences'))
             else:
                 xmlann = merge_annotations(xmlann, spans, breakable, merge_elements=merge_elements, nest_elements=nest_elements)
-    else:
-        # sort by XML element order attribute (`merge_annotations` already does this)
-        xmlann = sorted(xmlann, key=itemgetter('order'))
 
     with xmlout.open('w', encoding='utf-8') as xmlfile:
         # merge original plaintext with the annotation and write out
