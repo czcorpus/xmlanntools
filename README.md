@@ -119,6 +119,8 @@ will (with the default configuration as provided in `xmlanntools.ini`) result in
 
 Using the option `-vt dtok`, the result will be different: `<w id="1-2" synword="Can't" lemma="_" upos="_" xpos="_" feats="_" head="_" deprel="_" deps="_" misc="SpaceAfter=No">Can't<dtok form="Ca" id="1" synword="Ca" lemma="can" upos="AUX" xpos="MD" feats="VerbForm=Fin" head="0" deprel="root" deps="_" misc="_"/><dtok form="n't" id="2" synword="n't" lemma="not" upos="PART" xpos="RB" feats="_" head="1" deprel="advmod" deps="_" misc="_"/></w>`
 
+If the CoNLL-U input contains identification of named entities (CoNLL-U+NE), it will automatically be detected and converted into XML annotation in the form of additional `ne` elements (possibly nested) with the attribute `type`. (See also the description of the `tag_ud` script.)
+
 Additional features of the script will be described later in the section "Matching annotation with original text".
 
 ### standoff2xml
@@ -175,6 +177,10 @@ The resulting CoNLL-U vertical is output to the standard output (STDOUT) by defa
 The option `-v` reports some basic information about the progress to the standard error output (STDERR).
 
 The script supports [all documented features](http://lindat.mff.cuni.cz/services/udpipe/api-reference.php) of the LINDAT UDPipe REST API: any analysis of the input can be suppressed by using the option `-na` (`--no-analysis`) and then only segmentation and tokenization will be performed; syntactic (dependency) parsing can be suppressed using the option `-np` (`--no-parsing`); input or output format can be set by the options `-if <format>` (`--input-format`) and `-of <format>` (`--output-format`); additional options may be passed to the tokenizer, tagger and syntactic parser using the corresponding options `--tokenizer`, `--tagger` and `--parser` or configuration options `tokenizer_options`, `tagger_options` and `parser_options` respectively.
+
+The script can also call the [NameTag](https://lindat.mff.cuni.cz/services/nametag/) NER tool to enrich the CoNLL-U output with recognition of named entities. Use the option `-ner` (configuration option `named_entities`) with an optional specification of the NER model to use. If no model is specified with the commandline option (or the value of `auto` is used in the configuration), the same specification of model will be requested as for the UDPipe tagger, which may result into a potential failure: while NameTag accepts some basic language specifications common with the UD tagger (such as `cs`, `en` or `de`), it does not recognize others. Currently, only a model for Czech is available together with a universal multilingual model, so that languages other than `cs` are automatically analyzed using the latter one (if they are recognized at all). See also the corresponding [documentation on models](https://lindat.mff.cuni.cz/services/nametag/api-reference.php#models).
+
+Named entities are later automatically detected in the enriched "CoNLL-U+NE" output and converted into XML annotation by the `ann2standoff` script: `ne` elements are created with the attribute `type` specifying the particular type of the identified named entity. The `ne` elements may also be nested if multiple types of named entities are identified within overlapping text spans.
 
 ### xml2vrt
 
