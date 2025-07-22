@@ -70,6 +70,8 @@ def ann2standoff(vrtann, reftext, config, replacements=[], matchlist=[]):
     attrnames = config.get('attributes', '').replace(',',' ').split()
     excluded_attrs = config.get('exclude_attributes', '').replace(',',' ').split()
     token_element = config.get('token_element', 'w')
+    punct_rule = config.get('punctuation', '').split('=')
+    punct_element = config.get('punct_element', 'pc')
     sentence_element = config.get('sentence_element', 's')
     virtual_token = config.get('virtual_tokens')
     virtual_token_attr = config.get('virtual_token_attr', 'form')
@@ -85,6 +87,7 @@ def ann2standoff(vrtann, reftext, config, replacements=[], matchlist=[]):
     order = 1
     # each line in a vertical format corresponds to one annotated token in the reference text
     for line in vrtann:
+        token_element_name = token_element
         line = line.rstrip(" \t\r\n")
         linecnt += 1
         if not len(line):
@@ -112,6 +115,10 @@ def ann2standoff(vrtann, reftext, config, replacements=[], matchlist=[]):
                 attrname = 'attr_' + str(attrcnt)
             else:
                 attrname = attrnames[attrcnt-1]
+            if len(punct_rule)>1:
+                # detect punctuation
+                if attrname == punct_rule[0] and re.fullmatch(punct_rule[1], pattrs[attrcnt]):
+                    token_element_name = punct_element
             if attrname in excluded_attrs or attrname == '_':
                 attrcnt += 1
                 continue
@@ -181,7 +188,7 @@ def ann2standoff(vrtann, reftext, config, replacements=[], matchlist=[]):
                 order += 1
                 nentities.append(newent)
 
-        token = {"name": token_element, "contents": attrstr, "start": curpos, "end": curpos+wlen, "level": curlevel+1, 'order': order}
+        token = {"name": token_element_name, "contents": attrstr, "start": curpos, "end": curpos+wlen, "level": curlevel+1, 'order': order}
         order += 1
         annotation.append(token)
         curpos += wlen
@@ -365,7 +372,11 @@ if __name__ == '__main__':
              '-te <element_name>' Name of the resulting XML elemenent for tokens.
              Config setting: 'token_element'.
              Default: 'w'.
-              
+
+             '-pe <element_name>' Name of the resulting XML elemenent for punctuation symbols.
+             Config setting: 'punctuation_element'.
+             Default: 'pc'.
+
              '-se <element_name>' Name of the resulting XML elemenent for sentences.
              Config setting: 'sentence_element'.
              Default: 's'.
@@ -374,6 +385,12 @@ if __name__ == '__main__':
              tokenization/annotation.
              Config setting: 'virtual_tokens'.
              Default: no virtual subtokens created
+
+             '-pc <rule>' Identify punctuation symbols using the defined rule. The rule must have the form
+             `<attribute_name>=<attribute_value>`. Tokens are identified as punctuation symbols if their
+             corresponding attibute matches the provided value (as a regular expression).
+             Config setting: 'punctuation'.
+             Default: no rule - i.e. no detection of punctuation symbols.
     """
     
     import os
@@ -392,6 +409,8 @@ if __name__ == '__main__':
     parser.add_argument("-a", "--attributes", help="attribute names (except first position, separated by comma)", type=str)
     parser.add_argument("-ea", "--exclude-attributes", help="attribute names (except first position, separated by comma)", type=str)
     parser.add_argument("-te", "--token-element", help="name of token element", type=str)
+    parser.add_argument("-pe", "--punctuation-element", help="name of punctuation element", type=str)
+    parser.add_argument("-pc", "--punctuation", help="identification of punctuation", type=str)
     parser.add_argument("-se", "--sentence-element", help="name of sentence element", type=str)
     parser.add_argument("-vt", "--virtual-tokens", help="name of virtual subtokens for CoNLL-U second level tokenization", type=str)
     parser.add_argument("-va", "--virtual-token-attr", help="name of virtual subtoken attribute to capture form", type=str)
