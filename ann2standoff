@@ -73,6 +73,8 @@ def ann2standoff(vrtann, reftext, config, replacements=[], matchlist=[]):
     punct_rule = config.get('punctuation', '').split('=')
     punct_element = config.get('punct_element', 'pc')
     sentence_element = config.get('sentence_element', 's')
+    ne_element = config.get('ne_element', 'ne')
+    ne_type_attr = config.get('ne_type_attr', 'type')
     virtual_token = config.get('virtual_tokens')
     virtual_token_attr = config.get('virtual_token_attr', 'form')
     # named entities
@@ -184,7 +186,7 @@ def ann2standoff(vrtann, reftext, config, replacements=[], matchlist=[]):
             for i in range(len(nentities), len(negroups)):
                 (enttype, entlevel) = negroups[i].split('_')
                 curlevel += 1
-                newent = {"name": "ne", "contents": f'type="{enttype}"', "start": curpos, "level": curlevel, "order": order}
+                newent = {"name": ne_element, "contents": f'{ne_type_attr}="{enttype}"', "start": curpos, "level": curlevel, "order": order}
                 order += 1
                 nentities.append(newent)
 
@@ -381,6 +383,14 @@ if __name__ == '__main__':
              Config setting: 'sentence_element'.
              Default: 's'.
 
+             '-ne <element_name>' Name of the resulting XML elemenent for named entities.
+             Config setting: 'ne_element'.
+             Default: 'ne'.
+
+             '-nt <attribute_name>' Name of the attribute used for type of named entities.
+             Config setting: 'ne_type_attr'.
+             Default: 'type'.
+
              '-vt <name>' Name of virtual subtokens to carry second level tokenization from CoNLL-U two level 
              tokenization/annotation.
              Config setting: 'virtual_tokens'.
@@ -412,6 +422,8 @@ if __name__ == '__main__':
     parser.add_argument("-pe", "--punctuation-element", help="name of punctuation element", type=str)
     parser.add_argument("-pc", "--punctuation", help="identification of punctuation", type=str)
     parser.add_argument("-se", "--sentence-element", help="name of sentence element", type=str)
+    parser.add_argument("-ne", "--ne-element", help="name of element marking named entities", type=str)
+    parser.add_argument("-nt", "--ne-type-attr", help="name of type attribute for named entities", type=str)
     parser.add_argument("-vt", "--virtual-tokens", help="name of virtual subtokens for CoNLL-U second level tokenization", type=str)
     parser.add_argument("-va", "--virtual-token-attr", help="name of virtual subtoken attribute to capture form", type=str)
     args = parser.parse_args()

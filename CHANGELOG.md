@@ -35,7 +35,7 @@ _Warning: defaults were changed and some options renamed (esp. the long/configur
 
 ### configuration
 
-- Make all scripts configurable from a single common configuration file `xmlanntools.ini'` (some options needed renaming to avoid conflicts)
+- Make all scripts configurable from a single common configuration file `xmlanntools.ini` (some options needed renaming to avoid conflicts)
 - Make a new profile `tei_default` the default
 - Change default first column attribute in CoNLL-U (token number within the sentence) name to `n` (in order to avoid confusion with `xml:id`)
 

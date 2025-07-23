@@ -121,7 +121,7 @@ will (with the default configuration as provided in `xmlanntools.ini`) result in
 
 Using the option `-vt dtok`, the result will be different: `<w id="1-2" synword="Can't" lemma="_" upos="_" xpos="_" feats="_" head="_" deprel="_" deps="_" misc="SpaceAfter=No">Can't<dtok form="Ca" id="1" synword="Ca" lemma="can" upos="AUX" xpos="MD" feats="VerbForm=Fin" head="0" deprel="root" deps="_" misc="_"/><dtok form="n't" id="2" synword="n't" lemma="not" upos="PART" xpos="RB" feats="_" head="1" deprel="advmod" deps="_" misc="_"/></w>`
 
-If the CoNLL-U input contains identification of named entities (CoNLL-U+NE), it will automatically be detected and converted into XML annotation in the form of additional `ne` elements (possibly nested) with the attribute `type`. (See also the description of the `tag_ud` script.)
+If the CoNLL-U input contains identification of named entities (CoNLL-U+NE), it will automatically be detected and converted into XML annotation in the form of additional `ne` elements (possibly nested) with the attribute `type`. (See also the description of the `tag_ud` script.) The name of the element can be specified using the option `-ne <element_name>` (configuration option `ne_element`) and the name of the attribute for its type using the option `-nt <attribute_name>` (configuration option `ne_type_attr`).
 
 Additional features of the script will be described later in the section "Matching annotation with original text".
 
