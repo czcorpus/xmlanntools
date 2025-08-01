@@ -143,7 +143,7 @@ def matches_constraint(constraint, heap):
         return False
     # test for attribute constraints
     for attr_constr in constraint['attrs']:
-        expr = re.compile("(?<!\S)"+attr_constr['name']+"\s*=\s*\""+html.escape(attr_constr['value'], quote=True)+"\"")
+        expr = re.compile(r"(?<!\S)"+attr_constr['name']+r"\s*=\s*\""+html.escape(attr_constr['value'], quote=True)+"\"")
         if not expr.search(current['contents']):
             return False
     # test for parent constraints
