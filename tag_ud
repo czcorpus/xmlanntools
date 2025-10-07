@@ -102,7 +102,8 @@ def process(config, infile, outfile, verbose=False):
         print(udpipe_lindat(
             model= config.get('model', DEFAULT_MODEL),
             ner = config.get('named_entities'),
-            text= "".join(buffer),
+            # UD Pipe needs double "\n\n" to enforce paragraph breaks!
+            text= "\n".join(buffer)+"\n",
             tokenizer= config.get('tokenizer_options', ''),
             tagger= None if config.getboolean('no_analysis') else config.get('tagger_options', ''),
             parser= None if config.getboolean('no_parsing') or config.getboolean('no_analysis') else config.get('parser_options', ''),
