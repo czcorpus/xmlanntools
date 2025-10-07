@@ -1,7 +1,7 @@
 [
 {
 "name": "w",
-"contents": "id=\"1\" synword=\"SETK\u00c1N\u00cd\" lemma=\"setk\u00e1n\u00ed\" upos=\"NOUN\" xpos=\"NNNS1-----A----\" feats=\"Case=Nom|Gender=Neut|Number=Sing|VerbForm=Vnoun\" head=\"0\" deprel=\"root\" deps=\"_\" misc=\"SpacesBefore=\\n\\n\"",
+"contents": "n=\"1\" synword=\"SETK\u00c1N\u00cd\" lemma=\"setk\u00e1n\u00ed\" upos=\"NOUN\" xpos=\"NNNS1-----A----\" feats=\"Case=Nom|Gender=Neut|Number=Sing|VerbForm=Vnoun\" head=\"0\" deprel=\"root\" deps=\"_\" misc=\"SpacesBefore=\\n\\n\"",
 "start": 1,
 "end": 8,
 "level": 2,
@@ -9,7 +9,7 @@
 },
 {
 "name": "w",
-"contents": "id=\"2\" synword=\"P\u0158ED\" lemma=\"p\u0159ed\" upos=\"ADP\" xpos=\"RR--7----------\" feats=\"AdpType=Prep|Case=Ins\" head=\"3\" deprel=\"case\" deps=\"_\" misc=\"_\"",
+"contents": "n=\"2\" synword=\"P\u0158ED\" lemma=\"p\u0159ed\" upos=\"ADP\" xpos=\"RR--7----------\" feats=\"AdpType=Prep|Case=Ins\" head=\"3\" deprel=\"case\" deps=\"_\" misc=\"_\"",
 "start": 9,
 "end": 13,
 "level": 2,
@@ -17,7 +17,7 @@
 },
 {
 "name": "w",
-"contents": "id=\"3\" synword=\"DE\u0160T\u011aM\" lemma=\"d\u00e9\u0161\u0165\" upos=\"NOUN\" xpos=\"NNIS7-----A----\" feats=\"Animacy=Inan|Case=Ins|Gender=Masc|Number=Sing\" head=\"1\" deprel=\"nmod\" deps=\"_\" misc=\"SpacesAfter=\\n\\n\\n\\n\"",
+"contents": "n=\"3\" synword=\"DE\u0160T\u011aM\" lemma=\"d\u00e9\u0161\u0165\" upos=\"NOUN\" xpos=\"NNIS7-----A----\" feats=\"Animacy=Inan|Case=Ins|Gender=Masc|Number=Sing\" head=\"1\" deprel=\"nmod\" deps=\"_\" misc=\"SpacesAfter=\\n\\n\\n\\n\"",
 "start": 14,
 "end": 20,
 "level": 2,
@@ -33,7 +33,7 @@
 },
 {
 "name": "w",
-"contents": "id=\"1\" synword=\"V\" lemma=\"v\" upos=\"ADP\" xpos=\"RR--6----------\" feats=\"AdpType=Prep|Case=Loc\" head=\"3\" deprel=\"case\" deps=\"_\" misc=\"_\"",
+"contents": "n=\"1\" synword=\"V\" lemma=\"v\" upos=\"ADP\" xpos=\"RR--6----------\" feats=\"AdpType=Prep|Case=Loc\" head=\"3\" deprel=\"case\" deps=\"_\" misc=\"_\"",
 "start": 22,
 "end": 23,
 "level": 2,
@@ -41,7 +41,7 @@
 },
 {
 "name": "w",
-"contents": "id=\"2\" synword=\"bezb\u0159eh\u00e9\" lemma=\"bezb\u0159eh\u00fd\" upos=\"ADJ\" xpos=\"AAFS6----1A----\" feats=\"Case=Loc|Degree=Pos|Gender=Fem|Number=Sing|Polarity=Pos\" head=\"3\" deprel=\"amod\" deps=\"_\" misc=\"_\"",
+"contents": "n=\"2\" synword=\"bezb\u0159eh\u00e9\" lemma=\"bezb\u0159eh\u00fd\" upos=\"ADJ\" xpos=\"AAFS6----1A----\" feats=\"Case=Loc|Degree=Pos|Gender=Fem|Number=Sing|Polarity=Pos\" head=\"3\" deprel=\"amod\" deps=\"_\" misc=\"_\"",
 "start": 24,
 "end": 32,
 "level": 2,
@@ -49,7 +49,7 @@
 },
 {
 "name": "w",
-"contents": "id=\"3\" synword=\"slabosti\" lemma=\"slabost\" upos=\"NOUN\" xpos=\"NNFS6-----A----\" feats=\"Case=Loc|Gender=Fem|Number=Sing\" head=\"0\" deprel=\"root\" deps=\"_\" misc=\"SpacesAfter=\\n\\n\"",
+"contents": "n=\"3\" synword=\"slabosti\" lemma=\"slabost\" upos=\"NOUN\" xpos=\"NNFS6-----A----\" feats=\"Case=Loc|Gender=Fem|Number=Sing\" head=\"0\" deprel=\"root\" deps=\"_\" misc=\"SpacesAfter=\\n\\n\"",
 "start": 33,
 "end": 41,
 "level": 2,
@@ -65,7 +65,7 @@
 },
 {
 "name": "w",
-"contents": "id=\"1\" synword=\"siln\u00fdch\" lemma=\"siln\u00fd\" upos=\"ADJ\" xpos=\"AAIP2----1A----\" feats=\"Animacy=Inan|Case=Gen|Degree=Pos|Gender=Masc|Number=Plur|Polarity=Pos\" head=\"2\" deprel=\"amod\" deps=\"_\" misc=\"_\"",
+"contents": "n=\"1\" synword=\"siln\u00fdch\" lemma=\"siln\u00fd\" upos=\"ADJ\" xpos=\"AAIP2----1A----\" feats=\"Animacy=Inan|Case=Gen|Degree=Pos|Gender=Masc|Number=Plur|Polarity=Pos\" head=\"2\" deprel=\"amod\" deps=\"_\" misc=\"_\"",
 "start": 42,
 "end": 49,
 "level": 2,
@@ -73,7 +73,7 @@
 },
 {
 "name": "w",
-"contents": "id=\"2\" synword=\"okam\u017eik\u016f\" lemma=\"okam\u017eik\" upos=\"NOUN\" xpos=\"NNIP2-----A----\" feats=\"Animacy=Inan|Case=Gen|Gender=Masc|Number=Plur\" head=\"0\" deprel=\"root\" deps=\"_\" misc=\"SpacesAfter=\\n\\n\"",
+"contents": "n=\"2\" synword=\"okam\u017eik\u016f\" lemma=\"okam\u017eik\" upos=\"NOUN\" xpos=\"NNIP2-----A----\" feats=\"Animacy=Inan|Case=Gen|Gender=Masc|Number=Plur\" head=\"0\" deprel=\"root\" deps=\"_\" misc=\"SpacesAfter=\\n\\n\"",
 "start": 50,
 "end": 58,
 "level": 2,
@@ -89,7 +89,7 @@
 },
 {
 "name": "w",
-"contents": "id=\"1\" synword=\"rozmlouv\u00e1m\" lemma=\"rozmlouvat\" upos=\"VERB\" xpos=\"VB-S---1P-AAI--\" feats=\"Aspect=Imp|Mood=Ind|Number=Sing|Person=1|Polarity=Pos|Tense=Pres|VerbForm=Fin|Voice=Act\" head=\"0\" deprel=\"root\" deps=\"_\" misc=\"_\"",
+"contents": "n=\"1\" synword=\"rozmlouv\u00e1m\" lemma=\"rozmlouvat\" upos=\"VERB\" xpos=\"VB-S---1P-AAI--\" feats=\"Aspect=Imp|Mood=Ind|Number=Sing|Person=1|Polarity=Pos|Tense=Pres|VerbForm=Fin|Voice=Act\" head=\"0\" deprel=\"root\" deps=\"_\" misc=\"_\"",
 "start": 59,
 "end": 69,
 "level": 2,
@@ -97,7 +97,7 @@
 },
 {
 "name": "w",
-"contents": "id=\"2\" synword=\"s\" lemma=\"s\" upos=\"ADP\" xpos=\"RR--7----------\" feats=\"AdpType=Prep|Case=Ins\" head=\"3\" deprel=\"case\" deps=\"_\" misc=\"_\"",
+"contents": "n=\"2\" synword=\"s\" lemma=\"s\" upos=\"ADP\" xpos=\"RR--7----------\" feats=\"AdpType=Prep|Case=Ins\" head=\"3\" deprel=\"case\" deps=\"_\" misc=\"_\"",
 "start": 70,
 "end": 71,
 "level": 2,
@@ -105,7 +105,7 @@
 },
 {
 "name": "w",
-"contents": "id=\"3\" synword=\"k\u016frou\" lemma=\"k\u016fra\" upos=\"NOUN\" xpos=\"NNFS7-----A----\" feats=\"Case=Ins|Gender=Fem|Number=Sing\" head=\"1\" deprel=\"obl:arg\" deps=\"_\" misc=\"SpacesAfter=\\n\\n\"",
+"contents": "n=\"3\" synword=\"k\u016frou\" lemma=\"k\u016fra\" upos=\"NOUN\" xpos=\"NNFS7-----A----\" feats=\"Case=Ins|Gender=Fem|Number=Sing\" head=\"1\" deprel=\"obl:arg\" deps=\"_\" misc=\"SpacesAfter=\\n\\n\"",
 "start": 72,
 "end": 77,
 "level": 2,
@@ -121,7 +121,7 @@
 },
 {
 "name": "w",
-"contents": "id=\"1\" synword=\"stolet\u00fdch\" lemma=\"stolet\u00fd\" upos=\"ADJ\" xpos=\"AAIP2----1A----\" feats=\"Animacy=Inan|Case=Gen|Degree=Pos|Gender=Masc|Number=Plur|Polarity=Pos\" head=\"2\" deprel=\"amod\" deps=\"_\" misc=\"_\"",
+"contents": "n=\"1\" synword=\"stolet\u00fdch\" lemma=\"stolet\u00fd\" upos=\"ADJ\" xpos=\"AAIP2----1A----\" feats=\"Animacy=Inan|Case=Gen|Degree=Pos|Gender=Masc|Number=Plur|Polarity=Pos\" head=\"2\" deprel=\"amod\" deps=\"_\" misc=\"_\"",
 "start": 78,
 "end": 87,
 "level": 2,
@@ -129,7 +129,7 @@
 },
 {
 "name": "w",
-"contents": "id=\"2\" synword=\"strom\u016f\" lemma=\"strom\" upos=\"NOUN\" xpos=\"NNIP2-----A----\" feats=\"Animacy=Inan|Case=Gen|Gender=Masc|Number=Plur\" head=\"0\" deprel=\"root\" deps=\"_\" misc=\"SpacesAfter=\\n\\n\"",
+"contents": "n=\"2\" synword=\"strom\u016f\" lemma=\"strom\" upos=\"NOUN\" xpos=\"NNIP2-----A----\" feats=\"Animacy=Inan|Case=Gen|Gender=Masc|Number=Plur\" head=\"0\" deprel=\"root\" deps=\"_\" misc=\"SpacesAfter=\\n\\n\"",
 "start": 88,
 "end": 94,
 "level": 2,
@@ -145,7 +145,7 @@
 },
 {
 "name": "w",
-"contents": "id=\"1\" synword=\"Prstoklad\" lemma=\"prstoklad\" upos=\"NOUN\" xpos=\"NNIS1-----A----\" feats=\"Animacy=Inan|Case=Nom|Gender=Masc|Number=Sing\" head=\"0\" deprel=\"root\" deps=\"_\" misc=\"_\"",
+"contents": "n=\"1\" synword=\"Prstoklad\" lemma=\"prstoklad\" upos=\"NOUN\" xpos=\"NNIS1-----A----\" feats=\"Animacy=Inan|Case=Nom|Gender=Masc|Number=Sing\" head=\"0\" deprel=\"root\" deps=\"_\" misc=\"_\"",
 "start": 95,
 "end": 104,
 "level": 2,
@@ -153,7 +153,7 @@
 },
 {
 "name": "w",
-"contents": "id=\"2\" synword=\"ve\u010dern\u00edch\" lemma=\"ve\u010dern\u00ed\" upos=\"ADJ\" xpos=\"AAFP2----1A----\" feats=\"Case=Gen|Degree=Pos|Gender=Fem|Number=Plur|Polarity=Pos\" head=\"3\" deprel=\"amod\" deps=\"_\" misc=\"_\"",
+"contents": "n=\"2\" synword=\"ve\u010dern\u00edch\" lemma=\"ve\u010dern\u00ed\" upos=\"ADJ\" xpos=\"AAFP2----1A----\" feats=\"Case=Gen|Degree=Pos|Gender=Fem|Number=Plur|Polarity=Pos\" head=\"3\" deprel=\"amod\" deps=\"_\" misc=\"_\"",
 "start": 105,
 "end": 114,
 "level": 2,
@@ -161,7 +161,7 @@
 },
 {
 "name": "w",
-"contents": "id=\"3\" synword=\"n\u00e1lad\" lemma=\"n\u00e1lada\" upos=\"NOUN\" xpos=\"NNFP2-----A----\" feats=\"Case=Gen|Gender=Fem|Number=Plur\" head=\"1\" deprel=\"nmod\" deps=\"_\" misc=\"SpacesAfter=\\n\\n\"",
+"contents": "n=\"3\" synword=\"n\u00e1lad\" lemma=\"n\u00e1lada\" upos=\"NOUN\" xpos=\"NNFP2-----A----\" feats=\"Case=Gen|Gender=Fem|Number=Plur\" head=\"1\" deprel=\"nmod\" deps=\"_\" misc=\"SpacesAfter=\\n\\n\"",
 "start": 115,
 "end": 120,
 "level": 2,
@@ -177,7 +177,7 @@
 },
 {
 "name": "w",
-"contents": "id=\"1\" synword=\"chlad\u00ed\" lemma=\"chladit\" upos=\"VERB\" xpos=\"VB-S---3P-AAI--\" feats=\"Aspect=Imp|Mood=Ind|Number=Sing|Person=3|Polarity=Pos|Tense=Pres|VerbForm=Fin|Voice=Act\" head=\"0\" deprel=\"root\" deps=\"_\" misc=\"_\"",
+"contents": "n=\"1\" synword=\"chlad\u00ed\" lemma=\"chladit\" upos=\"VERB\" xpos=\"VB-S---3P-AAI--\" feats=\"Aspect=Imp|Mood=Ind|Number=Sing|Person=3|Polarity=Pos|Tense=Pres|VerbForm=Fin|Voice=Act\" head=\"0\" deprel=\"root\" deps=\"_\" misc=\"_\"",
 "start": 121,
 "end": 127,
 "level": 2,
@@ -185,7 +185,7 @@
 },
 {
 "name": "w",
-"contents": "id=\"2\" synword=\"svou\" lemma=\"sv\u016fj\" upos=\"DET\" xpos=\"P8FS7---------1\" feats=\"Case=Ins|Gender=Fem|Number=Sing|Poss=Yes|PronType=Prs|Reflex=Yes\" head=\"3\" deprel=\"det\" deps=\"_\" misc=\"_\"",
+"contents": "n=\"2\" synword=\"svou\" lemma=\"sv\u016fj\" upos=\"DET\" xpos=\"P8FS7---------1\" feats=\"Case=Ins|Gender=Fem|Number=Sing|Poss=Yes|PronType=Prs|Reflex=Yes\" head=\"3\" deprel=\"det\" deps=\"_\" misc=\"_\"",
 "start": 128,
 "end": 132,
 "level": 2,
@@ -193,7 +193,7 @@
 },
 {
 "name": "w",
-"contents": "id=\"3\" synword=\"sd\u00edlnost\u00ed\" lemma=\"sd\u00edlnost\" upos=\"NOUN\" xpos=\"NNFS7-----A----\" feats=\"Case=Ins|Gender=Fem|Number=Sing\" head=\"1\" deprel=\"obl\" deps=\"_\" misc=\"SpacesAfter=\\n\\n\"",
+"contents": "n=\"3\" synword=\"sd\u00edlnost\u00ed\" lemma=\"sd\u00edlnost\" upos=\"NOUN\" xpos=\"NNFS7-----A----\" feats=\"Case=Ins|Gender=Fem|Number=Sing\" head=\"1\" deprel=\"obl\" deps=\"_\" misc=\"SpacesAfter=\\n\\n\"",
 "start": 133,
 "end": 142,
 "level": 2,
@@ -209,7 +209,7 @@
 },
 {
 "name": "w",
-"contents": "id=\"1\" synword=\"zlehka\" lemma=\"zlehka\" upos=\"ADV\" xpos=\"Db-------------\" feats=\"_\" head=\"0\" deprel=\"root\" deps=\"_\" misc=\"_\"",
+"contents": "n=\"1\" synword=\"zlehka\" lemma=\"zlehka\" upos=\"ADV\" xpos=\"Db-------------\" feats=\"_\" head=\"0\" deprel=\"root\" deps=\"_\" misc=\"_\"",
 "start": 143,
 "end": 149,
 "level": 2,
@@ -217,7 +217,7 @@
 },
 {
 "name": "w",
-"contents": "id=\"2\" synword=\"rozeklan\u00e9\" lemma=\"rozeklan\u00fd\" upos=\"ADJ\" xpos=\"AAFP1----1A----\" feats=\"Case=Nom|Degree=Pos|Gender=Fem|Number=Plur|Polarity=Pos|VerbForm=Part|Voice=Pass\" head=\"3\" deprel=\"amod\" deps=\"_\" misc=\"_\"",
+"contents": "n=\"2\" synword=\"rozeklan\u00e9\" lemma=\"rozeklan\u00fd\" upos=\"ADJ\" xpos=\"AAFP1----1A----\" feats=\"Case=Nom|Degree=Pos|Gender=Fem|Number=Plur|Polarity=Pos|VerbForm=Part|Voice=Pass\" head=\"3\" deprel=\"amod\" deps=\"_\" misc=\"_\"",
 "start": 150,
 "end": 159,
 "level": 2,
@@ -225,7 +225,7 @@
 },
 {
 "name": "w",
-"contents": "id=\"3\" synword=\"dlan\u011b\" lemma=\"dla\u0148\" upos=\"NOUN\" xpos=\"NNFP1-----A----\" feats=\"Case=Nom|Gender=Fem|Number=Plur\" head=\"1\" deprel=\"dep\" deps=\"_\" misc=\"SpacesAfter=\\n\\n\"",
+"contents": "n=\"3\" synword=\"dlan\u011b\" lemma=\"dla\u0148\" upos=\"NOUN\" xpos=\"NNFP1-----A----\" feats=\"Case=Nom|Gender=Fem|Number=Plur\" head=\"1\" deprel=\"dep\" deps=\"_\" misc=\"SpacesAfter=\\n\\n\"",
 "start": 160,
 "end": 165,
 "level": 2,
@@ -241,7 +241,7 @@
 },
 {
 "name": "w",
-"contents": "id=\"1\" synword=\"b\u0159\u00ed\u0161ka\" lemma=\"b\u0159\u00ed\u0161ka\" upos=\"NOUN\" xpos=\"NNNP1-----A----\" feats=\"Case=Nom|Gender=Neut|Number=Plur\" head=\"0\" deprel=\"root\" deps=\"_\" misc=\"_\"",
+"contents": "n=\"1\" synword=\"b\u0159\u00ed\u0161ka\" lemma=\"b\u0159\u00ed\u0161ka\" upos=\"NOUN\" xpos=\"NNNP1-----A----\" feats=\"Case=Nom|Gender=Neut|Number=Plur\" head=\"0\" deprel=\"root\" deps=\"_\" misc=\"_\"",
 "start": 166,
 "end": 172,
 "level": 2,
@@ -249,7 +249,7 @@
 },
 {
 "name": "w",
-"contents": "id=\"2\" synword=\"prst\u016f\" lemma=\"prst\" upos=\"NOUN\" xpos=\"NNIP2-----A----\" feats=\"Animacy=Inan|Case=Gen|Gender=Masc|Number=Plur\" head=\"1\" deprel=\"nmod\" deps=\"_\" misc=\"_\"",
+"contents": "n=\"2\" synword=\"prst\u016f\" lemma=\"prst\" upos=\"NOUN\" xpos=\"NNIP2-----A----\" feats=\"Animacy=Inan|Case=Gen|Gender=Masc|Number=Plur\" head=\"1\" deprel=\"nmod\" deps=\"_\" misc=\"_\"",
 "start": 173,
 "end": 178,
 "level": 2,
@@ -257,7 +257,7 @@
 },
 {
 "name": "w",
-"contents": "id=\"3\" synword=\"\u0161evel\u00ed\" lemma=\"\u0161evele\" upos=\"NOUN\" xpos=\"NNFS7-----A----\" feats=\"Case=Ins|Gender=Fem|Number=Sing\" head=\"1\" deprel=\"dep\" deps=\"_\" misc=\"SpacesAfter=\\n\\n\"",
+"contents": "n=\"3\" synword=\"\u0161evel\u00ed\" lemma=\"\u0161evele\" upos=\"NOUN\" xpos=\"NNFS7-----A----\" feats=\"Case=Ins|Gender=Fem|Number=Sing\" head=\"1\" deprel=\"dep\" deps=\"_\" misc=\"SpacesAfter=\\n\\n\"",
 "start": 179,
 "end": 185,
 "level": 2,
@@ -273,7 +273,7 @@
 },
 {
 "name": "w",
-"contents": "id=\"1\" synword=\"zevnit\u0159\" lemma=\"zevnit\u0159\" upos=\"ADV\" xpos=\"Db-------------\" feats=\"_\" head=\"0\" deprel=\"root\" deps=\"_\" misc=\"SpacesAfter=\\n\\n\"",
+"contents": "n=\"1\" synword=\"zevnit\u0159\" lemma=\"zevnit\u0159\" upos=\"ADV\" xpos=\"Db-------------\" feats=\"_\" head=\"0\" deprel=\"root\" deps=\"_\" misc=\"SpacesAfter=\\n\\n\"",
 "start": 186,
 "end": 193,
 "level": 2,
@@ -289,7 +289,7 @@
 },
 {
 "name": "w",
-"contents": "id=\"1\" synword=\"D\u00e9\u0161\u0165\" lemma=\"d\u00e9\u0161\u0165\" upos=\"NOUN\" xpos=\"NNIS1-----A----\" feats=\"Animacy=Inan|Case=Nom|Gender=Masc|Number=Sing\" head=\"0\" deprel=\"root\" deps=\"_\" misc=\"SpacesAfter=\\n\\n\"",
+"contents": "n=\"1\" synword=\"D\u00e9\u0161\u0165\" lemma=\"d\u00e9\u0161\u0165\" upos=\"NOUN\" xpos=\"NNIS1-----A----\" feats=\"Animacy=Inan|Case=Nom|Gender=Masc|Number=Sing\" head=\"0\" deprel=\"root\" deps=\"_\" misc=\"SpacesAfter=\\n\\n\"",
 "start": 194,
 "end": 198,
 "level": 2,
@@ -305,7 +305,7 @@
 },
 {
 "name": "w",
-"contents": "id=\"1\" synword=\"ne\u017e\" lemma=\"ne\u017e\" upos=\"SCONJ\" xpos=\"J,-------------\" feats=\"_\" head=\"3\" deprel=\"mark\" deps=\"_\" misc=\"_\"",
+"contents": "n=\"1\" synword=\"ne\u017e\" lemma=\"ne\u017e\" upos=\"SCONJ\" xpos=\"J,-------------\" feats=\"_\" head=\"3\" deprel=\"mark\" deps=\"_\" misc=\"_\"",
 "start": 199,
 "end": 202,
 "level": 2,
@@ -313,7 +313,7 @@
 },
 {
 "name": "w",
-"contents": "id=\"2\" synword=\"prvn\u00ed\" lemma=\"prvn\u00ed\" upos=\"ADJ\" xpos=\"CrFS1----------\" feats=\"Case=Nom|Gender=Fem|Number=Sing|NumType=Ord\" head=\"3\" deprel=\"amod\" deps=\"_\" misc=\"_\"",
+"contents": "n=\"2\" synword=\"prvn\u00ed\" lemma=\"prvn\u00ed\" upos=\"ADJ\" xpos=\"CrFS1----------\" feats=\"Case=Nom|Gender=Fem|Number=Sing|NumType=Ord\" head=\"3\" deprel=\"amod\" deps=\"_\" misc=\"_\"",
 "start": 203,
 "end": 208,
 "level": 2,
@@ -321,7 +321,7 @@
 },
 {
 "name": "w",
-"contents": "id=\"3\" synword=\"kapka\" lemma=\"kapka\" upos=\"NOUN\" xpos=\"NNFS1-----A----\" feats=\"Case=Nom|Gender=Fem|Number=Sing\" head=\"0\" deprel=\"root\" deps=\"_\" misc=\"SpacesAfter=\\n\\n\"",
+"contents": "n=\"3\" synword=\"kapka\" lemma=\"kapka\" upos=\"NOUN\" xpos=\"NNFS1-----A----\" feats=\"Case=Nom|Gender=Fem|Number=Sing\" head=\"0\" deprel=\"root\" deps=\"_\" misc=\"SpacesAfter=\\n\\n\"",
 "start": 209,
 "end": 214,
 "level": 2,
@@ -337,7 +337,7 @@
 },
 {
 "name": "w",
-"contents": "id=\"1\" synword=\"vyzve\" lemma=\"vyzvat\" upos=\"VERB\" xpos=\"VB-S---3P-AAP--\" feats=\"Aspect=Perf|Mood=Ind|Number=Sing|Person=3|Polarity=Pos|Tense=Pres|VerbForm=Fin|Voice=Act\" head=\"0\" deprel=\"root\" deps=\"_\" misc=\"_\"",
+"contents": "n=\"1\" synword=\"vyzve\" lemma=\"vyzvat\" upos=\"VERB\" xpos=\"VB-S---3P-AAP--\" feats=\"Aspect=Perf|Mood=Ind|Number=Sing|Person=3|Polarity=Pos|Tense=Pres|VerbForm=Fin|Voice=Act\" head=\"0\" deprel=\"root\" deps=\"_\" misc=\"_\"",
 "start": 215,
 "end": 220,
 "level": 2,
@@ -345,7 +345,7 @@
 },
 {
 "name": "w",
-"contents": "id=\"2\" synword=\"hladinu\" lemma=\"hladina\" upos=\"NOUN\" xpos=\"NNFS4-----A----\" feats=\"Case=Acc|Gender=Fem|Number=Sing\" head=\"1\" deprel=\"obj\" deps=\"_\" misc=\"_\"",
+"contents": "n=\"2\" synword=\"hladinu\" lemma=\"hladina\" upos=\"NOUN\" xpos=\"NNFS4-----A----\" feats=\"Case=Acc|Gender=Fem|Number=Sing\" head=\"1\" deprel=\"obj\" deps=\"_\" misc=\"_\"",
 "start": 221,
 "end": 228,
 "level": 2,
@@ -353,7 +353,7 @@
 },
 {
 "name": "w",
-"contents": "id=\"3\" synword=\"k\" lemma=\"k\" upos=\"ADP\" xpos=\"RR--3----------\" feats=\"AdpType=Prep|Case=Dat\" head=\"4\" deprel=\"case\" deps=\"_\" misc=\"_\"",
+"contents": "n=\"3\" synword=\"k\" lemma=\"k\" upos=\"ADP\" xpos=\"RR--3----------\" feats=\"AdpType=Prep|Case=Dat\" head=\"4\" deprel=\"case\" deps=\"_\" misc=\"_\"",
 "start": 229,
 "end": 230,
 "level": 2,
@@ -361,7 +361,7 @@
 },
 {
 "name": "w",
-"contents": "id=\"4\" synword=\"tanci\" lemma=\"tanec\" upos=\"NOUN\" xpos=\"NNIS3-----A----\" feats=\"Animacy=Inan|Case=Dat|Gender=Masc|Number=Sing\" head=\"1\" deprel=\"obl\" deps=\"_\" misc=\"SpacesAfter=\\n\\n\"",
+"contents": "n=\"4\" synword=\"tanci\" lemma=\"tanec\" upos=\"NOUN\" xpos=\"NNIS3-----A----\" feats=\"Animacy=Inan|Case=Dat|Gender=Masc|Number=Sing\" head=\"1\" deprel=\"obl\" deps=\"_\" misc=\"SpacesAfter=\\n\\n\"",
 "start": 231,
 "end": 236,
 "level": 2,
@@ -377,7 +377,7 @@
 },
 {
 "name": "w",
-"contents": "id=\"1\" synword=\"/\" lemma=\"/\" upos=\"PUNCT\" xpos=\"Z:-------------\" feats=\"_\" head=\"3\" deprel=\"punct\" deps=\"_\" misc=\"SpaceAfter=No\"",
+"contents": "n=\"1\" synword=\"/\" lemma=\"/\" upos=\"PUNCT\" xpos=\"Z:-------------\" feats=\"_\" head=\"3\" deprel=\"punct\" deps=\"_\" misc=\"SpaceAfter=No\"",
 "start": 237,
 "end": 238,
 "level": 2,
@@ -385,7 +385,7 @@
 },
 {
 "name": "w",
-"contents": "id=\"2\" synword=\"i\" lemma=\"i\" upos=\"CCONJ\" xpos=\"J^-------------\" feats=\"_\" head=\"3\" deprel=\"advmod:emph\" deps=\"_\" misc=\"_\"",
+"contents": "n=\"2\" synword=\"i\" lemma=\"i\" upos=\"CCONJ\" xpos=\"J^-------------\" feats=\"_\" head=\"3\" deprel=\"advmod:emph\" deps=\"_\" misc=\"_\"",
 "start": 238,
 "end": 239,
 "level": 2,
@@ -393,7 +393,7 @@
 },
 {
 "name": "w",
-"contents": "id=\"3\" synword=\"vrby\" lemma=\"vrba\" upos=\"NOUN\" xpos=\"NNFP1-----A----\" feats=\"Case=Nom|Gender=Fem|Number=Plur\" head=\"0\" deprel=\"root\" deps=\"_\" misc=\"_\"",
+"contents": "n=\"3\" synword=\"vrby\" lemma=\"vrba\" upos=\"NOUN\" xpos=\"NNFP1-----A----\" feats=\"Case=Nom|Gender=Fem|Number=Plur\" head=\"0\" deprel=\"root\" deps=\"_\" misc=\"_\"",
 "start": 240,
 "end": 244,
 "level": 2,
@@ -401,7 +401,7 @@
 },
 {
 "name": "w",
-"contents": "id=\"4\" synword=\"v\" lemma=\"v\" upos=\"ADP\" xpos=\"RR--6----------\" feats=\"AdpType=Prep|Case=Loc\" head=\"5\" deprel=\"case\" deps=\"_\" misc=\"_\"",
+"contents": "n=\"4\" synword=\"v\" lemma=\"v\" upos=\"ADP\" xpos=\"RR--6----------\" feats=\"AdpType=Prep|Case=Loc\" head=\"5\" deprel=\"case\" deps=\"_\" misc=\"_\"",
 "start": 245,
 "end": 246,
 "level": 2,
@@ -409,7 +409,7 @@
 },
 {
 "name": "w",
-"contents": "id=\"5\" synword=\"zrdcadlen\u00ed\" lemma=\"zrdcadlen\u00ed\" upos=\"NOUN\" xpos=\"NNNS6-----A----\" feats=\"Case=Loc|Gender=Neut|Number=Sing|VerbForm=Vnoun\" head=\"3\" deprel=\"nmod\" deps=\"_\" misc=\"SpaceAfter=No\"",
+"contents": "n=\"5\" synword=\"zrdcadlen\u00ed\" lemma=\"zrdcadlen\u00ed\" upos=\"NOUN\" xpos=\"NNNS6-----A----\" feats=\"Case=Loc|Gender=Neut|Number=Sing|VerbForm=Vnoun\" head=\"3\" deprel=\"nmod\" deps=\"_\" misc=\"SpaceAfter=No\"",
 "start": 247,
 "end": 257,
 "level": 2,
@@ -417,7 +417,7 @@
 },
 {
 "name": "w",
-"contents": "id=\"6\" synword=\"/\" lemma=\"/\" upos=\"PUNCT\" xpos=\"Z:-------------\" feats=\"_\" head=\"3\" deprel=\"punct\" deps=\"_\" misc=\"SpacesAfter=\\n\\n\"",
+"contents": "n=\"6\" synword=\"/\" lemma=\"/\" upos=\"PUNCT\" xpos=\"Z:-------------\" feats=\"_\" head=\"3\" deprel=\"punct\" deps=\"_\" misc=\"SpacesAfter=\\n\\n\"",
 "start": 257,
 "end": 258,
 "level": 2,
@@ -433,7 +433,7 @@
 },
 {
 "name": "w",
-"contents": "id=\"1\" synword=\"ut\u00e1p\u00ed\" lemma=\"ut\u00e1pit\" upos=\"VERB\" xpos=\"VB-S---3P-AAP--\" feats=\"Aspect=Perf|Mood=Ind|Number=Sing|Person=3|Polarity=Pos|Tense=Pres|VerbForm=Fin|Voice=Act\" head=\"0\" deprel=\"root\" deps=\"_\" misc=\"_\"",
+"contents": "n=\"1\" synword=\"ut\u00e1p\u00ed\" lemma=\"ut\u00e1pit\" upos=\"VERB\" xpos=\"VB-S---3P-AAP--\" feats=\"Aspect=Perf|Mood=Ind|Number=Sing|Person=3|Polarity=Pos|Tense=Pres|VerbForm=Fin|Voice=Act\" head=\"0\" deprel=\"root\" deps=\"_\" misc=\"_\"",
 "start": 259,
 "end": 264,
 "level": 2,
@@ -441,7 +441,7 @@
 },
 {
 "name": "w",
-"contents": "id=\"2\" synword=\"sv\u00e9\" lemma=\"sv\u016fj\" upos=\"DET\" xpos=\"P8YP4---------1\" feats=\"Case=Acc|Gender=Masc|Number=Plur|Poss=Yes|PronType=Prs|Reflex=Yes\" head=\"4\" deprel=\"det\" deps=\"_\" misc=\"_\"",
+"contents": "n=\"2\" synword=\"sv\u00e9\" lemma=\"sv\u016fj\" upos=\"DET\" xpos=\"P8YP4---------1\" feats=\"Case=Acc|Gender=Masc|Number=Plur|Poss=Yes|PronType=Prs|Reflex=Yes\" head=\"4\" deprel=\"det\" deps=\"_\" misc=\"_\"",
 "start": 265,
 "end": 268,
 "level": 2,
@@ -449,7 +449,7 @@
 },
 {
 "name": "w",
-"contents": "id=\"3\" synword=\"dlouh\u00e9\" lemma=\"dlouh\u00fd\" upos=\"ADJ\" xpos=\"AAIP4----1A----\" feats=\"Animacy=Inan|Case=Acc|Degree=Pos|Gender=Masc|Number=Plur|Polarity=Pos\" head=\"4\" deprel=\"amod\" deps=\"_\" misc=\"_\"",
+"contents": "n=\"3\" synword=\"dlouh\u00e9\" lemma=\"dlouh\u00fd\" upos=\"ADJ\" xpos=\"AAIP4----1A----\" feats=\"Animacy=Inan|Case=Acc|Degree=Pos|Gender=Masc|Number=Plur|Polarity=Pos\" head=\"4\" deprel=\"amod\" deps=\"_\" misc=\"_\"",
 "start": 269,
 "end": 275,
 "level": 2,
@@ -457,7 +457,7 @@
 },
 {
 "name": "w",
-"contents": "id=\"4\" synword=\"vlasy\" lemma=\"vlas\" upos=\"NOUN\" xpos=\"NNIP4-----A----\" feats=\"Animacy=Inan|Case=Acc|Gender=Masc|Number=Plur\" head=\"1\" deprel=\"obj\" deps=\"_\" misc=\"SpacesAfter=\\n\\n\"",
+"contents": "n=\"4\" synword=\"vlasy\" lemma=\"vlas\" upos=\"NOUN\" xpos=\"NNIP4-----A----\" feats=\"Animacy=Inan|Case=Acc|Gender=Masc|Number=Plur\" head=\"1\" deprel=\"obj\" deps=\"_\" misc=\"SpacesAfter=\\n\\n\"",
 "start": 276,
 "end": 281,
 "level": 2,

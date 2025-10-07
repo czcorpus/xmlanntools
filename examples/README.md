@@ -10,7 +10,7 @@ Looking at the source file `TEI_example1.xml`, we can see typical TEI structure 
 - we want to exclude anything within the `<teiHeader>` and `<front>`-matter (these parts may otherwise also contain some above mentioned elements defined as text elements!)
 - we also want to exclude text parts within the `<foreign>` element, since there is no reason to analyze them with an English tagger
 
-In this situation, we should run `xml2standoff` with the text elements (option `-t`) specified as `p,head,quote,l` and excluding (option `-e`) anything within the elements `teiHeader,front,foreign`: 
+In this situation, we should run `xml2standoff` with the text elements (option `-t`) specified as `p,head,quote,l` and excluding (option `-e`) anything within the elements `teiHeader,front,foreign`:
 
 ```
 xml2standoff -t p,head,quote,l -e teiHeader,front,foreign TEI_example1.xml
@@ -25,7 +25,7 @@ tag_ud -f TEI_example1.txt -m en >TEI_example1.conllu
 Now, we can convert the resulting analysis from `TEI_example1.conllu` into another standoff XML-type mark-up by matching it to the original `TEI_example1.txt`. This can be done by the script `ann2standoff` using its CoNLL-U parser, i.e. the profile `conllu` (option `-p`):
 
 ```
-ann2standoff -p conllu TEI_example1.conllu
+ann2standoff TEI_example1.conllu
 ```
 
 This will create the `TEI_example1.ann.json` file (if the results from the tagger can be successfully matched with the plain text file).

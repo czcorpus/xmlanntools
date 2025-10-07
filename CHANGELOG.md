@@ -1,8 +1,8 @@
 # Changelog
 
-## Development version
+##  1.2 - 2025-10-07
 
-_Warning: defaults were changed and some options renamed (esp. the long/configuration names)._
+_Warning: defaults were changed and some options renamed (esp. the long option/configuration option names)._
 
 ### process
 
