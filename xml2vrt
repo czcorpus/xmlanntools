@@ -46,7 +46,10 @@ class TaggedXMLContentHandler(xml.sax.ContentHandler):
         self.glue_element = config.get('vrt_glue', 'g') if not config.getboolean('vrt_no_glue') else None
         vrt_attributes = config.get('vrt_attributes').replace(',',' ').split() if config.get('vrt_attributes') else None
         self.attrnames = vrt_attributes or config.get('attributes', '').replace(',',' ').split()
-        self.token_element = config.get('token_element', 'w')
+        self.token_elements = [config.get('token_element', 'w')]
+        punct_element = config.get('punct_element', 'pc')
+        if punct_element:
+            self.token_elements.append(punct_element)
         self.keep_empty = config.getboolean('vrt_keep_empty')
         self.discard_empty = config.get('vrt_discard_empty', '').replace(',',' ').split()
         self.discard_freetext = config.getboolean('vrt_discard_freetext')
@@ -77,7 +80,7 @@ class TaggedXMLContentHandler(xml.sax.ContentHandler):
         if self.exclude_scope > 0 or not self.include_scope:
             return
 
-        if name == self.token_element:
+        if name in self.token_elements:
             # token element
             # print out openTagBuffer
             self.output_tag_buffer()
@@ -116,7 +119,7 @@ class TaggedXMLContentHandler(xml.sax.ContentHandler):
         if name in self.exclude_elements:
             return
 
-        if name == self.token_element:
+        if name in self.token_elements:
             # token element
             # print out openTagBuffer
             self.output_tag_buffer()
@@ -124,7 +127,7 @@ class TaggedXMLContentHandler(xml.sax.ContentHandler):
             if self.glue_element is not None and self.whitespace == '' and self.last_was_token:
                 print("<{0}/>".format(self.glue_element), file=self.outfile)
             if self.token is None:
-                raise Exception(f"Nesting of token elements ('{self.token_element}') is not supported.")
+                raise Exception(f"Nesting of token elements ('{', '.join(self.token_elements)}') is not supported.")
             # print token
             print(self.token['word'], end="", file=self.outfile)
             attrcnt = 1
