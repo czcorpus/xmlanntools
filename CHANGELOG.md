@@ -1,8 +1,15 @@
 # Changelog
 
+## 1.2.1 - 2025-10-08
+
 ### tag_ud
 
 - Added option to disable doubling of line breaks
+- Fix configuration of punctuation symbol elements
+
+### xml2vrt
+
+- Fix configuration of punctuation symbol elements
 
 ##  1.2 - 2025-10-07
 

@@ -376,6 +376,10 @@ if __name__ == "__main__":
              Default: 'w'.
              Config setting: 'token_element'.
 
+             '-pe <element_name>' Name of the XML elemenent for punctuation symbols.
+             Config setting: 'punct_element'.
+             Default: 'pc'.
+
              '-i <element_names>' Comma separated list of (sub)element names to be extracted into the output vertical
              (no spaces!). By default the whole root element of the XML document will be extracted.
              Config setting: 'vrt_include_elements' (may also be separated by spaces, commas, linebreaks or
@@ -403,6 +407,7 @@ if __name__ == "__main__":
     parser.add_argument("-p", "--profile", help="config profile to use", type=str, default='DEFAULT')
     parser.add_argument("-a", "--attributes", help="attribute names (except first position, separated by comma)", type=str)
     parser.add_argument("-te", "--token-element", help="name of token element", type=str)
+    parser.add_argument("-pe", "--punct-element", help="name of punctuation element", type=str)
     parser.add_argument("-i", "--include-elements", help="(sub)elements to extract (default: document root)", type=str, dest='vrt_include_elements')
     parser.add_argument("-e", "--exclude-elements", help="elements to skip (exclude from the extraction)", type=str, dest='vrt_exclude_elements')
     parser.add_argument("-kt", "--keep-token-tags", help="keep tags within tokens", action="store_true", dest="vrt_keep_token_tags")

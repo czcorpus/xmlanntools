@@ -376,7 +376,7 @@ if __name__ == '__main__':
              Default: 'w'.
 
              '-pe <element_name>' Name of the resulting XML elemenent for punctuation symbols.
-             Config setting: 'punctuation_element'.
+             Config setting: 'punct_element'.
              Default: 'pc'.
 
              '-se <element_name>' Name of the resulting XML elemenent for sentences.
@@ -419,7 +419,7 @@ if __name__ == '__main__':
     parser.add_argument("-a", "--attributes", help="attribute names (except first position, separated by comma)", type=str)
     parser.add_argument("-ea", "--exclude-attributes", help="attribute names (except first position, separated by comma)", type=str)
     parser.add_argument("-te", "--token-element", help="name of token element", type=str)
-    parser.add_argument("-pe", "--punctuation-element", help="name of punctuation element", type=str)
+    parser.add_argument("-pe", "--punct-element", help="name of punctuation element", type=str)
     parser.add_argument("-pc", "--punctuation", help="identification of punctuation", type=str)
     parser.add_argument("-se", "--sentence-element", help="name of sentence element", type=str)
     parser.add_argument("-ne", "--ne-element", help="name of element marking named entities", type=str)
