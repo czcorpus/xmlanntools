@@ -91,6 +91,7 @@ def udpipe_lindat(model, text, ner=None, tokenizer="", tagger="", parser="", inp
     return result
 
 def process(config, infile, outfile, verbose=False):
+    nodblb = config.getboolean('no_double_lb')
     output = outfile.open('w', encoding='utf-8') if outfile else sys.stdout
     buffer = []
 
@@ -103,7 +104,7 @@ def process(config, infile, outfile, verbose=False):
             model= config.get('model', DEFAULT_MODEL),
             ner = config.get('named_entities'),
             # UD Pipe needs double "\n\n" to enforce paragraph breaks!
-            text= "\n".join(buffer)+"\n",
+            text= "".join(buffer) if nodblb else "\n".join(buffer)+"\n",
             tokenizer= config.get('tokenizer_options', ''),
             tagger= None if config.getboolean('no_analysis') else config.get('tagger_options', ''),
             parser= None if config.getboolean('no_parsing') or config.getboolean('no_analysis') else config.get('parser_options', ''),
@@ -158,6 +159,8 @@ if __name__ == '__main__':
 
              '-np' Do not perform syntactic parsing.
 
+             '-nd' Do not double line breaks (as required for UDPipe to enforce paragraph breaks)
+
              '--tokenizer' Additional options for the tokenizer.
 
              '--tagger' Additional options for the tagger (analysis).
@@ -184,6 +187,7 @@ if __name__ == '__main__':
     parser.add_argument("-b", "--batch", help="batch size in lines (default=1000)", type=int, dest="tagger_batch")
     parser.add_argument("-na", "--no-analysis", help="do NOT perform any analysis (lemmatization, tagging or parsing); perform just segmentation and tokenization", action="store_true")
     parser.add_argument("-np", "--no-parsing", help="do NOT perform dependency parsing (syntax)", action="store_true")
+    parser.add_argument("-nd", "--no-double-lb", help="do NOT double line breaks (UDPipe requires a sequence of two as paragraph break)", action="store_true")
     parser.add_argument("--tokenizer", help="additional options for the tokenizer", type=str, dest="tokenizer_options")
     parser.add_argument("--tagger", help="additional options for the tagger (ignored if --no-analysis is used)", type=str, dest="tagger_options")
     parser.add_argument("--parser", help="additional options for the syntactic parser (ignored if --no-analysis or --no-parsing is used)", type=str, dest="parser_options")

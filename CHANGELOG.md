@@ -1,5 +1,9 @@
 # Changelog
 
+### tag_ud
+
+- Added option to disable doubling of line breaks
+
 ##  1.2 - 2025-10-07
 
 _Warning: defaults were changed and some options renamed (esp. the long option/configuration option names)._
