@@ -2,82 +2,82 @@
 <text day="25" id="totem_3_1" month="6" title="Setkání před deštěm" year="2005">
 <head>
 <s>
-SETKÁNÍ	1	SETKÁNÍ	setkání	NOUN	NNNS1-----A----	Case=Nom|Gender=Neut|Number=Sing|VerbForm=Vnoun	0	root	_	SpacesBefore=\n\n
-PŘED	2	PŘED	před	ADP	RR--7----------	AdpType=Prep|Case=Ins	3	case	_	_
-DEŠTĚM	3	DEŠTĚM	déšť	NOUN	NNIS7-----A----	Animacy=Inan|Case=Ins|Gender=Masc|Number=Sing	1	nmod	_	SpacesAfter=\n\n\n\n
+SETKÁNÍ	1	SETKÁNÍ	setkání	NOUN	NNNS1-----A----	Case=Nom|Gender=Neut|Number=Sing|VerbForm=Vnoun	0	root	_
+PŘED	2	PŘED	před	ADP	RR--7----------	AdpType=Prep|Case=Ins	3	case	_
+DEŠTĚM	3	DEŠTĚM	déšť	NOUN	NNIS7-----A----	Animacy=Inan|Case=Ins|Gender=Masc|Number=Sing	1	nmod	_
 </s>
 </head>
 <p>
 <s>
-V	1	V	v	ADP	RR--6----------	AdpType=Prep|Case=Loc	3	case	_	_
-bezbřehé	2	bezbřehé	bezbřehý	ADJ	AAFS6----1A----	Case=Loc|Degree=Pos|Gender=Fem|Number=Sing|Polarity=Pos	3	amod	_	_
-slabosti	3	slabosti	slabost	NOUN	NNFS6-----A----	Case=Loc|Gender=Fem|Number=Sing	0	root	_	SpacesAfter=\n\n
+V	1	V	v	ADP	RR--6----------	AdpType=Prep|Case=Loc	3	case	_
+bezbřehé	2	bezbřehé	bezbřehý	ADJ	AAFS6----1A----	Case=Loc|Degree=Pos|Gender=Fem|Number=Sing|Polarity=Pos	3	amod	_
+slabosti	3	slabosti	slabost	NOUN	NNFS6-----A----	Case=Loc|Gender=Fem|Number=Sing	0	root	_
 </s>
 <s>
-silných	1	silných	silný	ADJ	AAIP2----1A----	Animacy=Inan|Case=Gen|Degree=Pos|Gender=Masc|Number=Plur|Polarity=Pos	2	amod	_	_
-okamžiků	2	okamžiků	okamžik	NOUN	NNIP2-----A----	Animacy=Inan|Case=Gen|Gender=Masc|Number=Plur	0	root	_	SpacesAfter=\n\n
+silných	1	silných	silný	ADJ	AAIP2----1A----	Animacy=Inan|Case=Gen|Degree=Pos|Gender=Masc|Number=Plur|Polarity=Pos	2	amod	_
+okamžiků	2	okamžiků	okamžik	NOUN	NNIP2-----A----	Animacy=Inan|Case=Gen|Gender=Masc|Number=Plur	0	root	_
 </s>
 <s>
-rozmlouvám	1	rozmlouvám	rozmlouvat	VERB	VB-S---1P-AAI--	Aspect=Imp|Mood=Ind|Number=Sing|Person=1|Polarity=Pos|Tense=Pres|VerbForm=Fin|Voice=Act	0	root	_	_
-s	2	s	s	ADP	RR--7----------	AdpType=Prep|Case=Ins	3	case	_	_
-kůrou	3	kůrou	kůra	NOUN	NNFS7-----A----	Case=Ins|Gender=Fem|Number=Sing	1	obl:arg	_	SpacesAfter=\n\n
+rozmlouvám	1	rozmlouvám	rozmlouvat	VERB	VB-S---1P-AAI--	Aspect=Imp|Mood=Ind|Number=Sing|Person=1|Polarity=Pos|Tense=Pres|VerbForm=Fin|Voice=Act	0	root	_
+s	2	s	s	ADP	RR--7----------	AdpType=Prep|Case=Ins	3	case	_
+kůrou	3	kůrou	kůra	NOUN	NNFS7-----A----	Case=Ins|Gender=Fem|Number=Sing	1	obl:arg	_
 </s>
 <s>
-stoletých	1	stoletých	stoletý	ADJ	AAIP2----1A----	Animacy=Inan|Case=Gen|Degree=Pos|Gender=Masc|Number=Plur|Polarity=Pos	2	amod	_	_
-stromů	2	stromů	strom	NOUN	NNIP2-----A----	Animacy=Inan|Case=Gen|Gender=Masc|Number=Plur	0	root	_	SpacesAfter=\n\n
+stoletých	1	stoletých	stoletý	ADJ	AAIP2----1A----	Animacy=Inan|Case=Gen|Degree=Pos|Gender=Masc|Number=Plur|Polarity=Pos	2	amod	_
+stromů	2	stromů	strom	NOUN	NNIP2-----A----	Animacy=Inan|Case=Gen|Gender=Masc|Number=Plur	0	root	_
 </s>
 <s>
-Prstoklad	1	Prstoklad	prstoklad	NOUN	NNIS1-----A----	Animacy=Inan|Case=Nom|Gender=Masc|Number=Sing	0	root	_	_
-večerních	2	večerních	večerní	ADJ	AAFP2----1A----	Case=Gen|Degree=Pos|Gender=Fem|Number=Plur|Polarity=Pos	3	amod	_	_
-nálad	3	nálad	nálada	NOUN	NNFP2-----A----	Case=Gen|Gender=Fem|Number=Plur	1	nmod	_	SpacesAfter=\n\n
+Prstoklad	1	Prstoklad	prstoklad	NOUN	NNIS1-----A----	Animacy=Inan|Case=Nom|Gender=Masc|Number=Sing	0	root	_
+večerních	2	večerních	večerní	ADJ	AAFP2----1A----	Case=Gen|Degree=Pos|Gender=Fem|Number=Plur|Polarity=Pos	3	amod	_
+nálad	3	nálad	nálada	NOUN	NNFP2-----A----	Case=Gen|Gender=Fem|Number=Plur	1	nmod	_
 </s>
 <s>
-chladí	1	chladí	chladit	VERB	VB-S---3P-AAI--	Aspect=Imp|Mood=Ind|Number=Sing|Person=3|Polarity=Pos|Tense=Pres|VerbForm=Fin|Voice=Act	0	root	_	_
-svou	2	svou	svůj	DET	P8FS7---------1	Case=Ins|Gender=Fem|Number=Sing|Poss=Yes|PronType=Prs|Reflex=Yes	3	det	_	_
-sdílností	3	sdílností	sdílnost	NOUN	NNFS7-----A----	Case=Ins|Gender=Fem|Number=Sing	1	obl	_	SpacesAfter=\n\n
+chladí	1	chladí	chladit	VERB	VB-S---3P-AAI--	Aspect=Imp|Mood=Ind|Number=Sing|Person=3|Polarity=Pos|Tense=Pres|VerbForm=Fin|Voice=Act	0	root	_
+svou	2	svou	svůj	DET	P8FS7---------1	Case=Ins|Gender=Fem|Number=Sing|Poss=Yes|PronType=Prs|Reflex=Yes	3	det	_
+sdílností	3	sdílností	sdílnost	NOUN	NNFS7-----A----	Case=Ins|Gender=Fem|Number=Sing	1	obl	_
 </s>
 <s>
-zlehka	1	zlehka	zlehka	ADV	Db-------------	_	0	root	_	_
-rozeklané	2	rozeklané	rozeklaný	ADJ	AAFP1----1A----	Case=Nom|Degree=Pos|Gender=Fem|Number=Plur|Polarity=Pos|VerbForm=Part|Voice=Pass	3	amod	_	_
-dlaně	3	dlaně	dlaň	NOUN	NNFP1-----A----	Case=Nom|Gender=Fem|Number=Plur	1	dep	_	SpacesAfter=\n\n
+zlehka	1	zlehka	zlehka	ADV	Db-------------	_	0	root	_
+rozeklané	2	rozeklané	rozeklaný	ADJ	AAFP1----1A----	Case=Nom|Degree=Pos|Gender=Fem|Number=Plur|Polarity=Pos|VerbForm=Part|Voice=Pass	3	amod	_
+dlaně	3	dlaně	dlaň	NOUN	NNFP1-----A----	Case=Nom|Gender=Fem|Number=Plur	1	dep	_
 </s>
 <s>
-bříška	1	bříška	bříška	NOUN	NNNP1-----A----	Case=Nom|Gender=Neut|Number=Plur	0	root	_	_
-prstů	2	prstů	prst	NOUN	NNIP2-----A----	Animacy=Inan|Case=Gen|Gender=Masc|Number=Plur	1	nmod	_	_
-ševelí	3	ševelí	ševele	NOUN	NNFS7-----A----	Case=Ins|Gender=Fem|Number=Sing	1	dep	_	SpacesAfter=\n\n
+bříška	1	bříška	bříška	NOUN	NNNP1-----A----	Case=Nom|Gender=Neut|Number=Plur	0	root	_
+prstů	2	prstů	prst	NOUN	NNIP2-----A----	Animacy=Inan|Case=Gen|Gender=Masc|Number=Plur	1	nmod	_
+ševelí	3	ševelí	ševele	NOUN	NNFS7-----A----	Case=Ins|Gender=Fem|Number=Sing	1	dep	_
 </s>
 <s>
-zevnitř	1	zevnitř	zevnitř	ADV	Db-------------	_	0	root	_	SpacesAfter=\n\n
+zevnitř	1	zevnitř	zevnitř	ADV	Db-------------	_	0	root	_
 </s>
 <s>
-Déšť	1	Déšť	déšť	NOUN	NNIS1-----A----	Animacy=Inan|Case=Nom|Gender=Masc|Number=Sing	0	root	_	SpacesAfter=\n\n
+Déšť	1	Déšť	déšť	NOUN	NNIS1-----A----	Animacy=Inan|Case=Nom|Gender=Masc|Number=Sing	0	root	_
 </s>
 <s>
-než	1	než	než	SCONJ	J,-------------	_	3	mark	_	_
-první	2	první	první	ADJ	CrFS1----------	Case=Nom|Gender=Fem|Number=Sing|NumType=Ord	3	amod	_	_
-kapka	3	kapka	kapka	NOUN	NNFS1-----A----	Case=Nom|Gender=Fem|Number=Sing	0	root	_	SpacesAfter=\n\n
+než	1	než	než	SCONJ	J,-------------	_	3	mark	_
+první	2	první	první	ADJ	CrFS1----------	Case=Nom|Gender=Fem|Number=Sing|NumType=Ord	3	amod	_
+kapka	3	kapka	kapka	NOUN	NNFS1-----A----	Case=Nom|Gender=Fem|Number=Sing	0	root	_
 </s>
 <s>
-vyzve	1	vyzve	vyzvat	VERB	VB-S---3P-AAP--	Aspect=Perf|Mood=Ind|Number=Sing|Person=3|Polarity=Pos|Tense=Pres|VerbForm=Fin|Voice=Act	0	root	_	_
-hladinu	2	hladinu	hladina	NOUN	NNFS4-----A----	Case=Acc|Gender=Fem|Number=Sing	1	obj	_	_
-k	3	k	k	ADP	RR--3----------	AdpType=Prep|Case=Dat	4	case	_	_
-tanci	4	tanci	tanec	NOUN	NNIS3-----A----	Animacy=Inan|Case=Dat|Gender=Masc|Number=Sing	1	obl	_	SpacesAfter=\n\n
+vyzve	1	vyzve	vyzvat	VERB	VB-S---3P-AAP--	Aspect=Perf|Mood=Ind|Number=Sing|Person=3|Polarity=Pos|Tense=Pres|VerbForm=Fin|Voice=Act	0	root	_
+hladinu	2	hladinu	hladina	NOUN	NNFS4-----A----	Case=Acc|Gender=Fem|Number=Sing	1	obj	_
+k	3	k	k	ADP	RR--3----------	AdpType=Prep|Case=Dat	4	case	_
+tanci	4	tanci	tanec	NOUN	NNIS3-----A----	Animacy=Inan|Case=Dat|Gender=Masc|Number=Sing	1	obl	_
 </s>
 <s>
-/	1	/	/	PUNCT	Z:-------------	_	3	punct	_	SpaceAfter=No
+/	1	/	/	PUNCT	Z:-------------	_	3	punct	_
 <g/>
-i	2	i	i	CCONJ	J^-------------	_	3	advmod:emph	_	_
-vrby	3	vrby	vrba	NOUN	NNFP1-----A----	Case=Nom|Gender=Fem|Number=Plur	0	root	_	_
-v	4	v	v	ADP	RR--6----------	AdpType=Prep|Case=Loc	5	case	_	_
-zrdcadlení	5	zrdcadlení	zrdcadlení	NOUN	NNNS6-----A----	Case=Loc|Gender=Neut|Number=Sing|VerbForm=Vnoun	3	nmod	_	SpaceAfter=No
+i	2	i	i	CCONJ	J^-------------	_	3	advmod:emph	_
+vrby	3	vrby	vrba	NOUN	NNFP1-----A----	Case=Nom|Gender=Fem|Number=Plur	0	root	_
+v	4	v	v	ADP	RR--6----------	AdpType=Prep|Case=Loc	5	case	_
+zrdcadlení	5	zrdcadlení	zrdcadlení	NOUN	NNNS6-----A----	Case=Loc|Gender=Neut|Number=Sing|VerbForm=Vnoun	3	nmod	_
 <g/>
-/	6	/	/	PUNCT	Z:-------------	_	3	punct	_	SpacesAfter=\n\n
+/	6	/	/	PUNCT	Z:-------------	_	3	punct	_
 </s>
 <s>
-utápí	1	utápí	utápit	VERB	VB-S---3P-AAP--	Aspect=Perf|Mood=Ind|Number=Sing|Person=3|Polarity=Pos|Tense=Pres|VerbForm=Fin|Voice=Act	0	root	_	_
-své	2	své	svůj	DET	P8YP4---------1	Case=Acc|Gender=Masc|Number=Plur|Poss=Yes|PronType=Prs|Reflex=Yes	4	det	_	_
-dlouhé	3	dlouhé	dlouhý	ADJ	AAIP4----1A----	Animacy=Inan|Case=Acc|Degree=Pos|Gender=Masc|Number=Plur|Polarity=Pos	4	amod	_	_
-vlasy	4	vlasy	vlas	NOUN	NNIP4-----A----	Animacy=Inan|Case=Acc|Gender=Masc|Number=Plur	1	obj	_	SpacesAfter=\n\n
+utápí	1	utápí	utápit	VERB	VB-S---3P-AAP--	Aspect=Perf|Mood=Ind|Number=Sing|Person=3|Polarity=Pos|Tense=Pres|VerbForm=Fin|Voice=Act	0	root	_
+své	2	své	svůj	DET	P8YP4---------1	Case=Acc|Gender=Masc|Number=Plur|Poss=Yes|PronType=Prs|Reflex=Yes	4	det	_
+dlouhé	3	dlouhé	dlouhý	ADJ	AAIP4----1A----	Animacy=Inan|Case=Acc|Degree=Pos|Gender=Masc|Number=Plur|Polarity=Pos	4	amod	_
+vlasy	4	vlasy	vlas	NOUN	NNIP4-----A----	Animacy=Inan|Case=Acc|Gender=Masc|Number=Plur	1	obj	_
 </s>
 </p>
 </text>

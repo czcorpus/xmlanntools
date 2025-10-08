@@ -3,536 +3,552 @@
 <div type="chapter">
 <head rend="center">
 <s>
-CHAPTER	1	CHAPTER	chapter	NOUN	NN	Number=Sing	0	root	_	SpacesBefore=\n\n
-III	2	III	III	NUM	CD	NumForm=Roman|NumType=Card	1	nummod	_	SpaceAfter=No
+CHAPTER	1	CHAPTER	chapter	NOUN	NN	Number=Sing	0	root	_
+III	2	III	III	NUM	CD	NumForm=Roman|NumType=Card	1	nummod	_
 <g/>
-.	3	.	.	PUNCT	.	_	1	punct	_	SpacesAfter=\n\n\n\n\s\s\s\s\s\s\s\s\s\n\n
+.	3	.	.	PUNCT	.	_	1	punct	_
 </s>
 </head>
 <quote>
 <l>
 <s>
-"	1	"	"	PUNCT	``	_	5	punct	_	SpaceAfter=No
+"	1	"	"	PUNCT	``	_	5	punct	_
 <g/>
-It	2	It	it	PRON	PRP	Case=Nom|Gender=Neut|Number=Sing|Person=3|PronType=Prs	5	nsubj	_	_
-is	3	is	be	AUX	VBZ	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	5	cop	_	_
-the	4	the	the	DET	DT	Definite=Def|PronType=Art	5	det	_	_
-hour	5	hour	hour	NOUN	NN	Number=Sing	0	root	_	_
-when	6	when	when	ADV	WRB	PronType=Int	9	advmod	_	_
-from	7	from	from	ADP	IN	_	9	case	_	_
-the	8	the	the	DET	DT	Definite=Def|PronType=Art	9	det	_	_
-boughs	9	boughs	bough	NOUN	NNS	Number=Plur	5	obl	_	SpacesAfter=\n\n\s\s\s\s\s\s\s\s\s\n\n
+It	2	It	it	PRON	PRP	Case=Nom|Gender=Neut|Number=Sing|Person=3|PronType=Prs	5	nsubj	_
+is	3	is	be	AUX	VBZ	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	5	cop	_
+the	4	the	the	DET	DT	Definite=Def|PronType=Art	5	det	_
+hour	5	hour	hour	NOUN	NN	Number=Sing	0	root	_
+when	6	when	when	ADV	WRB	PronType=Int	9	advmod	_
+from	7	from	from	ADP	IN	_	9	case	_
+the	8	the	the	DET	DT	Definite=Def|PronType=Art	9	det	_
+boughs	9	boughs	bough	NOUN	NNS	Number=Plur	5	obl	_
 </s>
 </l>
 <l rend="ti-2">
 <s>
-The	1	The	the	DET	DT	Definite=Def|PronType=Art	2	det	_	_
-nightingale's	2|3	nightingale|'s	nightingale|'s	NOUN|PART	NN|POS	Number=Sing||_	5|2	nmod:poss|case	_|_	_|_
-high	4	high	high	ADJ	JJ	Degree=Pos	5	amod	_	_
-note	5	note	note	NOUN	NN	Number=Sing	7	nsubj:pass	_	_
-is	6	is	be	AUX	VBZ	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	7	aux:pass	_	_
-heard	7	heard	hear	VERB	VBN	Tense=Past|VerbForm=Part|Voice=Pass	0	root	_	SpaceAfter=No
+The	1	The	the	DET	DT	Definite=Def|PronType=Art	2	det	_
+nightingale's	2-3	nightingale's	_	_	_	_	_	_	_
+high	4	high	high	ADJ	JJ	Degree=Pos	5	amod	_
+note	5	note	note	NOUN	NN	Number=Sing	7	nsubj:pass	_
+is	6	is	be	AUX	VBZ	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	7	aux:pass	_
+heard	7	heard	hear	VERB	VBN	Tense=Past|VerbForm=Part|Voice=Pass	0	root	_
 <g/>
-;	8	;	;	PUNCT	,	_	7	punct	_	SpacesAfter=\n\n\s\s\s\s\s\s\s\s\s\n\n
+;	8	;	;	PUNCT	,	_	7	punct	_
 </s>
 </l>
 <l>
 <s>
-It	1	It	it	PRON	PRP	Case=Nom|Gender=Neut|Number=Sing|Person=3|PronType=Prs	4	nsubj	_	_
-is	2	is	be	AUX	VBZ	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	4	cop	_	_
-the	3	the	the	DET	DT	Definite=Def|PronType=Art	4	det	_	_
-hour	4	hour	hour	NOUN	NN	Number=Sing	0	root	_	_
-when	5	when	when	ADV	WRB	PronType=Int	8	advmod	_	_
-lovers'	6|7	lovers|'	lover|'s	NOUN|PART	NNS|POS	Number=Plur||_	8|6	nmod:poss|case	_|_	_|_
-vows	8	vows	vow	NOUN	NNS	Number=Plur	4	nsubj	_	SpacesAfter=\n\n\s\s\s\s\s\s\s\s\s\n\n
+It	1	It	it	PRON	PRP	Case=Nom|Gender=Neut|Number=Sing|Person=3|PronType=Prs	4	nsubj	_
+is	2	is	be	AUX	VBZ	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	4	cop	_
+the	3	the	the	DET	DT	Definite=Def|PronType=Art	4	det	_
+hour	4	hour	hour	NOUN	NN	Number=Sing	0	root	_
+when	5	when	when	ADV	WRB	PronType=Int	8	advmod	_
+lovers'	6-7	lovers'	_	_	_	_	_	_	_
+vows	8	vows	vow	NOUN	NNS	Number=Plur	4	nsubj	_
 </s>
 </l>
 <l rend="ti-2">
 <s>
-Seem	1	Seem	seem	VERB	VB	Mood=Imp|VerbForm=Fin	0	root	_	_
-sweet	2	sweet	sweet	ADJ	JJ	Degree=Pos	1	xcomp	_	_
-in	3	in	in	ADP	IN	_	6	case	_	_
-every	4	every	every	DET	DT	PronType=Tot	6	det	_	_
-whispered	5	whispered	whisper	VERB	VBN	Tense=Past|VerbForm=Part|Voice=Pass	6	amod	_	_
-word	6	word	word	NOUN	NN	Number=Sing	2	obl	_	SpaceAfter=No
+Seem	1	Seem	seem	VERB	VB	Mood=Imp|VerbForm=Fin	0	root	_
+sweet	2	sweet	sweet	ADJ	JJ	Degree=Pos	1	xcomp	_
+in	3	in	in	ADP	IN	_	6	case	_
+every	4	every	every	DET	DT	PronType=Tot	6	det	_
+whispered	5	whispered	whisper	VERB	VBN	Tense=Past|VerbForm=Part|Voice=Pass	6	amod	_
+word	6	word	word	NOUN	NN	Number=Sing	2	obl	_
 <g/>
-—	7	—	—	PUNCT	,	_	1	punct	_	SpaceAfter=No
+—	7	—	—	PUNCT	,	_	1	punct	_
 <g/>
-"	8	"	"	PUNCT	''	_	1	punct	_	SpacesAfter=\n\n\s\s\s\s\s\s\s\s\n\n\n\n
+"	8	"	"	PUNCT	''	_	1	punct	_
 </s>
 </l>
 </quote>
 <p>
 <s>
-As	1	As	as	ADP	IN	_	5	mark	_	_
-saith	2	saith	saith	NOUN	NN	Number=Sing|Typo=Yes	5	obl	_	_
-that	3	that	that	DET	DT	Number=Sing|PronType=Dem	5	det	_	_
-most	4	most	most	ADV	RBS	Degree=Sup	5	advmod	_	_
-delicious	5	delicious	delicious	ADJ	JJ	Degree=Pos	0	root	_	_
-of	6	of	of	ADP	IN	_	8	case	_	_
-love	7	love	love	NOUN	NN	Number=Sing	8	compound	_	_
-poems	8	poems	poem	NOUN	NNS	Number=Plur	5	obl	_	_
-that	9	that	that	PRON	WDT	PronType=Rel	10	nsubj	_	_
-makes	10	makes	make	VERB	VBZ	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	8	acl:relcl	_	_
-us	11	us	we	PRON	PRP	Case=Acc|Number=Plur|Person=1|PronType=Prs	10	obj	_	_
-all	12	all	all	DET	DT	PronType=Tot	11	det	_	_
-feel	13	feel	feel	VERB	VB	VerbForm=Inf	10	xcomp	_	_
-immoral	14	immoral	immoral	ADJ	JJ	Degree=Pos	13	xcomp	_	_
-as	15	as	as	SCONJ	IN	_	17	mark	_	_
-we	16	we	we	PRON	PRP	Case=Nom|Number=Plur|Person=1|PronType=Prs	17	nsubj	_	_
-read	17	read	read	VERB	VBP	Mood=Ind|Number=Plur|Person=1|Tense=Pres|VerbForm=Fin	13	advcl	_	_
-it	18	it	it	PRON	PRP	Case=Acc|Gender=Neut|Number=Sing|Person=3|PronType=Prs	17	obj	_	SpaceAfter=No
+As	1	As	as	ADP	IN	_	5	mark	_
+saith	2	saith	saith	NOUN	NN	Number=Sing|Typo=Yes	5	obl	_
+that	3	that	that	DET	DT	Number=Sing|PronType=Dem	5	det	_
+most	4	most	most	ADV	RBS	Degree=Sup	5	advmod	_
+delicious	5	delicious	delicious	ADJ	JJ	Degree=Pos	0	root	_
+of	6	of	of	ADP	IN	_	8	case	_
+love	7	love	love	NOUN	NN	Number=Sing	8	compound	_
+poems	8	poems	poem	NOUN	NNS	Number=Plur	5	obl	_
+that	9	that	that	PRON	WDT	PronType=Rel	10	nsubj	_
+makes	10	makes	make	VERB	VBZ	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	8	acl:relcl	_
+us	11	us	we	PRON	PRP	Case=Acc|Number=Plur|Person=1|PronType=Prs	10	obj	_
+all	12	all	all	DET	DT	PronType=Tot	11	det	_
+feel	13	feel	feel	VERB	VB	VerbForm=Inf	10	xcomp	_
+immoral	14	immoral	immoral	ADJ	JJ	Degree=Pos	13	xcomp	_
+as	15	as	as	SCONJ	IN	_	17	mark	_
+we	16	we	we	PRON	PRP	Case=Nom|Number=Plur|Person=1|PronType=Prs	17	nsubj	_
+read	17	read	read	VERB	VBP	Mood=Ind|Number=Plur|Person=1|Tense=Pres|VerbForm=Fin	13	advcl	_
+it	18	it	it	PRON	PRP	Case=Acc|Gender=Neut|Number=Sing|Person=3|PronType=Prs	17	obj	_
 <g/>
-.	19	.	.	PUNCT	.	_	5	punct	_	_
+.	19	.	.	PUNCT	.	_	5	punct	_
 </s>
 <s>
-It	1	It	it	PRON	PRP	Case=Nom|Gender=Neut|Number=Sing|Person=3|PronType=Prs	4	nsubj	_	SpacesAfter=\s\s\s\s\s\s\s\s\s
-is	2	is	be	AUX	VBZ	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	4	cop	_	_
-the	3	the	the	DET	DT	Definite=Def|PronType=Art	4	det	_	_
-hour	4	hour	hour	NOUN	NN	Number=Sing	0	root	_	_
-when	5	when	when	ADV	WRB	PronType=Int	7	advmod	_	_
-chanticleer	6	chanticleer	chanticleer	NOUN	NN	Number=Sing	7	nsubj	_	_
-retires	7	retires	retire	VERB	VBZ	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	4	advcl	_	_
-to	8	to	to	ADP	IN	_	10	case	_	_
-his	9	his	his	PRON	PRP$	Case=Gen|Gender=Masc|Number=Sing|Person=3|Poss=Yes|PronType=Prs	10	nmod:poss	_	_
-perch	10	perch	perch	NOUN	NN	Number=Sing	7	obl	_	_
-in	11	in	in	ADP	IN	_	13	case	_	_
-the	12	the	the	DET	DT	Definite=Def|PronType=Art	13	det	_	_
-henhouse	13	henhouse	henhouse	NOUN	NN	Number=Sing	10	nmod	_	SpaceAfter=No
+It	1	It	it	PRON	PRP	Case=Nom|Gender=Neut|Number=Sing|Person=3|PronType=Prs	4	nsubj	_
+is	2	is	be	AUX	VBZ	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	4	cop	_
+the	3	the	the	DET	DT	Definite=Def|PronType=Art	4	det	_
+hour	4	hour	hour	NOUN	NN	Number=Sing	0	root	_
+when	5	when	when	ADV	WRB	PronType=Int	7	advmod	_
+chanticleer	6	chanticleer	chanticleer	NOUN	NN	Number=Sing	7	nsubj	_
+retires	7	retires	retire	VERB	VBZ	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	4	advcl	_
+to	8	to	to	ADP	IN	_	10	case	_
+his	9	his	his	PRON	PRP$	Case=Gen|Gender=Masc|Number=Sing|Person=3|Poss=Yes|PronType=Prs	10	nmod:poss	_
+perch	10	perch	perch	NOUN	NN	Number=Sing	7	obl	_
+in	11	in	in	ADP	IN	_	13	case	_
+the	12	the	the	DET	DT	Definite=Def|PronType=Art	13	det	_
+henhouse	13	henhouse	henhouse	NOUN	NN	Number=Sing	10	nmod	_
 <g/>
-,	14	,	,	PUNCT	,	_	15	punct	_	_
-lowers	15	lowers	lower	VERB	VBZ	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	7	conj	_	_
-his	16	his	his	PRON	PRP$	Case=Gen|Gender=Masc|Number=Sing|Person=3|Poss=Yes|PronType=Prs	18	nmod:poss	_	_
-proud	17	proud	proud	ADJ	JJ	Degree=Pos	18	amod	_	_
-tail	18	tail	tail	NOUN	NN	Number=Sing	15	obj	_	SpaceAfter=No
+,	14	,	,	PUNCT	,	_	15	punct	_
+lowers	15	lowers	lower	VERB	VBZ	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	7	conj	_
+his	16	his	his	PRON	PRP$	Case=Gen|Gender=Masc|Number=Sing|Person=3|Poss=Yes|PronType=Prs	18	nmod:poss	_
+proud	17	proud	proud	ADJ	JJ	Degree=Pos	18	amod	_
+tail	18	tail	tail	NOUN	NN	Number=Sing	15	obj	_
 <g/>
-,	19	,	,	PUNCT	,	_	20	punct	_	_
-sinks	20	sinks	sink	VERB	VBZ	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	7	conj	_	SpacesAfter=\s\s\s\s\s\s\s\s\s
-his	21	his	his	PRON	PRP$	Case=Gen|Gender=Masc|Number=Sing|Person=3|Poss=Yes|PronType=Prs	22	nmod:poss	_	_
-neck	22	neck	neck	NOUN	NN	Number=Sing	20	obj	_	_
-into	23	into	into	ADP	IN	_	25	case	_	_
-his	24	his	his	PRON	PRP$	Case=Gen|Gender=Masc|Number=Sing|Person=3|Poss=Yes|PronType=Prs	25	nmod:poss	_	_
-breast	25	breast	breast	NOUN	NN	Number=Sing	20	obl	_	SpaceAfter=No
+,	19	,	,	PUNCT	,	_	20	punct	_
+sinks	20	sinks	sink	VERB	VBZ	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	7	conj	_
+his	21	his	his	PRON	PRP$	Case=Gen|Gender=Masc|Number=Sing|Person=3|Poss=Yes|PronType=Prs	22	nmod:poss	_
+neck	22	neck	neck	NOUN	NN	Number=Sing	20	obj	_
+into	23	into	into	ADP	IN	_	25	case	_
+his	24	his	his	PRON	PRP$	Case=Gen|Gender=Masc|Number=Sing|Person=3|Poss=Yes|PronType=Prs	25	nmod:poss	_
+breast	25	breast	breast	NOUN	NN	Number=Sing	20	obl	_
 <g/>
-,	26	,	,	PUNCT	,	_	28	punct	_	_
-and	27	and	and	CCONJ	CC	_	28	cc	_	_
-goes	28	goes	go	VERB	VBZ	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	7	conj	_	_
-to	29	to	to	PART	TO	_	30	mark	_	_
-sleep	30	sleep	sleep	VERB	VB	VerbForm=Inf	28	advcl	_	_
-between	31	between	between	ADP	IN	_	35	case	_	_
-his	32	his	his	PRON	PRP$	Case=Gen|Gender=Masc|Number=Sing|Person=3|Poss=Yes|PronType=Prs	35	nmod:poss	_	_
-two	33	two	two	NUM	CD	NumForm=Word|NumType=Card	35	nummod	_	_
-fattest	34	fattest	fat	ADJ	JJS	Degree=Sup	35	amod	_	_
-wives	35	wives	wife	NOUN	NNS	Number=Plur	30	obl	_	SpaceAfter=No
+,	26	,	,	PUNCT	,	_	28	punct	_
+and	27	and	and	CCONJ	CC	_	28	cc	_
+goes	28	goes	go	VERB	VBZ	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	7	conj	_
+to	29	to	to	PART	TO	_	30	mark	_
+sleep	30	sleep	sleep	VERB	VB	VerbForm=Inf	28	advcl	_
+between	31	between	between	ADP	IN	_	35	case	_
+his	32	his	his	PRON	PRP$	Case=Gen|Gender=Masc|Number=Sing|Person=3|Poss=Yes|PronType=Prs	35	nmod:poss	_
+two	33	two	two	NUM	CD	NumForm=Word|NumType=Card	35	nummod	_
+fattest	34	fattest	fat	ADJ	JJS	Degree=Sup	35	amod	_
+wives	35	wives	wife	NOUN	NNS	Number=Plur	30	obl	_
 <g/>
-.	36	.	.	PUNCT	.	_	4	punct	_	_
+.	36	.	.	PUNCT	.	_	4	punct	_
 </s>
 <s>
-It	1	It	it	PRON	PRP	Case=Nom|Gender=Neut|Number=Sing|Person=3|PronType=Prs	4	nsubj	_	_
-is	2	is	be	AUX	VBZ	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	4	cop	_	_
-the	3	the	the	DET	DT	Definite=Def|PronType=Art	4	det	_	_
-hour	4	hour	hour	NOUN	NN	Number=Sing	0	root	_	_
-when	5	when	when	ADV	WRB	PronType=Int	11	advmod	_	SpacesAfter=\s\s\s\s\s\s\s\s\s
-animal	6	animal	animal	NOUN	NN	Number=Sing	7	compound	_	_
-life	7	life	life	NOUN	NN	Number=Sing	11	nsubj	_	_
-and	8	and	and	CCONJ	CC	_	10	cc	_	_
-wild	9	wild	wild	ADJ	JJ	Degree=Pos	10	amod	_	_
-humanity	10	humanity	humanity	NOUN	NN	Number=Sing	7	conj	_	_
-retire	11	retire	retire	VERB	VBP	Mood=Ind|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin	4	advcl	_	_
-to	12	to	to	ADP	IN	_	13	case	_	_
-bed	13	bed	bed	NOUN	NN	Number=Sing	11	obl	_	SpaceAfter=No
+It	1	It	it	PRON	PRP	Case=Nom|Gender=Neut|Number=Sing|Person=3|PronType=Prs	4	nsubj	_
+is	2	is	be	AUX	VBZ	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	4	cop	_
+the	3	the	the	DET	DT	Definite=Def|PronType=Art	4	det	_
+hour	4	hour	hour	NOUN	NN	Number=Sing	0	root	_
+when	5	when	when	ADV	WRB	PronType=Int	11	advmod	_
+animal	6	animal	animal	NOUN	NN	Number=Sing	7	compound	_
+life	7	life	life	NOUN	NN	Number=Sing	11	nsubj	_
+and	8	and	and	CCONJ	CC	_	10	cc	_
+wild	9	wild	wild	ADJ	JJ	Degree=Pos	10	amod	_
+humanity	10	humanity	humanity	NOUN	NN	Number=Sing	7	conj	_
+retire	11	retire	retire	VERB	VBP	Mood=Ind|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin	4	advcl	_
+to	12	to	to	ADP	IN	_	13	case	_
+bed	13	bed	bed	NOUN	NN	Number=Sing	11	obl	_
 <g/>
-;	14	;	;	PUNCT	,	_	16	punct	_	_
-the	15	the	the	DET	DT	Definite=Def|PronType=Art	16	det	_	_
-hour	16	hour	hour	NOUN	NN	Number=Sing	4	parataxis	_	_
-when	17	when	when	ADV	WRB	PronType=Int	20	advmod	_	_
-tamed	18	tamed	tame	VERB	VBN	Tense=Past|VerbForm=Part|Voice=Pass	19	amod	_	_
-humanity	19	humanity	humanity	NOUN	NN	Number=Sing	20	nsubj	_	_
-sits	20	sits	sit	VERB	VBZ	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	16	acl	_	_
-down	21	down	down	ADP	RP	_	20	compound:prt	_	_
-to	22	to	to	ADP	IN	_	23	case	_	_
-dinner	23	dinner	dinner	NOUN	NN	Number=Sing	20	obl	_	SpaceAfter=No
+;	14	;	;	PUNCT	,	_	16	punct	_
+the	15	the	the	DET	DT	Definite=Def|PronType=Art	16	det	_
+hour	16	hour	hour	NOUN	NN	Number=Sing	4	parataxis	_
+when	17	when	when	ADV	WRB	PronType=Int	20	advmod	_
+tamed	18	tamed	tame	VERB	VBN	Tense=Past|VerbForm=Part|Voice=Pass	19	amod	_
+humanity	19	humanity	humanity	NOUN	NN	Number=Sing	20	nsubj	_
+sits	20	sits	sit	VERB	VBZ	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	16	acl	_
+down	21	down	down	ADP	RP	_	20	compound:prt	_
+to	22	to	to	ADP	IN	_	23	case	_
+dinner	23	dinner	dinner	NOUN	NN	Number=Sing	20	obl	_
 <g/>
-.	24	.	.	PUNCT	.	_	4	punct	_	SpacesAfter=\s\s\s\s\s\s\s\s\s
+.	24	.	.	PUNCT	.	_	4	punct	_
 </s>
 <s>
-The	1	The	the	DET	DT	Definite=Def|PronType=Art	2	det	_	_
-more	2	more	more	ADV	RBR	Degree=Cmp	11	advmod	_	_
-we	3	we	we	PRON	PRP	Case=Nom|Number=Plur|Person=1|PronType=Prs	4	nsubj	_	_
-advance	4	advance	advance	VERB	VBP	Mood=Ind|Number=Plur|Person=1|Tense=Pres|VerbForm=Fin	2	advcl:relcl	_	_
-in	5	in	in	ADP	IN	_	6	case	_	_
-civilisation	6	civilisation	civilisation	NOUN	NN	Number=Sing	4	obl	_	_
-the	7	the	the	DET	DT	Definite=Def|PronType=Art	8	det	_	_
-farther	8	farther	far	ADV	RBR	Degree=Cmp	9	advmod	_	_
-back	9	back	back	ADV	RB	_	11	advmod	_	_
-we	10	we	we	PRON	PRP	Case=Nom|Number=Plur|Person=1|PronType=Prs	11	nsubj	_	_
-push	11	push	push	VERB	VBP	Mood=Ind|Number=Plur|Person=1|Tense=Pres|VerbForm=Fin	0	root	_	_
-the	12	the	the	DET	DT	Definite=Def|PronType=Art	13	det	_	_
-boundaries	13	boundaries	boundary	NOUN	NNS	Number=Plur	11	obj	_	_
-of	14	of	of	ADP	IN	_	15	case	_	_
-sleep	15	sleep	sleep	NOUN	NN	Number=Sing	13	nmod	_	_
-and	16	and	and	CCONJ	CC	_	17	cc	_	SpacesAfter=\s\s\s\s\s\s\s\s\s
-forgetfulness	17	forgetfulness	forgetfulness	NOUN	NN	Number=Sing	15	conj	_	SpaceAfter=No
+The	1	The	the	DET	DT	Definite=Def|PronType=Art	2	det	_
+more	2	more	more	ADV	RBR	Degree=Cmp	11	advmod	_
+we	3	we	we	PRON	PRP	Case=Nom|Number=Plur|Person=1|PronType=Prs	4	nsubj	_
+advance	4	advance	advance	VERB	VBP	Mood=Ind|Number=Plur|Person=1|Tense=Pres|VerbForm=Fin	2	advcl:relcl	_
+in	5	in	in	ADP	IN	_	6	case	_
+civilisation	6	civilisation	civilisation	NOUN	NN	Number=Sing	4	obl	_
+the	7	the	the	DET	DT	Definite=Def|PronType=Art	8	det	_
+farther	8	farther	far	ADV	RBR	Degree=Cmp	9	advmod	_
+back	9	back	back	ADV	RB	_	11	advmod	_
+we	10	we	we	PRON	PRP	Case=Nom|Number=Plur|Person=1|PronType=Prs	11	nsubj	_
+push	11	push	push	VERB	VBP	Mood=Ind|Number=Plur|Person=1|Tense=Pres|VerbForm=Fin	0	root	_
+the	12	the	the	DET	DT	Definite=Def|PronType=Art	13	det	_
+boundaries	13	boundaries	boundary	NOUN	NNS	Number=Plur	11	obj	_
+of	14	of	of	ADP	IN	_	15	case	_
+sleep	15	sleep	sleep	NOUN	NN	Number=Sing	13	nmod	_
+and	16	and	and	CCONJ	CC	_	17	cc	_
+forgetfulness	17	forgetfulness	forgetfulness	NOUN	NN	Number=Sing	15	conj	_
 <g/>
-.	18	.	.	PUNCT	.	_	11	punct	_	_
+.	18	.	.	PUNCT	.	_	11	punct	_
 </s>
 <s>
-When	1	When	when	ADV	WRB	PronType=Int	3	advmod	_	_
-we	2	we	we	PRON	PRP	Case=Nom|Number=Plur|Person=1|PronType=Prs	3	nsubj	_	_
-reach	3	reach	reach	VERB	VBP	Mood=Ind|Number=Plur|Person=1|Tense=Pres|VerbForm=Fin	11	advcl	_	_
-our	4	our	our	PRON	PRP$	Case=Gen|Number=Plur|Person=1|Poss=Yes|PronType=Prs	6	nmod:poss	_	_
-highest	5	highest	high	ADJ	JJS	Degree=Sup	6	amod	_	_
-point	6	point	point	NOUN	NN	Number=Sing	3	obj	_	_
-of	7	of	of	ADP	IN	_	8	case	_	_
-culture	8	culture	culture	NOUN	NN	Number=Sing	6	nmod	_	SpaceAfter=No
+When	1	When	when	ADV	WRB	PronType=Int	3	advmod	_
+we	2	we	we	PRON	PRP	Case=Nom|Number=Plur|Person=1|PronType=Prs	3	nsubj	_
+reach	3	reach	reach	VERB	VBP	Mood=Ind|Number=Plur|Person=1|Tense=Pres|VerbForm=Fin	11	advcl	_
+our	4	our	our	PRON	PRP$	Case=Gen|Number=Plur|Person=1|Poss=Yes|PronType=Prs	6	nmod:poss	_
+highest	5	highest	high	ADJ	JJS	Degree=Sup	6	amod	_
+point	6	point	point	NOUN	NN	Number=Sing	3	obj	_
+of	7	of	of	ADP	IN	_	8	case	_
+culture	8	culture	culture	NOUN	NN	Number=Sing	6	nmod	_
 <g/>
-,	9	,	,	PUNCT	,	_	3	punct	_	_
-I	10	I	I	PRON	PRP	Case=Nom|Number=Sing|Person=1|PronType=Prs	11	nsubj	_	_
-suppose	11	suppose	suppose	VERB	VBP	Mood=Ind|Number=Sing|Person=1|Tense=Pres|VerbForm=Fin	0	root	_	_
-we	12	we	we	PRON	PRP	Case=Nom|Number=Plur|Person=1|PronType=Prs	14	nsubj	_	_
-shall	13	shall	shall	AUX	MD	VerbForm=Fin	14	aux	_	_
-hustle	14	hustle	hustle	VERB	VB	VerbForm=Inf	11	ccomp	_	_
-the	15	the	the	DET	DT	Definite=Def|PronType=Art	16	det	_	SpacesAfter=\s\s\s\s\s\s\s\s\s
-blessed	16	blessed	bless	VERB	VBN	Tense=Past|VerbForm=Part|Voice=Pass	14	obj	_	SpaceAfter=No
+,	9	,	,	PUNCT	,	_	3	punct	_
+I	10	I	I	PRON	PRP	Case=Nom|Number=Sing|Person=1|PronType=Prs	11	nsubj	_
+suppose	11	suppose	suppose	VERB	VBP	Mood=Ind|Number=Sing|Person=1|Tense=Pres|VerbForm=Fin	0	root	_
+we	12	we	we	PRON	PRP	Case=Nom|Number=Plur|Person=1|PronType=Prs	14	nsubj	_
+shall	13	shall	shall	AUX	MD	VerbForm=Fin	14	aux	_
+hustle	14	hustle	hustle	VERB	VB	VerbForm=Inf	11	ccomp	_
+the	15	the	the	DET	DT	Definite=Def|PronType=Art	16	det	_
+blessed	16	blessed	bless	VERB	VBN	Tense=Past|VerbForm=Part|Voice=Pass	14	obj	_
 <g/>
-,	17	,	,	PUNCT	,	_	20	punct	_	_
-the	18	the	the	DET	DT	Definite=Def|PronType=Art	20	det	_	_
-divine	19	divine	divine	ADJ	JJ	Degree=Pos	20	amod	_	_
-Nepenthe	20	Nepenthe	nepenthe	PROPN	NNP	Number=Sing	16	appos	_	SpaceAfter=No
+,	17	,	,	PUNCT	,	_	20	punct	_
+the	18	the	the	DET	DT	Definite=Def|PronType=Art	20	det	_
+divine	19	divine	divine	ADJ	JJ	Degree=Pos	20	amod	_
+<ne type="LOC">
+Nepenthe	20	Nepenthe	nepenthe	PROPN	NNP	Number=Sing	16	appos	_
+</ne>
+,	21	,	,	PUNCT	,	_	24	punct	_
+off	22	off	off	ADP	IN	_	24	case	_
+the	23	the	the	DET	DT	Definite=Def|PronType=Art	24	det	_
+face	24	face	face	NOUN	NN	Number=Sing	14	obl	_
+of	25	of	of	ADP	IN	_	27	case	_
+the	26	the	the	DET	DT	Definite=Def|PronType=Art	27	det	_
+earth	27	earth	earth	NOUN	NN	Number=Sing	24	nmod	_
+altogether	28	altogether	altogether	ADV	RB	_	24	advmod	_
 <g/>
-,	21	,	,	PUNCT	,	_	24	punct	_	_
-off	22	off	off	ADP	IN	_	24	case	_	_
-the	23	the	the	DET	DT	Definite=Def|PronType=Art	24	det	_	_
-face	24	face	face	NOUN	NN	Number=Sing	14	obl	_	_
-of	25	of	of	ADP	IN	_	27	case	_	_
-the	26	the	the	DET	DT	Definite=Def|PronType=Art	27	det	_	_
-earth	27	earth	earth	NOUN	NN	Number=Sing	24	nmod	_	_
-altogether	28	altogether	altogether	ADV	RB	_	24	advmod	_	SpaceAfter=No
-<g/>
-.	29	.	.	PUNCT	.	_	11	punct	_	SpacesAfter=\n\n\n\n
+.	29	.	.	PUNCT	.	_	11	punct	_
 </s>
 </p>
 </div>
 <div type="chapter">
 <head rend="center">
 <s>
-CHAPTER	1	CHAPTER	chapter	NOUN	NN	Number=Sing	0	root	_	_
-XVI	2	XVI	XVI	NUM	CD	NumForm=Roman|NumType=Card	1	nummod	_	SpaceAfter=No
+CHAPTER	1	CHAPTER	chapter	NOUN	NN	Number=Sing	0	root	_
+XVI	2	XVI	XVI	NUM	CD	NumForm=Roman|NumType=Card	1	nummod	_
 <g/>
-.	3	.	.	PUNCT	.	_	1	punct	_	SpacesAfter=\n\n\n\n
+.	3	.	.	PUNCT	.	_	1	punct	_
 </s>
 </head>
 <p>
 <s>
-THE	1	THE	the	DET	DT	Definite=Def|PronType=Art	3	det	_	_
-weekly	2	weekly	weekly	ADJ	JJ	Degree=Pos	3	amod	_	_
-clearance	3	clearance	clearance	NOUN	NN	Number=Sing	9	nsubj:pass	_	_
-of	4	of	of	ADP	IN	_	6	case	_	_
-mundane	5	mundane	mundane	ADJ	JJ	Degree=Pos	6	amod	_	_
-books	6	books	book	NOUN	NNS	Number=Plur	3	nmod	_	_
-has	7	has	have	AUX	VBZ	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	9	aux	_	_
-been	8	been	be	AUX	VBN	Tense=Past|VerbForm=Part	9	aux:pass	_	_
-made	9	made	make	VERB	VBN	Tense=Past|VerbForm=Part|Voice=Pass	0	root	_	_
-at	10	at	at	ADP	IN	_	11	case	_	_
-Plas	11	Plas	Plas	PROPN	NNP	Number=Sing	9	obl	_	_
-Berwyn	12	Berwyn	Berwyn	PROPN	NNP	Number=Sing	11	flat	_	SpaceAfter=No
+THE	1	THE	the	DET	DT	Definite=Def|PronType=Art	3	det	_
+weekly	2	weekly	weekly	ADJ	JJ	Degree=Pos	3	amod	_
+clearance	3	clearance	clearance	NOUN	NN	Number=Sing	9	nsubj:pass	_
+of	4	of	of	ADP	IN	_	6	case	_
+mundane	5	mundane	mundane	ADJ	JJ	Degree=Pos	6	amod	_
+books	6	books	book	NOUN	NNS	Number=Plur	3	nmod	_
+has	7	has	have	AUX	VBZ	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	9	aux	_
+been	8	been	be	AUX	VBN	Tense=Past|VerbForm=Part	9	aux:pass	_
+made	9	made	make	VERB	VBN	Tense=Past|VerbForm=Part|Voice=Pass	0	root	_
+at	10	at	at	ADP	IN	_	11	case	_
+<ne type="LOC">
+Plas	11	Plas	Plas	PROPN	NNP	Number=Sing	9	obl	_
+Berwyn	12	Berwyn	Berwyn	PROPN	NNP	Number=Sing	11	flat	_
+</ne>
+;	13	;	;	PUNCT	,	_	39	punct	_
+the	14	the	the	DET	DT	Definite=Def|PronType=Art	17	det	_
+skimp	15	skimp	skimp	NOUN	NN	Number=Sing	17	compound	_
+drab	16	drab	drab	NOUN	NN	Number=Sing	17	compound	_
+gowns	17	gowns	gown	NOUN	NNS	Number=Plur	39	nsubj:pass	_
 <g/>
-;	13	;	;	PUNCT	,	_	39	punct	_	_
-the	14	the	the	DET	DT	Definite=Def|PronType=Art	17	det	_	_
-skimp	15	skimp	skimp	NOUN	NN	Number=Sing	17	compound	_	_
-drab	16	drab	drab	NOUN	NN	Number=Sing	17	compound	_	_
-gowns	17	gowns	gown	NOUN	NNS	Number=Plur	39	nsubj:pass	_	SpaceAfter=No
+,	18	,	,	PUNCT	,	_	25	punct	_
+and	19	and	and	CCONJ	CC	_	25	cc	_
+the	20	the	the	DET	DT	Definite=Def|PronType=Art	25	det	_
+ill	21	ill	ill	ADV	RB	Degree=Pos	23	advmod	_
 <g/>
-,	18	,	,	PUNCT	,	_	25	punct	_	_
-and	19	and	and	CCONJ	CC	_	25	cc	_	SpacesAfter=\s\s\s\s\s\s
-the	20	the	the	DET	DT	Definite=Def|PronType=Art	25	det	_	_
-ill	21	ill	ill	ADV	RB	Degree=Pos	23	advmod	_	SpaceAfter=No
+-	22	-	-	PUNCT	HYPH	_	21	punct	_
 <g/>
--	22	-	-	PUNCT	HYPH	_	21	punct	_	SpaceAfter=No
+made	23	made	make	VERB	VBN	Tense=Past|VerbForm=Part|Voice=Pass	25	amod	_
+frock	24	frock	frock	NOUN	NN	Number=Sing	25	compound	_
+coat	25	coat	coat	NOUN	NN	Number=Sing	17	conj	_
 <g/>
-made	23	made	make	VERB	VBN	Tense=Past|VerbForm=Part|Voice=Pass	25	amod	_	_
-frock	24	frock	frock	NOUN	NN	Number=Sing	25	compound	_	_
-coat	25	coat	coat	NOUN	NN	Number=Sing	17	conj	_	SpaceAfter=No
+,	26	,	,	PUNCT	,	_	29	punct	_
+whose	27	whose	whose	PRON	WP$	Poss=Yes|PronType=Rel	28	nmod:poss	_
+flaps	28	flaps	flap	NOUN	NNS	Number=Plur	29	nsubj	_
+lap	29	lap	lap	VERB	VBP	Mood=Ind|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin	25	acl:relcl	_
+over	30	over	over	ADP	IN	_	31	case	_
+one	31	one	one	PRON	CD	ExtPos=PRON|PronType=Rcp	29	obl	_
+another	32	another	another	DET	DT	PronType=Ind	31	fixed	_
+so	33	so	so	ADV	RB	_	34	advmod	_
+painfully	34	painfully	painfully	ADV	RB	_	35	advmod	_
+behind	35	behind	behind	ADV	RB	_	29	advmod	_
 <g/>
-,	26	,	,	PUNCT	,	_	29	punct	_	_
-whose	27	whose	whose	PRON	WP$	Poss=Yes|PronType=Rel	28	nmod:poss	_	_
-flaps	28	flaps	flap	NOUN	NNS	Number=Plur	29	nsubj	_	_
-lap	29	lap	lap	VERB	VBP	Mood=Ind|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin	25	acl:relcl	_	_
-over	30	over	over	ADP	IN	_	31	case	_	_
-one	31	one	one	PRON	CD	ExtPos=PRON|PronType=Rcp	29	obl	_	_
-another	32	another	another	DET	DT	PronType=Ind	31	fixed	_	_
-so	33	so	so	ADV	RB	_	34	advmod	_	_
-painfully	34	painfully	painfully	ADV	RB	_	35	advmod	_	_
-behind	35	behind	behind	ADV	RB	_	29	advmod	_	SpaceAfter=No
+,	36	,	,	PUNCT	,	_	17	punct	_
+have	37	have	have	AUX	VBP	Mood=Ind|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin	39	aux	_
+been	38	been	be	AUX	VBN	Tense=Past|VerbForm=Part	39	aux:pass	_
+endured	39	endured	endure	VERB	VBN	Tense=Past|VerbForm=Part|Voice=Pass	9	parataxis	_
+by	40	by	by	ADP	IN	_	42	case	_
+the	41	the	the	DET	DT	Definite=Def|PronType=Art	42	det	_
+Misses	42	Misses	miss	PROPN	NNPS	Number=Plur	39	obl:agent	_
+<ne type="PER">
+Brandon	43	Brandon	Brandon	PROPN	NNP	Number=Sing	42	flat	_
+</ne>
+and	44	and	and	CCONJ	CC	_	46	cc	_
+their	45	their	their	PRON	PRP$	Case=Gen|Number=Plur|Person=3|Poss=Yes|PronType=Prs	46	nmod:poss	_
+brother	46	brother	brother	NOUN	NN	Number=Sing	42	conj	_
+respectively	47	respectively	respectively	ADV	RB	_	39	advmod	_
 <g/>
-,	36	,	,	PUNCT	,	_	17	punct	_	_
-have	37	have	have	AUX	VBP	Mood=Ind|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin	39	aux	_	_
-been	38	been	be	AUX	VBN	Tense=Past|VerbForm=Part	39	aux:pass	_	SpacesAfter=\s\s\s\s\s\s
-endured	39	endured	endure	VERB	VBN	Tense=Past|VerbForm=Part|Voice=Pass	9	parataxis	_	_
-by	40	by	by	ADP	IN	_	42	case	_	_
-the	41	the	the	DET	DT	Definite=Def|PronType=Art	42	det	_	_
-Misses	42	Misses	miss	PROPN	NNPS	Number=Plur	39	obl:agent	_	_
-Brandon	43	Brandon	Brandon	PROPN	NNP	Number=Sing	42	flat	_	_
-and	44	and	and	CCONJ	CC	_	46	cc	_	_
-their	45	their	their	PRON	PRP$	Case=Gen|Number=Plur|Person=3|Poss=Yes|PronType=Prs	46	nmod:poss	_	_
-brother	46	brother	brother	NOUN	NN	Number=Sing	42	conj	_	_
-respectively	47	respectively	respectively	ADV	RB	_	39	advmod	_	SpaceAfter=No
-<g/>
-.	48	.	.	PUNCT	.	_	9	punct	_	_
+.	48	.	.	PUNCT	.	_	9	punct	_
 </s>
 <s>
-At	1	At	at	ADP	IN	_	2	case	_	_
-church	2	church	church	NOUN	NN	Number=Sing	8	nmod	_	_
-has	3	has	have	AUX	VBZ	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	8	aux	_	_
-been	4	been	be	AUX	VBN	Tense=Past|VerbForm=Part	8	cop	_	_
-all	5	all	all	DET	PDT	PronType=Tot	8	det:predet	_	_
-the	6	the	the	DET	DT	Definite=Def|PronType=Art	8	det	_	SpacesAfter=\s\s\s\s\s\s
-Brandon	7	Brandon	Brandon	PROPN	NNP	Number=Sing	8	compound	_	_
-household	8	household	household	NOUN	NN	Number=Sing	0	root	_	SpaceAfter=No
+At	1	At	at	ADP	IN	_	2	case	_
+church	2	church	church	NOUN	NN	Number=Sing	8	nmod	_
+has	3	has	have	AUX	VBZ	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	8	aux	_
+been	4	been	be	AUX	VBN	Tense=Past|VerbForm=Part	8	cop	_
+all	5	all	all	DET	PDT	PronType=Tot	8	det:predet	_
+the	6	the	the	DET	DT	Definite=Def|PronType=Art	8	det	_
+<ne type="PER">
+Brandon	7	Brandon	Brandon	PROPN	NNP	Number=Sing	8	compound	_
+</ne>
+household	8	household	household	NOUN	NN	Number=Sing	0	root	_
 <g/>
-:	9	:	:	PUNCT	:	_	10	punct	_	_
-son	10	son	son	NOUN	NN	Number=Sing	8	appos	_	_
-and	11	and	and	CCONJ	CC	_	12	cc	_	_
-daughters	12	daughters	daughter	NOUN	NNS	Number=Plur	10	conj	_	SpaceAfter=No
+:	9	:	:	PUNCT	:	_	10	punct	_
+son	10	son	son	NOUN	NN	Number=Sing	8	appos	_
+and	11	and	and	CCONJ	CC	_	12	cc	_
+daughters	12	daughters	daughter	NOUN	NNS	Number=Plur	10	conj	_
 <g/>
-,	13	,	,	PUNCT	,	_	16	punct	_	_
-man	14	man	man	NOUN	NN	Number=Sing	16	compound	_	SpaceAfter=No
+,	13	,	,	PUNCT	,	_	16	punct	_
+man	14	man	man	NOUN	NN	Number=Sing	16	compound	_
 <g/>
--	15	-	-	PUNCT	HYPH	_	14	punct	_	SpaceAfter=No
+-	15	-	-	PUNCT	HYPH	_	14	punct	_
 <g/>
-servant	16	servant	servant	NOUN	NN	Number=Sing	10	conj	_	_
-and	17	and	and	CCONJ	CC	_	20	cc	_	_
-maid	18	maid	maid	NOUN	NN	Number=Sing	20	compound	_	SpaceAfter=No
+servant	16	servant	servant	NOUN	NN	Number=Sing	10	conj	_
+and	17	and	and	CCONJ	CC	_	20	cc	_
+maid	18	maid	maid	NOUN	NN	Number=Sing	20	compound	_
 <g/>
--	19	-	-	PUNCT	HYPH	_	18	punct	_	SpaceAfter=No
+-	19	-	-	PUNCT	HYPH	_	18	punct	_
 <g/>
-servant	20	servant	servant	NOUN	NN	Number=Sing	10	conj	_	SpaceAfter=No
+servant	20	servant	servant	NOUN	NN	Number=Sing	10	conj	_
 <g/>
-,	21	,	,	PUNCT	,	_	22	punct	_	_
-ox	22	ox	ox	NOUN	NN	Number=Sing	10	conj	_	_
-and	23	and	and	CCONJ	CC	_	24	cc	_	_
-sheep	24	sheep	sheep	NOUN	NN	Number=Sing	22	conj	_	SpaceAfter=No
+,	21	,	,	PUNCT	,	_	22	punct	_
+ox	22	ox	ox	NOUN	NN	Number=Sing	10	conj	_
+and	23	and	and	CCONJ	CC	_	24	cc	_
+sheep	24	sheep	sheep	NOUN	NN	Number=Sing	22	conj	_
 <g/>
-,	25	,	,	PUNCT	,	_	26	punct	_	_
-camel	26	camel	camel	NOUN	NN	Number=Sing	10	conj	_	_
-and	27	and	and	CCONJ	CC	_	28	cc	_	SpacesAfter=\s\s\s\s\s\s
-ass	28	ass	ass	NOUN	NN	Number=Sing	10	conj	_	SpaceAfter=No
+,	25	,	,	PUNCT	,	_	26	punct	_
+camel	26	camel	camel	NOUN	NN	Number=Sing	10	conj	_
+and	27	and	and	CCONJ	CC	_	28	cc	_
+ass	28	ass	ass	NOUN	NN	Number=Sing	10	conj	_
 <g/>
-.	29	.	.	PUNCT	.	_	8	punct	_	_
+.	29	.	.	PUNCT	.	_	8	punct	_
 </s>
 <s>
-I	1	I	I	PRON	PRP	Case=Nom|Number=Sing|Person=1|PronType=Prs	2	nsubj	_	_
-need	2	need	need	VERB	VBP	Mood=Ind|Number=Sing|Person=1|Tense=Pres|VerbForm=Fin	0	root	_	_
-hardly	3	hardly	hardly	ADV	RB	_	4	advmod	_	_
-say	4	say	say	VERB	VB	VerbForm=Inf	2	xcomp	_	_
-that	5	that	that	SCONJ	IN	_	11	mark	_	_
-the	6	the	the	DET	DT	Definite=Def|PronType=Art	8	det	_	_
-last	7	last	last	ADJ	JJ	Degree=Pos	8	amod	_	_
-quartette	8	quartette	quartette	NOUN	NN	Number=Sing	11	nsubj:pass	_	_
-have	9	have	have	AUX	VBP	Mood=Ind|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin	11	aux	_	_
-been	10	been	be	AUX	VBN	Tense=Past|VerbForm=Part	11	aux:pass	_	_
-introduced	11	introduced	introduce	VERB	VBN	Tense=Past|VerbForm=Part|Voice=Pass	4	ccomp	_	_
-merely	12	merely	merely	ADV	RB	_	15	advmod	_	_
-for	13	for	for	ADP	IN	_	15	case	_	_
-the	14	the	the	DET	DT	Definite=Def|PronType=Art	15	det	_	_
-sake	15	sake	sake	NOUN	NN	Number=Sing	11	obl	_	_
-of	16	of	of	ADP	IN	_	17	case	_	SpacesAfter=\s\s\s\s\s\s
-euphony	17	euphony	euphony	NOUN	NN	Number=Sing	15	nmod	_	SpaceAfter=No
+I	1	I	I	PRON	PRP	Case=Nom|Number=Sing|Person=1|PronType=Prs	2	nsubj	_
+need	2	need	need	VERB	VBP	Mood=Ind|Number=Sing|Person=1|Tense=Pres|VerbForm=Fin	0	root	_
+hardly	3	hardly	hardly	ADV	RB	_	4	advmod	_
+say	4	say	say	VERB	VB	VerbForm=Inf	2	xcomp	_
+that	5	that	that	SCONJ	IN	_	11	mark	_
+the	6	the	the	DET	DT	Definite=Def|PronType=Art	8	det	_
+last	7	last	last	ADJ	JJ	Degree=Pos	8	amod	_
+quartette	8	quartette	quartette	NOUN	NN	Number=Sing	11	nsubj:pass	_
+have	9	have	have	AUX	VBP	Mood=Ind|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin	11	aux	_
+been	10	been	be	AUX	VBN	Tense=Past|VerbForm=Part	11	aux:pass	_
+introduced	11	introduced	introduce	VERB	VBN	Tense=Past|VerbForm=Part|Voice=Pass	4	ccomp	_
+merely	12	merely	merely	ADV	RB	_	15	advmod	_
+for	13	for	for	ADP	IN	_	15	case	_
+the	14	the	the	DET	DT	Definite=Def|PronType=Art	15	det	_
+sake	15	sake	sake	NOUN	NN	Number=Sing	11	obl	_
+of	16	of	of	ADP	IN	_	17	case	_
+euphony	17	euphony	euphony	NOUN	NN	Number=Sing	15	nmod	_
 <g/>
-,	18	,	,	PUNCT	,	_	21	punct	_	_
-and	19	and	and	CCONJ	CC	_	21	cc	_	_
-to	20	to	to	PART	TO	_	21	mark	_	_
-give	21	give	give	VERB	VB	VerbForm=Inf	11	conj	_	_
-a	22	a	a	DET	DT	Definite=Ind|PronType=Art	24	det	_	_
-fuller	23	fuller	full	ADJ	JJR	Degree=Cmp	24	amod	_	_
-rhythm	24	rhythm	rhythm	NOUN	NN	Number=Sing	21	obj	_	_
-to	25	to	to	ADP	IN	_	27	case	_	_
-the	26	the	the	DET	DT	Definite=Def|PronType=Art	27	det	_	_
-close	27	close	close	NOUN	NN	Number=Sing	21	obl	_	_
-of	28	of	of	ADP	IN	_	30	case	_	_
-the	29	the	the	DET	DT	Definite=Def|PronType=Art	30	det	_	_
-sentence	30	sentence	sentence	NOUN	NN	Number=Sing	27	nmod	_	SpaceAfter=No
+,	18	,	,	PUNCT	,	_	21	punct	_
+and	19	and	and	CCONJ	CC	_	21	cc	_
+to	20	to	to	PART	TO	_	21	mark	_
+give	21	give	give	VERB	VB	VerbForm=Inf	11	conj	_
+a	22	a	a	DET	DT	Definite=Ind|PronType=Art	24	det	_
+fuller	23	fuller	full	ADJ	JJR	Degree=Cmp	24	amod	_
+rhythm	24	rhythm	rhythm	NOUN	NN	Number=Sing	21	obj	_
+to	25	to	to	ADP	IN	_	27	case	_
+the	26	the	the	DET	DT	Definite=Def|PronType=Art	27	det	_
+close	27	close	close	NOUN	NN	Number=Sing	21	obl	_
+of	28	of	of	ADP	IN	_	30	case	_
+the	29	the	the	DET	DT	Definite=Def|PronType=Art	30	det	_
+sentence	30	sentence	sentence	NOUN	NN	Number=Sing	27	nmod	_
 <g/>
-.	31	.	.	PUNCT	.	_	2	punct	_	_
+.	31	.	.	PUNCT	.	_	2	punct	_
 </s>
 <s>
-The	1	The	the	DET	DT	Definite=Def|PronType=Art	2	det	_	_
-Misses	2	Misses	miss	PROPN	NNPS	Number=Plur	5	nsubj	_	_
-Brandon	3	Brandon	Brandon	PROPN	NNP	Number=Sing	2	appos	_	_
-always	4	always	always	ADV	RB	PronType=Tot	5	advmod	_	SpacesAfter=\s\s\s\s\s\s
-stand	5	stand	stand	VERB	VBP	Mood=Ind|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin	0	root	_	_
-as	6	as	as	ADV	RB	_	7	advmod	_	_
-stiff	7	stiff	stiff	ADJ	JJ	Degree=Pos	5	xcomp	_	_
-as	8	as	as	ADP	IN	_	9	case	_	_
-pokers	9	pokers	poker	NOUN	NNS	Number=Plur	7	obl	_	_
-during	10	during	during	ADP	IN	_	12	case	_	_
-the	11	the	the	DET	DT	Definite=Def|PronType=Art	12	det	_	_
-creed	12	creed	creed	NOUN	NN	Number=Sing	5	obl	_	SpaceAfter=No
+The	1	The	the	DET	DT	Definite=Def|PronType=Art	2	det	_
+Misses	2	Misses	miss	PROPN	NNPS	Number=Plur	5	nsubj	_
+<ne type="PER">
+Brandon	3	Brandon	Brandon	PROPN	NNP	Number=Sing	2	appos	_
+</ne>
+always	4	always	always	ADV	RB	PronType=Tot	5	advmod	_
+stand	5	stand	stand	VERB	VBP	Mood=Ind|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin	0	root	_
+as	6	as	as	ADV	RB	_	7	advmod	_
+stiff	7	stiff	stiff	ADJ	JJ	Degree=Pos	5	xcomp	_
+as	8	as	as	ADP	IN	_	9	case	_
+pokers	9	pokers	poker	NOUN	NNS	Number=Plur	7	obl	_
+during	10	during	during	ADP	IN	_	12	case	_
+the	11	the	the	DET	DT	Definite=Def|PronType=Art	12	det	_
+creed	12	creed	creed	NOUN	NN	Number=Sing	5	obl	_
 <g/>
-,	13	,	,	PUNCT	,	_	19	punct	_	_
-with	14	with	with	ADP	IN	_	16	case	_	_
-their	15	their	their	PRON	PRP$	Case=Gen|Number=Plur|Person=3|Poss=Yes|PronType=Prs	16	nmod:poss	_	_
-backs	16	backs	back	NOUN	NNS	Number=Plur	19	nsubj	_	_
-to	17	to	to	ADP	IN	_	19	case	_	_
-the	18	the	the	DET	DT	Definite=Def|PronType=Art	19	det	_	_
-altar	19	altar	altar	NOUN	NN	Number=Sing	5	advcl	_	SpaceAfter=No
+,	13	,	,	PUNCT	,	_	19	punct	_
+with	14	with	with	ADP	IN	_	16	case	_
+their	15	their	their	PRON	PRP$	Case=Gen|Number=Plur|Person=3|Poss=Yes|PronType=Prs	16	nmod:poss	_
+backs	16	backs	back	NOUN	NNS	Number=Plur	19	nsubj	_
+to	17	to	to	ADP	IN	_	19	case	_
+the	18	the	the	DET	DT	Definite=Def|PronType=Art	19	det	_
+altar	19	altar	altar	NOUN	NN	Number=Sing	5	advcl	_
 <g/>
-.	20	.	.	PUNCT	.	_	5	punct	_	_
+.	20	.	.	PUNCT	.	_	5	punct	_
 </s>
 <s>
-It	1	It	it	PRON	PRP	Case=Nom|Gender=Neut|Number=Sing|Person=3|PronType=Prs	2	nsubj	_	_
-amuses	2	amuses	amuse	VERB	VBZ	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	0	root	_	_
-them	3	them	they	PRON	PRP	Case=Acc|Number=Plur|Person=3|PronType=Prs	2	obj	_	SpaceAfter=No
+It	1	It	it	PRON	PRP	Case=Nom|Gender=Neut|Number=Sing|Person=3|PronType=Prs	2	nsubj	_
+amuses	2	amuses	amuse	VERB	VBZ	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	0	root	_
+them	3	them	they	PRON	PRP	Case=Acc|Number=Plur|Person=3|PronType=Prs	2	obj	_
 <g/>
-,	4	,	,	PUNCT	,	_	9	punct	_	_
-and	5	and	and	CCONJ	CC	_	9	cc	_	SpacesAfter=\s\s\s\s\s\s
-it	6	it	it	PRON	PRP	Case=Nom|Gender=Neut|Number=Sing|Person=3|PronType=Prs	9	nsubj	_	_
-does	7	does	do	AUX	VBZ	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	9	aux	_	_
-not	8	not	not	PART	RB	Polarity=Neg	9	advmod	_	_
-do	9	do	do	VERB	VB	VerbForm=Inf	2	conj	_	_
-anybody	10	anybody	anybody	PRON	NN	Number=Sing|PronType=Ind	9	obj	_	_
-else	11	else	else	ADJ	JJ	Degree=Pos	10	amod	_	_
-any	12	any	any	DET	DT	PronType=Ind	13	det	_	_
-harm	13	harm	harm	NOUN	NN	Number=Sing	9	obj	_	SpaceAfter=No
+,	4	,	,	PUNCT	,	_	9	punct	_
+and	5	and	and	CCONJ	CC	_	9	cc	_
+it	6	it	it	PRON	PRP	Case=Nom|Gender=Neut|Number=Sing|Person=3|PronType=Prs	9	nsubj	_
+does	7	does	do	AUX	VBZ	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	9	aux	_
+not	8	not	not	PART	RB	Polarity=Neg	9	advmod	_
+do	9	do	do	VERB	VB	VerbForm=Inf	2	conj	_
+anybody	10	anybody	anybody	PRON	NN	Number=Sing|PronType=Ind	9	obj	_
+else	11	else	else	ADJ	JJ	Degree=Pos	10	amod	_
+any	12	any	any	DET	DT	PronType=Ind	13	det	_
+harm	13	harm	harm	NOUN	NN	Number=Sing	9	obj	_
 <g/>
-,	14	,	,	PUNCT	,	_	22	punct	_	_
-so	15	so	so	ADV	RB	_	22	advmod	_	_
-why	16	why	why	ADV	WRB	PronType=Int	22	advmod	_	_
-should	17	should	should	AUX	MD	VerbForm=Fin	22	aux	_	_
-not	18	not	not	PART	RB	Polarity=Neg	22	advmod	_	_
-they	19	they	they	PRON	PRP	Case=Nom|Number=Plur|Person=3|PronType=Prs	22	nsubj	_	SpaceAfter=No
+,	14	,	,	PUNCT	,	_	22	punct	_
+so	15	so	so	ADV	RB	_	22	advmod	_
+why	16	why	why	ADV	WRB	PronType=Int	22	advmod	_
+should	17	should	should	AUX	MD	VerbForm=Fin	22	aux	_
+not	18	not	not	PART	RB	Polarity=Neg	22	advmod	_
+they	19	they	they	PRON	PRP	Case=Nom|Number=Plur|Person=3|PronType=Prs	22	nsubj	_
 <g/>
-,	20	,	,	PUNCT	,	_	19	punct	_	_
-poor	21	poor	poor	ADJ	JJ	Degree=Pos	22	amod	_	_
-women	22	women	woman	NOUN	NNS	Number=Plur	2	parataxis	_	SpaceAfter=No
+,	20	,	,	PUNCT	,	_	19	punct	_
+poor	21	poor	poor	ADJ	JJ	Degree=Pos	22	amod	_
+women	22	women	woman	NOUN	NNS	Number=Plur	2	parataxis	_
 <g/>
-?	23	?	?	PUNCT	.	_	2	punct	_	_
+?	23	?	?	PUNCT	.	_	2	punct	_
 </s>
 <s>
-Bob	1	Bob	Bob	PROPN	NNP	Number=Sing	2	nsubj	_	_
-truckles	2	truckles	truckle	VERB	VBZ	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	0	root	_	_
-to	3	to	to	ADP	IN	_	6	case	_	_
-the	4	the	the	DET	DT	Definite=Def|PronType=Art	6	det	_	SpacesAfter=\s\s\s\s\s\s
-Scarlet	5	Scarlet	Scarlet	ADJ	NNP	Degree=Pos	6	amod	_	_
-Woman	6	Woman	Woman	PROPN	NNP	Number=Sing	2	obl	_	SpaceAfter=No
+<ne type="PER">
+Bob	1	Bob	Bob	PROPN	NNP	Number=Sing	2	nsubj	_
+</ne>
+truckles	2	truckles	truckle	VERB	VBZ	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	0	root	_
+to	3	to	to	ADP	IN	_	6	case	_
+the	4	the	the	DET	DT	Definite=Def|PronType=Art	6	det	_
+<ne type="PER">
+Scarlet	5	Scarlet	Scarlet	ADJ	NNP	Degree=Pos	6	amod	_
+Woman	6	Woman	Woman	PROPN	NNP	Number=Sing	2	obl	_
+</ne>
+;	7	;	;	PUNCT	,	_	9	punct	_
+he	8	he	he	PRON	PRP	Case=Nom|Gender=Masc|Number=Sing|Person=3|PronType=Prs	9	nsubj	_
+bows	9	bows	bow	VERB	VBZ	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	2	parataxis	_
 <g/>
-;	7	;	;	PUNCT	,	_	9	punct	_	_
-he	8	he	he	PRON	PRP	Case=Nom|Gender=Masc|Number=Sing|Person=3|PronType=Prs	9	nsubj	_	_
-bows	9	bows	bow	VERB	VBZ	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	2	parataxis	_	SpaceAfter=No
+,	10	,	,	PUNCT	,	_	12	punct	_
+and	11	and	and	CCONJ	CC	_	12	cc	_
+turns	12	turns	turn	VERB	VBZ	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	9	conj	_
+his	13	his	his	PRON	PRP$	Case=Gen|Gender=Masc|Number=Sing|Person=3|Poss=Yes|PronType=Prs	17	nmod:poss	_
+honest	14	honest	honest	ADJ	JJ	Degree=Pos	17	amod	_
 <g/>
-,	10	,	,	PUNCT	,	_	12	punct	_	_
-and	11	and	and	CCONJ	CC	_	12	cc	_	_
-turns	12	turns	turn	VERB	VBZ	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	9	conj	_	_
-his	13	his	his	PRON	PRP$	Case=Gen|Gender=Masc|Number=Sing|Person=3|Poss=Yes|PronType=Prs	17	nmod:poss	_	_
-honest	14	honest	honest	ADJ	JJ	Degree=Pos	17	amod	_	SpaceAfter=No
+,	15	,	,	PUNCT	,	_	14	punct	_
+serious	16	serious	serious	ADJ	JJ	Degree=Pos	17	amod	_
+face	17	face	face	NOUN	NN	Number=Sing	12	obj	_
+to	18	to	to	ADP	IN	_	20	case	_
+the	19	the	the	DET	DT	Definite=Def|PronType=Art	20	det	_
+east	20	east	east	NOUN	NN	Number=Sing	12	obl	_
 <g/>
-,	15	,	,	PUNCT	,	_	14	punct	_	_
-serious	16	serious	serious	ADJ	JJ	Degree=Pos	17	amod	_	_
-face	17	face	face	NOUN	NN	Number=Sing	12	obj	_	_
-to	18	to	to	ADP	IN	_	20	case	_	_
-the	19	the	the	DET	DT	Definite=Def|PronType=Art	20	det	_	_
-east	20	east	east	NOUN	NN	Number=Sing	12	obl	_	SpaceAfter=No
-<g/>
-.	21	.	.	PUNCT	.	_	2	punct	_	_
+.	21	.	.	PUNCT	.	_	2	punct	_
 </s>
 <s>
-The	1	The	the	DET	DT	Definite=Def|PronType=Art	2	det	_	_
-service	2	service	service	NOUN	NN	Number=Sing	5	nsubj	_	_
-is	3	is	be	AUX	VBZ	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	5	cop	_	_
-in	4	in	in	ADP	IN	_	5	case	_	SpacesAfter=\s\s\s\s\s\s
-Welsh	5	Welsh	Welsh	PROPN	NNP	Number=Sing	0	root	_	SpaceAfter=No
+The	1	The	the	DET	DT	Definite=Def|PronType=Art	2	det	_
+service	2	service	service	NOUN	NN	Number=Sing	5	nsubj	_
+is	3	is	be	AUX	VBZ	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	5	cop	_
+in	4	in	in	ADP	IN	_	5	case	_
+<ne type="MISC">
+Welsh	5	Welsh	Welsh	PROPN	NNP	Number=Sing	0	root	_
+</ne>
+,	6	,	,	PUNCT	,	_	12	punct	_
+of	7	of	of	ADP	IN	_	8	case	_
+which	8	which	which	PRON	WDT	PronType=Rel	12	obl	_
+he	9	he	he	PRON	PRP	Case=Nom|Gender=Masc|Number=Sing|Person=3|PronType=Prs	12	nsubj	_
+does	10	does	do	AUX	VBZ	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	12	aux	_
+not	11	not	not	PART	RB	Polarity=Neg	12	advmod	_
+understand	12	understand	understand	VERB	VB	VerbForm=Inf	5	acl:relcl	_
+a	13	a	a	DET	DT	Definite=Ind|PronType=Art	14	det	_
+word	14	word	word	NOUN	NN	Number=Sing	12	obj	_
 <g/>
-,	6	,	,	PUNCT	,	_	12	punct	_	_
-of	7	of	of	ADP	IN	_	8	case	_	_
-which	8	which	which	PRON	WDT	PronType=Rel	12	obl	_	_
-he	9	he	he	PRON	PRP	Case=Nom|Gender=Masc|Number=Sing|Person=3|PronType=Prs	12	nsubj	_	_
-does	10	does	do	AUX	VBZ	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	12	aux	_	_
-not	11	not	not	PART	RB	Polarity=Neg	12	advmod	_	_
-understand	12	understand	understand	VERB	VB	VerbForm=Inf	5	acl:relcl	_	_
-a	13	a	a	DET	DT	Definite=Ind|PronType=Art	14	det	_	_
-word	14	word	word	NOUN	NN	Number=Sing	12	obj	_	SpaceAfter=No
-<g/>
-.	15	.	.	PUNCT	.	_	5	punct	_	_
+.	15	.	.	PUNCT	.	_	5	punct	_
 </s>
 <s>
-He	1	He	he	PRON	PRP	Case=Nom|Gender=Masc|Number=Sing|Person=3|PronType=Prs	3	nsubj	_	_
-can	2	can	can	AUX	MD	VerbForm=Fin	3	aux	_	_
-pick	3	pick	pick	VERB	VB	VerbForm=Inf	0	root	_	_
-his	4	his	his	PRON	PRP$	Case=Gen|Gender=Masc|Number=Sing|Person=3|Poss=Yes|PronType=Prs	5	nmod:poss	_	_
-way	5	way	way	NOUN	NN	Number=Sing	3	obj	_	_
-pretty	6	pretty	pretty	ADV	RB	_	7	advmod	_	_
-well	7	well	well	ADV	RB	Degree=Pos	3	advmod	_	_
-through	8	through	through	ADP	IN	_	10	case	_	_
-the	9	the	the	DET	DT	Definite=Def|PronType=Art	10	det	_	SpacesAfter=\s\s\s\s\s\s
-prayers	10	prayers	prayer	NOUN	NNS	Number=Plur	3	obl	_	SpaceAfter=No
+He	1	He	he	PRON	PRP	Case=Nom|Gender=Masc|Number=Sing|Person=3|PronType=Prs	3	nsubj	_
+can	2	can	can	AUX	MD	VerbForm=Fin	3	aux	_
+pick	3	pick	pick	VERB	VB	VerbForm=Inf	0	root	_
+his	4	his	his	PRON	PRP$	Case=Gen|Gender=Masc|Number=Sing|Person=3|Poss=Yes|PronType=Prs	5	nmod:poss	_
+way	5	way	way	NOUN	NN	Number=Sing	3	obj	_
+pretty	6	pretty	pretty	ADV	RB	_	7	advmod	_
+well	7	well	well	ADV	RB	Degree=Pos	3	advmod	_
+through	8	through	through	ADP	IN	_	10	case	_
+the	9	the	the	DET	DT	Definite=Def|PronType=Art	10	det	_
+prayers	10	prayers	prayer	NOUN	NNS	Number=Plur	3	obl	_
 <g/>
-,	11	,	,	PUNCT	,	_	12	punct	_	_
-however	12	however	however	ADV	RB	_	3	advmod	_	SpaceAfter=No
+,	11	,	,	PUNCT	,	_	12	punct	_
+however	12	however	however	ADV	RB	_	3	advmod	_
 <g/>
-,	13	,	,	PUNCT	,	_	16	punct	_	_
-by	14	by	by	ADP	IN	_	16	case	_	_
-the	15	the	the	DET	DT	Definite=Def|PronType=Art	16	det	_	_
-help	16	help	help	NOUN	NN	Number=Sing	3	obl	_	_
-of	17	of	of	ADP	IN	_	23	case	_	_
-a	18	a	a	DET	DT	Definite=Ind|PronType=Art	23	det	_	_
-Welsh	19	Welsh	Welsh	ADJ	JJ	Degree=Pos	23	amod	_	_
-and	20	and	and	CCONJ	CC	_	21	cc	_	_
-English	21	English	English	ADJ	JJ	Degree=Pos	19	conj	_	_
-prayer	22	prayer	prayer	NOUN	NN	Number=Sing	23	compound	_	_
-book	23	book	book	NOUN	NN	Number=Sing	16	nmod	_	SpaceAfter=No
+,	13	,	,	PUNCT	,	_	16	punct	_
+by	14	by	by	ADP	IN	_	16	case	_
+the	15	the	the	DET	DT	Definite=Def|PronType=Art	16	det	_
+help	16	help	help	NOUN	NN	Number=Sing	3	obl	_
+of	17	of	of	ADP	IN	_	23	case	_
+a	18	a	a	DET	DT	Definite=Ind|PronType=Art	23	det	_
+<ne type="MISC">
+Welsh	19	Welsh	Welsh	ADJ	JJ	Degree=Pos	23	amod	_
+</ne>
+and	20	and	and	CCONJ	CC	_	21	cc	_
+<ne type="MISC">
+English	21	English	English	ADJ	JJ	Degree=Pos	19	conj	_
+</ne>
+prayer	22	prayer	prayer	NOUN	NN	Number=Sing	23	compound	_
+book	23	book	book	NOUN	NN	Number=Sing	16	nmod	_
 <g/>
-.	24	.	.	PUNCT	.	_	3	punct	_	_
+.	24	.	.	PUNCT	.	_	3	punct	_
 </s>
 <s>
-There	1	There	there	PRON	EX	_	2	expl	_	_
-are	2	are	be	VERB	VBP	Mood=Ind|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin	0	root	_	_
-several	3	several	several	ADJ	JJ	Degree=Pos	4	amod	_	_
-landmarks	4	landmarks	landmark	NOUN	NNS	Number=Plur	2	nsubj	_	SpacesAfter=\s\s\s\s\s\s
-that	5	that	that	PRON	WDT	PronType=Rel	7	obj	_	_
-he	6	he	he	PRON	PRP	Case=Nom|Gender=Masc|Number=Sing|Person=3|PronType=Prs	7	nsubj	_	_
-knows	7	knows	know	VERB	VBZ	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	4	acl:relcl	_	SpaceAfter=No
+There	1	There	there	PRON	EX	_	2	expl	_
+are	2	are	be	VERB	VBP	Mood=Ind|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin	0	root	_
+several	3	several	several	ADJ	JJ	Degree=Pos	4	amod	_
+landmarks	4	landmarks	landmark	NOUN	NNS	Number=Plur	2	nsubj	_
+that	5	that	that	PRON	WDT	PronType=Rel	7	obj	_
+he	6	he	he	PRON	PRP	Case=Nom|Gender=Masc|Number=Sing|Person=3|PronType=Prs	7	nsubj	_
+knows	7	knows	know	VERB	VBZ	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	4	acl:relcl	_
 <g/>
-,	8	,	,	PUNCT	,	_	12	punct	_	_
-whose	9	whose	whose	PRON	WP$	Poss=Yes|PronType=Rel	11	nmod:poss	_	_
-friendly	10	friendly	friendly	ADJ	JJ	Degree=Pos	11	amod	_	_
-faces	11	faces	face	NOUN	NNS	Number=Plur	12	nsubj	_	_
-beam	12	beam	beam	VERB	VBP	Mood=Ind|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin	4	acl:relcl	_	_
-upon	13	upon	upon	ADP	IN	_	14	case	_	_
-him	14	him	he	PRON	PRP	Case=Acc|Gender=Masc|Number=Sing|Person=3|PronType=Prs	12	obl	_	_
-now	15	now	now	ADV	RB	PronType=Dem	12	advmod	_	_
-and	16	and	and	CCONJ	CC	_	17	cc	_	_
-again	17	again	again	ADV	RB	_	15	conj	_	_
-when	18	when	when	ADV	WRB	PronType=Int	21	advmod	_	_
-he	19	he	he	PRON	PRP	Case=Nom|Gender=Masc|Number=Sing|Person=3|PronType=Prs	21	nsubj	_	_
-is	20	is	be	AUX	VBZ	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	21	aux	_	_
-beginning	21	beginning	begin	VERB	VBG	Tense=Pres|VerbForm=Part	12	advcl	_	_
-to	22	to	to	PART	TO	_	23	mark	_	SpacesAfter=\s\s\s\s\s\s
-flounder	23	flounder	flounder	VERB	VB	VerbForm=Inf	21	xcomp	_	_
-hopelessly	24	hopelessly	hopelessly	ADV	RB	_	23	advmod	_	_
-among	25	among	among	ADP	IN	_	27	case	_	_
-uncouth	26	uncouth	uncouth	ADJ	JJ	Degree=Pos	27	amod	_	_
-words	27	words	word	NOUN	NNS	Number=Plur	23	obl	_	_
-of	28	of	of	ADP	IN	_	30	case	_	_
-seven	29	seven	seven	NUM	CD	NumForm=Word|NumType=Card	30	nummod	_	_
-consonants	30	consonants	consonant	NOUN	NNS	Number=Plur	27	nmod	_	_
-and	31	and	and	CCONJ	CC	_	33	cc	_	_
-a	32	a	a	DET	DT	Definite=Ind|PronType=Art	33	det	_	_
-vowel	33	vowel	vowel	NOUN	NN	Number=Sing	30	conj	_	SpaceAfter=No
+,	8	,	,	PUNCT	,	_	12	punct	_
+whose	9	whose	whose	PRON	WP$	Poss=Yes|PronType=Rel	11	nmod:poss	_
+friendly	10	friendly	friendly	ADJ	JJ	Degree=Pos	11	amod	_
+faces	11	faces	face	NOUN	NNS	Number=Plur	12	nsubj	_
+beam	12	beam	beam	VERB	VBP	Mood=Ind|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin	4	acl:relcl	_
+upon	13	upon	upon	ADP	IN	_	14	case	_
+him	14	him	he	PRON	PRP	Case=Acc|Gender=Masc|Number=Sing|Person=3|PronType=Prs	12	obl	_
+now	15	now	now	ADV	RB	PronType=Dem	12	advmod	_
+and	16	and	and	CCONJ	CC	_	17	cc	_
+again	17	again	again	ADV	RB	_	15	conj	_
+when	18	when	when	ADV	WRB	PronType=Int	21	advmod	_
+he	19	he	he	PRON	PRP	Case=Nom|Gender=Masc|Number=Sing|Person=3|PronType=Prs	21	nsubj	_
+is	20	is	be	AUX	VBZ	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	21	aux	_
+beginning	21	beginning	begin	VERB	VBG	Tense=Pres|VerbForm=Part	12	advcl	_
+to	22	to	to	PART	TO	_	23	mark	_
+flounder	23	flounder	flounder	VERB	VB	VerbForm=Inf	21	xcomp	_
+hopelessly	24	hopelessly	hopelessly	ADV	RB	_	23	advmod	_
+among	25	among	among	ADP	IN	_	27	case	_
+uncouth	26	uncouth	uncouth	ADJ	JJ	Degree=Pos	27	amod	_
+words	27	words	word	NOUN	NNS	Number=Plur	23	obl	_
+of	28	of	of	ADP	IN	_	30	case	_
+seven	29	seven	seven	NUM	CD	NumForm=Word|NumType=Card	30	nummod	_
+consonants	30	consonants	consonant	NOUN	NNS	Number=Plur	27	nmod	_
+and	31	and	and	CCONJ	CC	_	33	cc	_
+a	32	a	a	DET	DT	Definite=Ind|PronType=Art	33	det	_
+vowel	33	vowel	vowel	NOUN	NN	Number=Sing	30	conj	_
 <g/>
-.	34	.	.	PUNCT	.	_	2	punct	_	_
+.	34	.	.	PUNCT	.	_	2	punct	_
 </s>
 <s>
-These	1	These	this	PRON	DT	Number=Plur|PronType=Dem	7	nsubj	_	_
-are	2	are	be	AUX	VBP	Mood=Ind|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin	7	cop	_	_
-his	3	his	his	PRON	PRP$	Case=Gen|Gender=Masc|Number=Sing|Person=3|Poss=Yes|PronType=Prs	7	nmod:poss	_	_
-chief	4	chief	chief	ADJ	JJ	Degree=Pos	7	amod	_	SpacesAfter=\s\s\s\s\s\s
-finger	5	finger	finger	NOUN	NN	Number=Sing	7	compound	_	SpaceAfter=No
+These	1	These	this	PRON	DT	Number=Plur|PronType=Dem	7	nsubj	_
+are	2	are	be	AUX	VBP	Mood=Ind|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin	7	cop	_
+his	3	his	his	PRON	PRP$	Case=Gen|Gender=Masc|Number=Sing|Person=3|Poss=Yes|PronType=Prs	7	nmod:poss	_
+chief	4	chief	chief	ADJ	JJ	Degree=Pos	7	amod	_
+finger	5	finger	finger	NOUN	NN	Number=Sing	7	compound	_
 <g/>
--	6	-	-	PUNCT	HYPH	_	5	punct	_	SpaceAfter=No
+-	6	-	-	PUNCT	HYPH	_	5	punct	_
 <g/>
-posts	7	posts	post	NOUN	NNS	Number=Plur	0	root	_	SpaceAfter=No
+posts	7	posts	post	NOUN	NNS	Number=Plur	0	root	_
 <g/>
-:	8	:	:	PUNCT	:	_	7	punct	_	SpacesAfter=\s\n\n\n\n\s
+:	8	:	:	PUNCT	:	_	7	punct	_
 </s>
 <quote>
 <foreign xml:lang="cy">
@@ -541,37 +557,39 @@ Glan;"
 </foreign>
 </quote>
 <s>
-that	1	that	that	PRON	DT	Number=Sing|PronType=Dem	2	nsubj	_	_
-is	2	is	be	AUX	VBZ	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	0	root	_	SpaceAfter=No
+that	1	that	that	PRON	DT	Number=Sing|PronType=Dem	2	nsubj	_
+is	2	is	be	AUX	VBZ	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	0	root	_
 <g/>
-,	3	,	,	PUNCT	,	_	2	punct	_	SpacesAfter=\s\n\n
+,	3	,	,	PUNCT	,	_	2	punct	_
 </s>
 <quote>
 <s>
-"	1	"	"	PUNCT	``	_	6	punct	_	SpaceAfter=No
+"	1	"	"	PUNCT	``	_	6	punct	_
 <g/>
-Glory	2	Glory	glory	NOUN	NN	Number=Sing	6	nsubj	_	_
-be	3	be	be	AUX	VB	VerbForm=Inf	6	cop	_	_
-to	4	to	to	ADP	IN	_	6	case	_	_
-the	5	the	the	DET	DT	Definite=Def|PronType=Art	6	det	_	SpacesAfter=\s\s\s\s\s\s\s
-Father	6	Father	Father	PROPN	NNP	Number=Sing	0	root	_	SpaceAfter=No
+Glory	2	Glory	glory	NOUN	NN	Number=Sing	6	nsubj	_
+be	3	be	be	AUX	VB	VerbForm=Inf	6	cop	_
+to	4	to	to	ADP	IN	_	6	case	_
+the	5	the	the	DET	DT	Definite=Def|PronType=Art	6	det	_
+<ne type="PER">
+Father	6	Father	Father	PROPN	NNP	Number=Sing	0	root	_
+</ne>
+,	7	,	,	PUNCT	,	_	11	punct	_
+and	8	and	and	CCONJ	CC	_	11	cc	_
+to	9	to	to	ADP	IN	_	11	case	_
+the	10	the	the	DET	DT	Definite=Def|PronType=Art	11	det	_
+<ne type="PER">
+Son	11	Son	Son	NOUN	NN	Number=Sing	6	conj	_
+</ne>
+,	12	,	,	PUNCT	,	_	17	punct	_
+and	13	and	and	CCONJ	CC	_	17	cc	_
+to	14	to	to	ADP	IN	_	17	case	_
+the	15	the	the	DET	DT	Definite=Def|PronType=Art	17	det	_
+Holy	16	Holy	Holy	ADJ	JJ	Degree=Pos	17	amod	_
+Ghost	17	Ghost	Ghost	PROPN	NNP	Number=Sing	6	conj	_
 <g/>
-,	7	,	,	PUNCT	,	_	11	punct	_	_
-and	8	and	and	CCONJ	CC	_	11	cc	_	_
-to	9	to	to	ADP	IN	_	11	case	_	_
-the	10	the	the	DET	DT	Definite=Def|PronType=Art	11	det	_	_
-Son	11	Son	Son	NOUN	NN	Number=Sing	6	conj	_	SpaceAfter=No
+.	18	.	.	PUNCT	.	_	6	punct	_
 <g/>
-,	12	,	,	PUNCT	,	_	17	punct	_	_
-and	13	and	and	CCONJ	CC	_	17	cc	_	_
-to	14	to	to	ADP	IN	_	17	case	_	_
-the	15	the	the	DET	DT	Definite=Def|PronType=Art	17	det	_	_
-Holy	16	Holy	Holy	ADJ	JJ	Degree=Pos	17	amod	_	_
-Ghost	17	Ghost	Ghost	PROPN	NNP	Number=Sing	6	conj	_	SpaceAfter=No
-<g/>
-.	18	.	.	PUNCT	.	_	6	punct	_	SpaceAfter=No
-<g/>
-"	19	"	"	PUNCT	''	_	6	punct	_	SpacesAfter=\n\n\s\s\s\s\s\s\n\n\n\n\s\s\s\s\s\s\n\n
+"	19	"	"	PUNCT	''	_	6	punct	_
 </s>
 </quote>
 <quote>
@@ -581,17 +599,18 @@ Ghost	17	Ghost	Ghost	PROPN	NNP	Number=Sing	6	conj	_	SpaceAfter=No
 </quote>
 <quote>
 <s>
-"	1	"	"	PUNCT	``	_	3	punct	_	_
-Good	2	Good	good	ADJ	JJ	Degree=Pos	3	amod	_	_
-Lord	3	Lord	Lord	PROPN	NNP	Number=Sing	5	vocative	_	SpaceAfter=No
+"	1	"	"	PUNCT	``	_	3	punct	_
+Good	2	Good	good	ADJ	JJ	Degree=Pos	3	amod	_
+<ne type="PER">
+Lord	3	Lord	Lord	PROPN	NNP	Number=Sing	5	vocative	_
+</ne>
+,	4	,	,	PUNCT	,	_	3	punct	_
+deliver	5	deliver	deliver	VERB	VB	Mood=Imp|VerbForm=Fin	0	root	_
+us	6	us	we	PRON	PRP	Case=Acc|Number=Plur|Person=1|PronType=Prs	5	obj	_
 <g/>
-,	4	,	,	PUNCT	,	_	3	punct	_	_
-deliver	5	deliver	deliver	VERB	VB	Mood=Imp|VerbForm=Fin	0	root	_	_
-us	6	us	we	PRON	PRP	Case=Acc|Number=Plur|Person=1|PronType=Prs	5	obj	_	SpaceAfter=No
+!	7	!	!	PUNCT	.	_	5	punct	_
 <g/>
-!	7	!	!	PUNCT	.	_	5	punct	_	SpaceAfter=No
-<g/>
-"	8	"	"	PUNCT	''	_	5	punct	_	SpacesAfter=\n\n\s\s\s\s\s\s\n\n\n\n\s\s\s\s\s\s\n\n
+"	8	"	"	PUNCT	''	_	5	punct	_
 </s>
 </quote>
 <quote>
@@ -601,16 +620,16 @@ us	6	us	we	PRON	PRP	Case=Acc|Number=Plur|Person=1|PronType=Prs	5	obj	_	SpaceAfte
 </quote>
 <quote>
 <s>
-"	1	"	"	PUNCT	``	_	5	punct	_	SpaceAfter=No
+"	1	"	"	PUNCT	``	_	5	punct	_
 <g/>
-Thou	2	Thou	thou	PRON	PRP	Case=Nom|Person=2|PronType=Prs	5	nsubj	_	_
-shalt	3	shalt	shalt	AUX	MD	VerbForm=Fin	5	aux	_	_
-not	4	not	not	PART	RB	Polarity=Neg	5	advmod	_	_
-steal	5	steal	steal	VERB	VB	VerbForm=Inf	0	root	_	SpaceAfter=No
+Thou	2	Thou	thou	PRON	PRP	Case=Nom|Person=2|PronType=Prs	5	nsubj	_
+shalt	3	shalt	shalt	AUX	MD	VerbForm=Fin	5	aux	_
+not	4	not	not	PART	RB	Polarity=Neg	5	advmod	_
+steal	5	steal	steal	VERB	VB	VerbForm=Inf	0	root	_
 <g/>
-!	6	!	!	PUNCT	.	_	5	punct	_	SpaceAfter=No
+!	6	!	!	PUNCT	.	_	5	punct	_
 <g/>
-"	7	"	"	PUNCT	''	_	5	punct	_	SpacesAfter=\n\n\n\n\n\n
+"	7	"	"	PUNCT	''	_	5	punct	_
 </s>
 </quote>
 </p>
@@ -618,321 +637,329 @@ steal	5	steal	steal	VERB	VB	VerbForm=Inf	0	root	_	SpaceAfter=No
 <div type="chapter">
 <head rend="center">
 <s>
-CHAPTER	1	CHAPTER	chapter	NOUN	NN	Number=Sing	0	root	_	_
-XXII	2	XXII	XXII	NUM	CD	NumForm=Roman|NumType=Card	1	nummod	_	SpaceAfter=No
-<g/>
-.	3	.	.	PUNCT	.	_	1	punct	_	SpacesAfter=\n\n\n\n
+<ne type="MISC">
+CHAPTER	1	CHAPTER	chapter	NOUN	NN	Number=Sing	0	root	_
+XXII	2	XXII	XXII	NUM	CD	NumForm=Roman|NumType=Card	1	nummod	_
+</ne>
+.	3	.	.	PUNCT	.	_	1	punct	_
 </s>
 </head>
 <p>
 <s>
-THUS	1	THUS	thus	ADV	RB	_	4	advmod	_	_
-the	2	the	the	DET	DT	Definite=Def|PronType=Art	3	det	_	_
-grave	3	grave	grave	NOUN	NN	Number=Sing	4	nsubj	_	_
-yawns	4	yawns	yawn	VERB	VBZ	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	0	root	_	_
-for	5	for	for	ADP	IN	_	7	case	_	_
-another	6	another	another	DET	DT	PronType=Ind	7	det	_	_
-victim	7	victim	victim	NOUN	NN	Number=Sing	4	obl	_	SpaceAfter=No
+THUS	1	THUS	thus	ADV	RB	_	4	advmod	_
+the	2	the	the	DET	DT	Definite=Def|PronType=Art	3	det	_
+grave	3	grave	grave	NOUN	NN	Number=Sing	4	nsubj	_
+yawns	4	yawns	yawn	VERB	VBZ	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	0	root	_
+for	5	for	for	ADP	IN	_	7	case	_
+another	6	another	another	DET	DT	PronType=Ind	7	det	_
+victim	7	victim	victim	NOUN	NN	Number=Sing	4	obl	_
 <g/>
-,	8	,	,	PUNCT	,	_	22	punct	_	_
-and	9	and	and	CCONJ	CC	_	22	cc	_	_
-having	10	having	have	AUX	VBG	Tense=Pres|VerbForm=Part	11	aux	_	_
-swallowed	11	swallowed	swallow	VERB	VBN	Tense=Past|VerbForm=Part	22	advcl	_	_
-him	12	him	he	PRON	PRP	Case=Acc|Gender=Masc|Number=Sing|Person=3|PronType=Prs	11	obj	_	SpaceAfter=No
+,	8	,	,	PUNCT	,	_	22	punct	_
+and	9	and	and	CCONJ	CC	_	22	cc	_
+having	10	having	have	AUX	VBG	Tense=Pres|VerbForm=Part	11	aux	_
+swallowed	11	swallowed	swallow	VERB	VBN	Tense=Past|VerbForm=Part	22	advcl	_
+him	12	him	he	PRON	PRP	Case=Acc|Gender=Masc|Number=Sing|Person=3|PronType=Prs	11	obj	_
 <g/>
-,	13	,	,	PUNCT	,	_	17	punct	_	_
-and	14	and	and	CCONJ	CC	_	17	cc	_	_
-a	15	a	a	DET	DT	Definite=Ind|PronType=Art	16	det	_	_
-million	16	million	million	NUM	CD	NumForm=Word|NumType=Card	17	obl:unmarked	_	_
-more	17	more	more	ADJ	JJR	Degree=Cmp	11	conj	_	_
-that	18	that	that	DET	DT	Number=Sing|PronType=Dem	20	det	_	SpacesAfter=\s\s\s\s\s\s\s\s
-same	19	same	same	ADJ	JJ	Degree=Pos	20	amod	_	_
-day	20	day	day	NOUN	NN	Number=Sing	17	obl:unmarked	_	SpaceAfter=No
+,	13	,	,	PUNCT	,	_	17	punct	_
+and	14	and	and	CCONJ	CC	_	17	cc	_
+a	15	a	a	DET	DT	Definite=Ind|PronType=Art	16	det	_
+million	16	million	million	NUM	CD	NumForm=Word|NumType=Card	17	obl:unmarked	_
+more	17	more	more	ADJ	JJR	Degree=Cmp	11	conj	_
+that	18	that	that	DET	DT	Number=Sing|PronType=Dem	20	det	_
+same	19	same	same	ADJ	JJ	Degree=Pos	20	amod	_
+day	20	day	day	NOUN	NN	Number=Sing	17	obl:unmarked	_
 <g/>
-,	21	,	,	PUNCT	,	_	11	punct	_	_
-returns	22	returns	return	VERB	VBZ	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	4	conj	_	_
-to	23	to	to	ADP	IN	_	26	case	_	_
-its	24	its	its	PRON	PRP$	Case=Gen|Gender=Neut|Number=Sing|Person=3|Poss=Yes|PronType=Prs	26	nmod:poss	_	_
-former	25	former	former	ADJ	JJ	Degree=Pos	26	amod	_	_
-state	26	state	state	NOUN	NN	Number=Sing	22	obl	_	_
-of	27	of	of	ADP	IN	_	30	case	_	_
-insatiable	28	insatiable	insatiable	ADJ	JJ	Degree=Pos	30	amod	_	_
-famished	29	famished	famish	VERB	VBN	Tense=Past|VerbForm=Part|Voice=Pass	30	amod	_	_
-greed	30	greed	greed	NOUN	NN	Number=Sing	26	nmod	_	SpaceAfter=No
+,	21	,	,	PUNCT	,	_	11	punct	_
+returns	22	returns	return	VERB	VBZ	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	4	conj	_
+to	23	to	to	ADP	IN	_	26	case	_
+its	24	its	its	PRON	PRP$	Case=Gen|Gender=Neut|Number=Sing|Person=3|Poss=Yes|PronType=Prs	26	nmod:poss	_
+former	25	former	former	ADJ	JJ	Degree=Pos	26	amod	_
+state	26	state	state	NOUN	NN	Number=Sing	22	obl	_
+of	27	of	of	ADP	IN	_	30	case	_
+insatiable	28	insatiable	insatiable	ADJ	JJ	Degree=Pos	30	amod	_
+famished	29	famished	famish	VERB	VBN	Tense=Past|VerbForm=Part|Voice=Pass	30	amod	_
+greed	30	greed	greed	NOUN	NN	Number=Sing	26	nmod	_
 <g/>
-.	31	.	.	PUNCT	.	_	4	punct	_	_
+.	31	.	.	PUNCT	.	_	4	punct	_
 </s>
 <s>
-It	1	It	it	PRON	PRP	Case=Nom|Gender=Neut|Number=Sing|Person=3|PronType=Prs	4	nsubj	_	_
-is	2	is	be	AUX	VBZ	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	4	cop	_	_
-a	3	a	a	DET	DT	Definite=Ind|PronType=Art	4	det	_	_
-law—	4	law—	law—	NOUN	NN	Number=Sing	0	root	_	SpaceAfter=No
+It	1	It	it	PRON	PRP	Case=Nom|Gender=Neut|Number=Sing|Person=3|PronType=Prs	4	nsubj	_
+is	2	is	be	AUX	VBZ	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	4	cop	_
+a	3	a	a	DET	DT	Definite=Ind|PronType=Art	4	det	_
+law—	4	law—	law—	NOUN	NN	Number=Sing	0	root	_
 <g/>
-natural	5	natural	natural	ADJ	JJ	Degree=Pos	4	amod	_	SpaceAfter=No
+natural	5	natural	natural	ADJ	JJ	Degree=Pos	4	amod	_
 <g/>
-,	6	,	,	PUNCT	,	_	7	punct	_	_
-wise	7	wise	wise	ADJ	JJ	Degree=Pos	5	conj	_	SpaceAfter=No
+,	6	,	,	PUNCT	,	_	7	punct	_
+wise	7	wise	wise	ADJ	JJ	Degree=Pos	5	conj	_
 <g/>
-,	8	,	,	PUNCT	,	_	10	punct	_	SpacesAfter=\s\s\s\s\s\s\s\s
-and	9	and	and	CCONJ	CC	_	10	cc	_	_
-comprehensible	10	comprehensible	comprehensible	ADJ	JJ	Degree=Pos	5	conj	_	_
-by	11	by	by	ADP	IN	_	14	case	_	_
-the	12	the	the	DET	DT	Definite=Def|PronType=Art	14	det	_	_
-feeblest	13	feeblest	feebl	ADJ	JJS	Degree=Sup	14	amod	_	_
-understanding	14	understanding	understanding	NOUN	NN	Number=Sing	4	nmod	_	SpaceAfter=No
+,	8	,	,	PUNCT	,	_	10	punct	_
+and	9	and	and	CCONJ	CC	_	10	cc	_
+comprehensible	10	comprehensible	comprehensible	ADJ	JJ	Degree=Pos	5	conj	_
+by	11	by	by	ADP	IN	_	14	case	_
+the	12	the	the	DET	DT	Definite=Def|PronType=Art	14	det	_
+feeblest	13	feeblest	feebl	ADJ	JJS	Degree=Sup	14	amod	_
+understanding	14	understanding	understanding	NOUN	NN	Number=Sing	4	nmod	_
 <g/>
-—	15	—	-	PUNCT	,	_	29	punct	_	SpaceAfter=No
+—	15	—	-	PUNCT	,	_	29	punct	_
 <g/>
-that	16	that	that	SCONJ	IN	_	29	mark	_	_
-all	17	all	all	DET	DT	PronType=Tot	19	det	_	_
-created	18	created	create	VERB	VBN	Tense=Past|VerbForm=Part|Voice=Pass	19	amod	_	_
-beings	19	beings	being	NOUN	NNS	Number=Plur	29	nsubj	_	SpaceAfter=No
+that	16	that	that	SCONJ	IN	_	29	mark	_
+all	17	all	all	DET	DT	PronType=Tot	19	det	_
+created	18	created	create	VERB	VBN	Tense=Past|VerbForm=Part|Voice=Pass	19	amod	_
+beings	19	beings	being	NOUN	NNS	Number=Plur	29	nsubj	_
 <g/>
-,	20	,	,	PUNCT	,	_	24	punct	_	_
-in	21	in	in	ADP	IN	_	22	case	_	_
-which	22	which	which	PRON	WDT	PronType=Rel	24	obl	_	_
-there	23	there	there	PRON	EX	_	24	expl	_	_
-is	24	is	be	VERB	VBZ	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	19	acl:relcl	_	SpacesAfter=\s\s\s\s\s\s\s\s
-progressive	25	progressive	progressive	ADJ	JJ	Degree=Pos	26	amod	_	_
-life	26	life	life	NOUN	NN	Number=Sing	24	nsubj	_	SpaceAfter=No
+,	20	,	,	PUNCT	,	_	24	punct	_
+in	21	in	in	ADP	IN	_	22	case	_
+which	22	which	which	PRON	WDT	PronType=Rel	24	obl	_
+there	23	there	there	PRON	EX	_	24	expl	_
+is	24	is	be	VERB	VBZ	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	19	acl:relcl	_
+progressive	25	progressive	progressive	ADJ	JJ	Degree=Pos	26	amod	_
+life	26	life	life	NOUN	NN	Number=Sing	24	nsubj	_
 <g/>
-,	27	,	,	PUNCT	,	_	19	punct	_	_
-must	28	must	must	AUX	MD	VerbForm=Fin	29	aux	_	_
-come	29	come	come	VERB	VB	VerbForm=Inf	14	acl:relcl	_	_
-forth	30	forth	forth	ADV	RB	_	29	advmod	_	SpaceAfter=No
+,	27	,	,	PUNCT	,	_	19	punct	_
+must	28	must	must	AUX	MD	VerbForm=Fin	29	aux	_
+come	29	come	come	VERB	VB	VerbForm=Inf	14	acl:relcl	_
+forth	30	forth	forth	ADV	RB	_	29	advmod	_
 <g/>
-,	31	,	,	PUNCT	,	_	32	punct	_	_
-ripen	32	ripen	ripen	VERB	VB	VerbForm=Inf	29	conj	_	SpaceAfter=No
+,	31	,	,	PUNCT	,	_	32	punct	_
+ripen	32	ripen	ripen	VERB	VB	VerbForm=Inf	29	conj	_
 <g/>
-,	33	,	,	PUNCT	,	_	34	punct	_	_
-decay	34	decay	decay	VERB	VB	VerbForm=Inf	29	conj	_	SpaceAfter=No
+,	33	,	,	PUNCT	,	_	34	punct	_
+decay	34	decay	decay	VERB	VB	VerbForm=Inf	29	conj	_
 <g/>
-,	35	,	,	PUNCT	,	_	37	punct	_	_
-and	36	and	and	CCONJ	CC	_	37	cc	_	_
-fall	37	fall	fall	VERB	VB	VerbForm=Inf	29	conj	_	SpaceAfter=No
+,	35	,	,	PUNCT	,	_	37	punct	_
+and	36	and	and	CCONJ	CC	_	37	cc	_
+fall	37	fall	fall	VERB	VB	VerbForm=Inf	29	conj	_
 <g/>
-.	38	.	.	PUNCT	.	_	4	punct	_	_
+.	38	.	.	PUNCT	.	_	4	punct	_
 </s>
 <s>
-But	1	But	but	CCONJ	CC	_	2	cc	_	_
-why	2	why	why	ADV	WRB	PronType=Int	0	root	_	SpaceAfter=No
+But	1	But	but	CCONJ	CC	_	2	cc	_
+why	2	why	why	ADV	WRB	PronType=Int	0	root	_
 <g/>
-,	3	,	,	PUNCT	,	_	4	punct	_	_
-oh	4	oh	oh	INTJ	UH	_	2	discourse	_	SpaceAfter=No
+,	3	,	,	PUNCT	,	_	4	punct	_
+oh	4	oh	oh	INTJ	UH	_	2	discourse	_
 <g/>
-!	5	!	!	PUNCT	.	_	2	punct	_	_
+!	5	!	!	PUNCT	.	_	2	punct	_
 </s>
 <s>
-why	1	why	why	ADV	WRB	PronType=Int	12	advmod	_	SpaceAfter=No
+why	1	why	why	ADV	WRB	PronType=Int	12	advmod	_
 <g/>
-,	2	,	,	PUNCT	,	_	1	punct	_	_
-in	3	in	in	ADP	IN	_	6	case	_	_
-too	4	too	too	ADV	RB	_	5	advmod	_	_
-many	5	many	many	ADJ	JJ	Degree=Pos	6	amod	_	_
-cases	6	cases	case	NOUN	NNS	Number=Plur	12	obl	_	SpacesAfter=\s\s\s\s\s\s\s\s
-does	7	does	do	AUX	VBZ	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	12	aux	_	_
-the	8	the	the	DET	DT	Definite=Def|PronType=Art	9	det	_	_
-decay	9	decay	decay	NOUN	NN	Number=Sing	12	nsubj	_	_
-and	10	and	and	CCONJ	CC	_	11	cc	_	_
-fall	11	fall	fall	NOUN	NN	Number=Sing	9	conj	_	_
-forerun	12	forerun	forerun	VERB	VB	VerbForm=Inf	0	root	_	_
-the	13	the	the	DET	DT	Definite=Def|PronType=Art	14	det	_	_
-ripening	14	ripening	ripening	NOUN	NN	Number=Sing	12	obj	_	SpaceAfter=No
+,	2	,	,	PUNCT	,	_	1	punct	_
+in	3	in	in	ADP	IN	_	6	case	_
+too	4	too	too	ADV	RB	_	5	advmod	_
+many	5	many	many	ADJ	JJ	Degree=Pos	6	amod	_
+cases	6	cases	case	NOUN	NNS	Number=Plur	12	obl	_
+does	7	does	do	AUX	VBZ	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	12	aux	_
+the	8	the	the	DET	DT	Definite=Def|PronType=Art	9	det	_
+decay	9	decay	decay	NOUN	NN	Number=Sing	12	nsubj	_
+and	10	and	and	CCONJ	CC	_	11	cc	_
+fall	11	fall	fall	NOUN	NN	Number=Sing	9	conj	_
+forerun	12	forerun	forerun	VERB	VB	VerbForm=Inf	0	root	_
+the	13	the	the	DET	DT	Definite=Def|PronType=Art	14	det	_
+ripening	14	ripening	ripening	NOUN	NN	Number=Sing	12	obj	_
 <g/>
-?	15	?	?	PUNCT	.	_	12	punct	_	_
+?	15	?	?	PUNCT	.	_	12	punct	_
 </s>
 <s>
-Why	1	Why	why	ADV	WRB	PronType=Int	7	advmod	_	_
-is	2	is	be	AUX	VBZ	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	7	aux:pass	_	_
-so	3	so	so	ADV	RB	_	4	advmod	_	_
-many	4	many	many	ADJ	JJ	Degree=Pos	7	nsubj:pass	_	_
-a	5	a	a	DET	DT	Definite=Ind|PronType=Art	6	det	_	_
-worm	6	worm	worm	NOUN	NN	Number=Sing	7	nsubj:pass	_	_
-permitted	7	permitted	permit	VERB	VBN	Tense=Past|VerbForm=Part|Voice=Pass	0	root	_	_
-to	8	to	to	PART	TO	_	9	mark	_	_
-gnaw	9	gnaw	gnaw	VERB	VB	VerbForm=Inf	7	xcomp	_	_
-out	10	out	out	ADP	RP	_	9	compound:prt	_	_
-so	11	so	so	ADV	RB	_	12	advmod	_	SpacesAfter=\s\s\s\s\s\s\s\s
-many	12	many	many	ADJ	JJ	Degree=Pos	18	amod	_	_
-a	13	a	a	DET	DT	Definite=Ind|PronType=Art	15	det	_	_
-closed	14	closed	close	VERB	VBN	Tense=Past|VerbForm=Part|Voice=Pass	15	amod	_	_
-bud's	15|16	bud|'s	bud|'s	NOUN|PART	NN|POS	Number=Sing||_	18|15	nmod:poss|case	_|_	_|_
-green	17	green	green	ADJ	JJ	Degree=Pos	18	amod	_	_
-heart	18	heart	heart	NOUN	NN	Number=Sing	9	obj	_	SpaceAfter=No
+Why	1	Why	why	ADV	WRB	PronType=Int	7	advmod	_
+is	2	is	be	AUX	VBZ	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	7	aux:pass	_
+so	3	so	so	ADV	RB	_	4	advmod	_
+many	4	many	many	ADJ	JJ	Degree=Pos	7	nsubj:pass	_
+a	5	a	a	DET	DT	Definite=Ind|PronType=Art	6	det	_
+worm	6	worm	worm	NOUN	NN	Number=Sing	7	nsubj:pass	_
+permitted	7	permitted	permit	VERB	VBN	Tense=Past|VerbForm=Part|Voice=Pass	0	root	_
+to	8	to	to	PART	TO	_	9	mark	_
+gnaw	9	gnaw	gnaw	VERB	VB	VerbForm=Inf	7	xcomp	_
+out	10	out	out	ADP	RP	_	9	compound:prt	_
+so	11	so	so	ADV	RB	_	12	advmod	_
+many	12	many	many	ADJ	JJ	Degree=Pos	18	amod	_
+a	13	a	a	DET	DT	Definite=Ind|PronType=Art	15	det	_
+closed	14	closed	close	VERB	VBN	Tense=Past|VerbForm=Part|Voice=Pass	15	amod	_
+bud's	15-16	bud's	_	_	_	_	_	_	_
+green	17	green	green	ADJ	JJ	Degree=Pos	18	amod	_
+heart	18	heart	heart	NOUN	NN	Number=Sing	9	obj	_
 <g/>
-?	19	?	?	PUNCT	.	_	7	punct	_	_
+?	19	?	?	PUNCT	.	_	7	punct	_
 </s>
 <s>
-Why	1	Why	why	ADV	WRB	PronType=Int	6	advmod	_	_
-is	2	is	be	AUX	VBZ	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	6	aux:pass	_	_
-the	3	the	the	DET	DT	Definite=Def|PronType=Art	5	det	_	_
-canker	4	canker	canker	NOUN	NN	Number=Sing	5	compound	_	_
-death	5	death	death	NOUN	NN	Number=Sing	6	nsubj:pass	_	_
-allowed	6	allowed	allow	VERB	VBN	Tense=Past|VerbForm=Part|Voice=Pass	0	root	_	_
-to	7	to	to	PART	TO	_	8	mark	_	_
-pasture	8	pasture	pasture	VERB	VB	VerbForm=Inf	6	xcomp	_	_
-on	9	on	on	ADP	IN	_	14	case	_	_
-so	10	so	so	ADV	RB	_	11	advmod	_	_
-many	11	many	many	ADJ	JJ	Degree=Pos	14	amod	_	_
-an	12	an	a	DET	DT	Definite=Ind|PronType=Art	14	det	_	SpacesAfter=\s\s\s\s\s\s\s\s
-unblown	13	unblown	unblown	ADJ	JJ	Degree=Pos	14	amod	_	_
-life	14	life	life	NOUN	NN	Number=Sing	8	obl	_	SpaceAfter=No
+Why	1	Why	why	ADV	WRB	PronType=Int	6	advmod	_
+is	2	is	be	AUX	VBZ	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	6	aux:pass	_
+the	3	the	the	DET	DT	Definite=Def|PronType=Art	5	det	_
+canker	4	canker	canker	NOUN	NN	Number=Sing	5	compound	_
+death	5	death	death	NOUN	NN	Number=Sing	6	nsubj:pass	_
+allowed	6	allowed	allow	VERB	VBN	Tense=Past|VerbForm=Part|Voice=Pass	0	root	_
+to	7	to	to	PART	TO	_	8	mark	_
+pasture	8	pasture	pasture	VERB	VB	VerbForm=Inf	6	xcomp	_
+on	9	on	on	ADP	IN	_	14	case	_
+so	10	so	so	ADV	RB	_	11	advmod	_
+many	11	many	many	ADJ	JJ	Degree=Pos	14	amod	_
+an	12	an	a	DET	DT	Definite=Ind|PronType=Art	14	det	_
+unblown	13	unblown	unblown	ADJ	JJ	Degree=Pos	14	amod	_
+life	14	life	life	NOUN	NN	Number=Sing	8	obl	_
 <g/>
-?	15	?	?	PUNCT	.	_	6	punct	_	_
+?	15	?	?	PUNCT	.	_	6	punct	_
 </s>
 <s>
-Why	1	Why	why	ADV	WRB	PronType=Int	28	advmod	_	_
-are	2	are	be	AUX	VBP	Mood=Ind|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin	28	aux:pass	_	_
-so	3	so	so	ADV	RB	_	4	advmod	_	_
-many	4	many	many	ADJ	JJ	Degree=Pos	7	amod	_	_
-little	5	little	little	ADJ	JJ	Degree=Pos	7	amod	_	_
-toddling	6	toddling	toddling	NOUN	NN	Number=Sing	7	amod	_	_
-children	7	children	child	NOUN	NNS	Number=Plur	28	nsubj:pass	_	SpaceAfter=No
+Why	1	Why	why	ADV	WRB	PronType=Int	28	advmod	_
+are	2	are	be	AUX	VBP	Mood=Ind|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin	28	aux:pass	_
+so	3	so	so	ADV	RB	_	4	advmod	_
+many	4	many	many	ADJ	JJ	Degree=Pos	7	amod	_
+little	5	little	little	ADJ	JJ	Degree=Pos	7	amod	_
+toddling	6	toddling	toddling	NOUN	NN	Number=Sing	7	amod	_
+children	7	children	child	NOUN	NNS	Number=Plur	28	nsubj:pass	_
 <g/>
-,	8	,	,	PUNCT	,	_	11	punct	_	_
-not	9	not	not	PART	RB	Polarity=Neg	11	advmod	_	_
-yet	10	yet	yet	ADV	RB	_	11	advmod	_	_
-come	11	come	come	VERB	VBN	Tense=Past|VerbForm=Part|Voice=Pass	7	acl	_	_
-into	12	into	into	ADP	IN	_	14	case	_	_
-the	13	the	the	DET	DT	Definite=Def|PronType=Art	14	det	_	_
-heritage	14	heritage	heritage	NOUN	NN	Number=Sing	11	obl	_	_
-of	15	of	of	ADP	IN	_	16	case	_	SpacesAfter=\s\s\s\s\s\s\s\s
-reason	16	reason	reason	NOUN	NN	Number=Sing	14	nmod	_	_
-to	17	to	to	ADP	IN	_	18	case	_	_
-which	18	which	which	PRON	WDT	PronType=Rel	25	nmod	_	_
-we	19	we	we	PRON	PRP	Case=Nom|Number=Plur|Person=1|PronType=Prs	25	nsubj	_	_
-are	20	are	be	AUX	VBP	Mood=Ind|Number=Plur|Person=1|Tense=Pres|VerbForm=Fin	25	cop	_	_
-all	21	all	all	ADV	RB	_	25	advmod	_	_
-by	22	by	by	ADP	IN	_	25	case	_	_
-our	23	our	our	PRON	PRP$	Case=Gen|Number=Plur|Person=1|Poss=Yes|PronType=Prs	25	nmod:poss	_	_
-human	24	human	human	ADJ	JJ	Degree=Pos	25	amod	_	_
-birth	25	birth	birth	NOUN	NN	Number=Sing	16	acl:relcl	_	_
-entitled	26	entitled	entitle	VERB	VBN	Tense=Past|VerbForm=Part|Voice=Pass	25	acl	_	SpaceAfter=No
+,	8	,	,	PUNCT	,	_	11	punct	_
+not	9	not	not	PART	RB	Polarity=Neg	11	advmod	_
+yet	10	yet	yet	ADV	RB	_	11	advmod	_
+come	11	come	come	VERB	VBN	Tense=Past|VerbForm=Part|Voice=Pass	7	acl	_
+into	12	into	into	ADP	IN	_	14	case	_
+the	13	the	the	DET	DT	Definite=Def|PronType=Art	14	det	_
+heritage	14	heritage	heritage	NOUN	NN	Number=Sing	11	obl	_
+of	15	of	of	ADP	IN	_	16	case	_
+reason	16	reason	reason	NOUN	NN	Number=Sing	14	nmod	_
+to	17	to	to	ADP	IN	_	18	case	_
+which	18	which	which	PRON	WDT	PronType=Rel	25	nmod	_
+we	19	we	we	PRON	PRP	Case=Nom|Number=Plur|Person=1|PronType=Prs	25	nsubj	_
+are	20	are	be	AUX	VBP	Mood=Ind|Number=Plur|Person=1|Tense=Pres|VerbForm=Fin	25	cop	_
+all	21	all	all	ADV	RB	_	25	advmod	_
+by	22	by	by	ADP	IN	_	25	case	_
+our	23	our	our	PRON	PRP$	Case=Gen|Number=Plur|Person=1|Poss=Yes|PronType=Prs	25	nmod:poss	_
+human	24	human	human	ADJ	JJ	Degree=Pos	25	amod	_
+birth	25	birth	birth	NOUN	NN	Number=Sing	16	acl:relcl	_
+entitled	26	entitled	entitle	VERB	VBN	Tense=Past|VerbForm=Part|Voice=Pass	25	acl	_
 <g/>
-,	27	,	,	PUNCT	,	_	28	punct	_	_
-borne	28	borne	bear	VERB	VBN	Tense=Past|VerbForm=Part|Voice=Pass	0	root	_	_
-from	29	from	from	ADP	IN	_	34	case	_	_
-their	30	their	their	PRON	PRP$	Case=Gen|Number=Plur|Person=3|Poss=Yes|PronType=Prs	31	nmod:poss	_	_
-mother's	31|32	mother|'s	mother|'s	NOUN|PART	NN|POS	Number=Sing||_	34|31	nmod:poss|case	_|_	_|_
-emptied	33	emptied	empty	VERB	VBN	Tense=Past|VerbForm=Part|Voice=Pass	34	amod	_	_
-arms	34	arms	arm	NOUN	NNS	Number=Plur	28	obl	_	SpacesAfter=\s\s\s\s\s\s\s\s
-to	35	to	to	ADP	IN	_	39	case	_	_
-their	36	their	their	PRON	PRP$	Case=Gen|Number=Plur|Person=3|Poss=Yes|PronType=Prs	39	nmod:poss	_	_
-small	37	small	small	ADJ	JJ	Degree=Pos	39	amod	_	_
-short	38	short	short	ADJ	JJ	Degree=Pos	39	amod	_	_
-graves	39	graves	grave	NOUN	NNS	Number=Plur	28	obl	_	SpaceAfter=No
+,	27	,	,	PUNCT	,	_	28	punct	_
+borne	28	borne	bear	VERB	VBN	Tense=Past|VerbForm=Part|Voice=Pass	0	root	_
+from	29	from	from	ADP	IN	_	34	case	_
+their	30	their	their	PRON	PRP$	Case=Gen|Number=Plur|Person=3|Poss=Yes|PronType=Prs	31	nmod:poss	_
+mother's	31-32	mother's	_	_	_	_	_	_	_
+emptied	33	emptied	empty	VERB	VBN	Tense=Past|VerbForm=Part|Voice=Pass	34	amod	_
+arms	34	arms	arm	NOUN	NNS	Number=Plur	28	obl	_
+to	35	to	to	ADP	IN	_	39	case	_
+their	36	their	their	PRON	PRP$	Case=Gen|Number=Plur|Person=3|Poss=Yes|PronType=Prs	39	nmod:poss	_
+small	37	small	small	ADJ	JJ	Degree=Pos	39	amod	_
+short	38	short	short	ADJ	JJ	Degree=Pos	39	amod	_
+graves	39	graves	grave	NOUN	NNS	Number=Plur	28	obl	_
 <g/>
-?	40	?	?	PUNCT	.	_	28	punct	_	_
+?	40	?	?	PUNCT	.	_	28	punct	_
 </s>
 <s>
-Is	1	Is	be	AUX	VBZ	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	15	cop	_	_
-it	2	it	it	PRON	PRP	Case=Nom|Gender=Neut|Number=Sing|Person=3|PronType=Prs	15	nsubj	_	SpaceAfter=No
+Is	1	Is	be	AUX	VBZ	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	15	cop	_
+it	2	it	it	PRON	PRP	Case=Nom|Gender=Neut|Number=Sing|Person=3|PronType=Prs	15	nsubj	_
 <g/>
-,	3	,	,	PUNCT	,	_	8	punct	_	_
-as	4	as	as	SCONJ	IN	_	8	mark	_	_
-Hartley	5	Hartley	Hartley	PROPN	NNP	Number=Sing	8	nsubj	_	_
-Coleridge	6	Coleridge	Coleridge	PROPN	NNP	Number=Sing	5	flat	_	_
-very	7	very	very	ADV	RB	_	8	advmod	_	_
-nobly	8	nobly	nobly	ADV	RB	_	15	advcl	_	SpaceAfter=No
+,	3	,	,	PUNCT	,	_	8	punct	_
+as	4	as	as	SCONJ	IN	_	8	mark	_
+<ne type="PER">
+Hartley	5	Hartley	Hartley	PROPN	NNP	Number=Sing	8	nsubj	_
+Coleridge	6	Coleridge	Coleridge	PROPN	NNP	Number=Sing	5	flat	_
+</ne>
+very	7	very	very	ADV	RB	_	8	advmod	_
+nobly	8	nobly	nobly	ADV	RB	_	15	advcl	_
 <g/>
-,	9	,	,	PUNCT	,	_	11	punct	_	_
-whether	10	whether	whether	SCONJ	IN	_	11	mark	_	_
-truly	11	truly	truly	ADV	RB	_	8	advcl	_	_
-or	12	or	or	CCONJ	CC	_	13	cc	_	_
-untruly	13	untruly	untruly	ADV	RB	_	11	conj	_	SpaceAfter=No
+,	9	,	,	PUNCT	,	_	11	punct	_
+whether	10	whether	whether	SCONJ	IN	_	11	mark	_
+truly	11	truly	truly	ADV	RB	_	8	advcl	_
+or	12	or	or	CCONJ	CC	_	13	cc	_
+untruly	13	untruly	untruly	ADV	RB	_	11	conj	_
 <g/>
-,	14	,	,	PUNCT	,	_	8	punct	_	SpacesAfter=\s\s\s\s\s\s\s\s
-said	15	said	say	VERB	VBD	Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin	0	root	_	SpaceAfter=No
+,	14	,	,	PUNCT	,	_	8	punct	_
+said	15	said	say	VERB	VBD	Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin	0	root	_
 <g/>
-—	16	—	—	PUNCT	,	_	15	punct	_	SpacesAfter=\s\n\n\s\s\s\s\s\s\s\s\s\n\n
+—	16	—	—	PUNCT	,	_	15	punct	_
 </s>
 <quote>
 <l rend="ti-3">
 <s>
-"	1	"	"	PUNCT	``	_	4	punct	_	SpaceAfter=No
+"	1	"	"	PUNCT	``	_	4	punct	_
+<ne type="PER">
+God	2	God	God	PROPN	NNP	Number=Sing	4	nsubj	_
+</ne>
+only	3	only	only	ADV	RB	_	4	advmod	_
+made	4	made	make	VERB	VBD	Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin	0	root	_
+them	5	them	they	PRON	PRP	Case=Acc|Number=Plur|Person=3|PronType=Prs	4	obj	_
+for	6	for	for	SCONJ	IN	_	10	mark	_
+his	7	his	his	PRON	PRP$	Case=Gen|Gender=Masc|Number=Sing|Person=3|Poss=Yes|PronType=Prs	8	nmod:poss	_
+<ne type="PER">
+Christ	8	Christ	Christ	PROPN	NNP	Number=Sing	10	nsubj	_
+</ne>
+to	9	to	to	PART	TO	_	10	mark	_
+save	10	save	save	VERB	VB	VerbForm=Inf	4	advcl	_
 <g/>
-God	2	God	God	PROPN	NNP	Number=Sing	4	nsubj	_	_
-only	3	only	only	ADV	RB	_	4	advmod	_	_
-made	4	made	make	VERB	VBD	Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin	0	root	_	_
-them	5	them	they	PRON	PRP	Case=Acc|Number=Plur|Person=3|PronType=Prs	4	obj	_	_
-for	6	for	for	SCONJ	IN	_	10	mark	_	_
-his	7	his	his	PRON	PRP$	Case=Gen|Gender=Masc|Number=Sing|Person=3|Poss=Yes|PronType=Prs	8	nmod:poss	_	_
-Christ	8	Christ	Christ	PROPN	NNP	Number=Sing	10	nsubj	_	_
-to	9	to	to	PART	TO	_	10	mark	_	_
-save	10	save	save	VERB	VB	VerbForm=Inf	4	advcl	_	SpaceAfter=No
+?	11	?	?	PUNCT	.	_	4	punct	_
 <g/>
-?	11	?	?	PUNCT	.	_	4	punct	_	SpaceAfter=No
-<g/>
-"	12	"	"	PUNCT	''	_	4	punct	_	SpacesAfter=\n\n\n\n\s\s\s\s\s\s\s\n\n\n\n
+"	12	"	"	PUNCT	''	_	4	punct	_
 </s>
 </l>
 </quote>
 </p>
 <p>
 <s>
-Very	1	Very	very	ADV	RB	_	2	advmod	_	_
-wasteful	2	wasteful	wasteful	ADJ	JJ	Degree=Pos	0	root	_	_
-is	3	is	be	AUX	VBZ	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	2	cop	_	_
-the	4	the	the	DET	DT	Definite=Def|PronType=Art	6	det	_	_
-mighty	5	mighty	mighty	ADJ	JJ	Degree=Pos	6	amod	_	_
-mother	6	mother	mother	NOUN	NN	Number=Sing	2	nsubj	_	SpaceAfter=No
+Very	1	Very	very	ADV	RB	_	2	advmod	_
+wasteful	2	wasteful	wasteful	ADJ	JJ	Degree=Pos	0	root	_
+is	3	is	be	AUX	VBZ	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	2	cop	_
+the	4	the	the	DET	DT	Definite=Def|PronType=Art	6	det	_
+mighty	5	mighty	mighty	ADJ	JJ	Degree=Pos	6	amod	_
+mother	6	mother	mother	NOUN	NN	Number=Sing	2	nsubj	_
 <g/>
-,	7	,	,	PUNCT	,	_	8	punct	_	_
-knowing	8	knowing	know	VERB	VBG	Tense=Pres|VerbForm=Part	2	advcl	_	_
-that	9	that	that	SCONJ	IN	_	13	mark	_	_
-her	10	her	her	PRON	PRP$	Case=Gen|Gender=Fem|Number=Sing|Person=3|Poss=Yes|PronType=Prs	11	nmod:poss	_	_
-materials	11	materials	material	NOUN	NNS	Number=Plur	13	nsubj	_	_
-are	12	are	be	AUX	VBP	Mood=Ind|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin	13	cop	_	_
-inexhaustible	13	inexhaustible	inexhaustible	ADJ	JJ	Degree=Pos	8	ccomp	_	SpaceAfter=No
+,	7	,	,	PUNCT	,	_	8	punct	_
+knowing	8	knowing	know	VERB	VBG	Tense=Pres|VerbForm=Part	2	advcl	_
+that	9	that	that	SCONJ	IN	_	13	mark	_
+her	10	her	her	PRON	PRP$	Case=Gen|Gender=Fem|Number=Sing|Person=3|Poss=Yes|PronType=Prs	11	nmod:poss	_
+materials	11	materials	material	NOUN	NNS	Number=Plur	13	nsubj	_
+are	12	are	be	AUX	VBP	Mood=Ind|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin	13	cop	_
+inexhaustible	13	inexhaustible	inexhaustible	ADJ	JJ	Degree=Pos	8	ccomp	_
 <g/>
-.	14	.	.	PUNCT	.	_	2	punct	_	_
+.	14	.	.	PUNCT	.	_	2	punct	_
 </s>
 <s>
-And	1	And	and	CCONJ	CC	_	4	cc	_	_
-so	2	so	so	ADV	RB	_	4	advmod	_	_
-they	3	they	they	PRON	PRP	Case=Nom|Number=Plur|Person=3|PronType=Prs	4	nsubj	_	SpacesAfter=\s\s\s\s\s\s\s\s
-lay	4	lay	lie	VERB	VBD	Mood=Ind|Number=Plur|Person=3|Tense=Past|VerbForm=Fin	0	root	_	_
-Jack	5	Jack	Jack	PROPN	NNP	Number=Sing	4	obj	_	_
-down	6	down	down	ADV	RB	_	4	advmod	_	_
-in	7	in	in	ADP	IN	_	10	case	_	_
-the	8	the	the	DET	DT	Definite=Def|PronType=Art	10	det	_	_
-wormy	9	wormy	wormy	ADJ	JJ	Degree=Pos	10	amod	_	_
-grave	10	grave	grave	NOUN	NN	Number=Sing	4	obl	_	SpaceAfter=No
+And	1	And	and	CCONJ	CC	_	4	cc	_
+so	2	so	so	ADV	RB	_	4	advmod	_
+they	3	they	they	PRON	PRP	Case=Nom|Number=Plur|Person=3|PronType=Prs	4	nsubj	_
+lay	4	lay	lie	VERB	VBD	Mood=Ind|Number=Plur|Person=3|Tense=Past|VerbForm=Fin	0	root	_
+<ne type="PER">
+Jack	5	Jack	Jack	PROPN	NNP	Number=Sing	4	obj	_
+</ne>
+down	6	down	down	ADV	RB	_	4	advmod	_
+in	7	in	in	ADP	IN	_	10	case	_
+the	8	the	the	DET	DT	Definite=Def|PronType=Art	10	det	_
+wormy	9	wormy	wormy	ADJ	JJ	Degree=Pos	10	amod	_
+grave	10	grave	grave	NOUN	NN	Number=Sing	4	obl	_
 <g/>
-.	11	.	.	PUNCT	.	_	4	punct	_	SpacesAfter=\s\n\n\s\s\s\s\s\s\s\s\s\n\n
+.	11	.	.	PUNCT	.	_	4	punct	_
 </s>
 <quote>
 <l rend="ti-5">
 <s>
-"	1	"	"	PUNCT	``	_	4	punct	_	SpaceAfter=No
+"	1	"	"	PUNCT	``	_	4	punct	_
 <g/>
-Bear	2	Bear	bear	PROPN	NNP	Number=Sing	4	vocative	_	SpaceAfter=No
+Bear	2	Bear	bear	PROPN	NNP	Number=Sing	4	vocative	_
 <g/>
-,	3	,	,	PUNCT	,	_	2	punct	_	_
-bear	4	bear	bear	VERB	VB	Mood=Imp|VerbForm=Fin	0	root	_	_
-him	5	him	he	PRON	PRP	Case=Acc|Gender=Masc|Number=Sing|Person=3|PronType=Prs	4	obj	_	_
-along	6	along	along	ADV	RB	_	4	advmod	_	SpaceAfter=No
+,	3	,	,	PUNCT	,	_	2	punct	_
+bear	4	bear	bear	VERB	VB	Mood=Imp|VerbForm=Fin	0	root	_
+him	5	him	he	PRON	PRP	Case=Acc|Gender=Masc|Number=Sing|Person=3|PronType=Prs	4	obj	_
+along	6	along	along	ADV	RB	_	4	advmod	_
 <g/>
-,	7	,	,	PUNCT	,	_	4	punct	_	SpacesAfter=\n\n\s\s\s\s\s\s\s\s\s\n\n
+,	7	,	,	PUNCT	,	_	4	punct	_
 </s>
 </l>
 <l rend="ti-3">
 <s>
-With	1	With	with	SCONJ	IN	_	5	mark	_	_
-his	2	his	his	PRON	PRP$	Case=Gen|Gender=Masc|Number=Sing|Person=3|Poss=Yes|PronType=Prs	4	nmod:poss	_	_
-few	3	few	few	ADJ	JJ	Degree=Pos	4	amod	_	_
-faults	4	faults	fault	NOUN	NNS	Number=Plur	5	nsubj:pass	_	_
-shut	5	shut	shut	VERB	VBN	Tense=Past|VerbForm=Part|Voice=Pass	0	root	_	_
-up	6	up	up	ADP	RP	_	5	compound:prt	_	_
-like	7	like	like	ADP	IN	_	10	case	_	_
-dead	8	dead	dead	ADJ	JJ	Degree=Pos	9	amod	_	_
-flow'	9	flow'	flow	NOUN	NN	Number=Sing|Typo=Yes	10	compound	_	SpaceAfter=No
+With	1	With	with	SCONJ	IN	_	5	mark	_
+his	2	his	his	PRON	PRP$	Case=Gen|Gender=Masc|Number=Sing|Person=3|Poss=Yes|PronType=Prs	4	nmod:poss	_
+few	3	few	few	ADJ	JJ	Degree=Pos	4	amod	_
+faults	4	faults	fault	NOUN	NNS	Number=Plur	5	nsubj:pass	_
+shut	5	shut	shut	VERB	VBN	Tense=Past|VerbForm=Part|Voice=Pass	0	root	_
+up	6	up	up	ADP	RP	_	5	compound:prt	_
+like	7	like	like	ADP	IN	_	10	case	_
+dead	8	dead	dead	ADJ	JJ	Degree=Pos	9	amod	_
+flow'	9	flow'	flow	NOUN	NN	Number=Sing|Typo=Yes	10	compound	_
 <g/>
-rets	10	rets	ret	NOUN	NNS	Number=Plur	5	obl	_	SpaceAfter=No
+rets	10	rets	ret	NOUN	NNS	Number=Plur	5	obl	_
 <g/>
-.	11	.	.	PUNCT	.	_	5	punct	_	SpaceAfter=No
+.	11	.	.	PUNCT	.	_	5	punct	_
 <g/>
-"	12	"	"	PUNCT	''	_	5	punct	_	SpacesAfter=\n\n\n\n\n\n
+"	12	"	"	PUNCT	''	_	5	punct	_
 </s>
 </l>
 </quote>
