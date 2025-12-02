@@ -100,8 +100,7 @@ def process(config, infile, outfile, verbose=False):
     def analyze(buffer):
         analyze.counter += 1
         if verbose:
-            items = 'tokens' if pretokenized  else 'lines'
-            sys.stderr.write(f"[{analyze.counter}] Sending {len(buffer)} {items} to UD-pipe. ")
+            sys.stderr.write(f"[{analyze.counter}] Sending {len(buffer)} lines to UD-pipe. ")
             sys.stderr.flush()
         print(udpipe_lindat(
             model= config.get('model', DEFAULT_MODEL),
@@ -121,17 +120,20 @@ def process(config, infile, outfile, verbose=False):
     analyze.counter = 0
 
     with infile.open() if infile else sys.stdin as input_file:
+        vertical = informat.startswith('vertical') or informat.startswith('conllu')
         cnt = 0
         informat = config.get('tagger_input', 'plaintext')
         for line in input_file:
-            if not line.strip() or not (informat.startswith('vertical') or informat.startswith('conllu')):
-                cnt += 1
             if cnt >= config.getint('tagger_batch', 1000):
                 analyze(buffer)
                 buffer.clear()
                 cnt = 0
+            # count only empty lines (sentences) for vertical input, every line for other formats
+            if not line.strip() or not vertical:
+                cnt += 1
             buffer.append(line)
-        analyze(buffer)
+        if len(buffer):
+           analyze(buffer)
 
     output.close()
 
