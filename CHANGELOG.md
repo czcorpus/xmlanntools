@@ -1,5 +1,9 @@
 # Changelog
 
+### tag_ud
+
+- Fixes for pre-tokenized input (vertical/conllu)
+
 ## 1.2.1 - 2025-10-08
 
 ### tag_ud

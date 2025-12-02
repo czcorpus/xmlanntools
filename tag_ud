@@ -91,21 +91,24 @@ def udpipe_lindat(model, text, ner=None, tokenizer="", tagger="", parser="", inp
     return result
 
 def process(config, infile, outfile, verbose=False):
-    nodblb = config.getboolean('no_double_lb')
+    informat = config.get('tagger_input', 'plaintext')
+    pretokenized = informat != 'plaintext'
+    nodblb = config.getboolean('no_double_lb') or pretokenized
     output = outfile.open('w', encoding='utf-8') if outfile else sys.stdout
     buffer = []
 
     def analyze(buffer):
         analyze.counter += 1
         if verbose:
-            sys.stderr.write(f"[{analyze.counter}] Sending {len(buffer)} lines to UD-pipe. ")
+            items = 'tokens' if pretokenized  else 'lines'
+            sys.stderr.write(f"[{analyze.counter}] Sending {len(buffer)} {items} to UD-pipe. ")
             sys.stderr.flush()
         print(udpipe_lindat(
             model= config.get('model', DEFAULT_MODEL),
             ner = config.get('named_entities'),
             # UD Pipe needs double "\n\n" to enforce paragraph breaks!
             text= "".join(buffer) if nodblb else "\n".join(buffer)+"\n",
-            tokenizer= config.get('tokenizer_options', ''),
+            tokenizer= None if pretokenized else config.get('tokenizer_options', ''),
             tagger= None if config.getboolean('no_analysis') else config.get('tagger_options', ''),
             parser= None if config.getboolean('no_parsing') or config.getboolean('no_analysis') else config.get('parser_options', ''),
             input= None if config.get('tagger_input', 'plaintext')=='plaintext' else config.get('tagger_input'),
@@ -118,10 +121,15 @@ def process(config, infile, outfile, verbose=False):
     analyze.counter = 0
 
     with infile.open() if infile else sys.stdin as input_file:
+        cnt = 0
+        informat = config.get('tagger_input', 'plaintext')
         for line in input_file:
-            if len(buffer) >= config.getint('tagger_batch', 1000):
+            if not line.strip() or not (informat.startswith('vertical') or informat.startswith('conllu')):
+                cnt += 1
+            if cnt >= config.getint('tagger_batch', 1000):
                 analyze(buffer)
                 buffer.clear()
+                cnt = 0
             buffer.append(line)
         analyze(buffer)
 
