@@ -154,7 +154,7 @@ class TaggedXMLContentHandler(xml.sax.ContentHandler):
             # other XML element
             if self.no_flattening:
                 # there are elements in the buffer of open elements
-                if not self.keep_empty and name == self.openTagBuffer[-1][0] \
+                if not self.keep_empty and len(self.openTagBuffer) and name == self.openTagBuffer[-1][0] \
                     and (len(self.discard_empty) == 0 or name in self.discard_empty):
                     # empty element to be ignored
                     self.openTagBuffer.pop()
@@ -213,7 +213,8 @@ class TaggedXMLContentHandler(xml.sax.ContentHandler):
                 tag = '<'+tname+tcontents+'>'
             if self.token:
                 # inside a token: append to its string contents ('word')
-                self.token['word'] += tag
+                if not self.strip_word_xml:
+                    self.token['word'] += tag
             else:
                 # just print out
                 print(tag, file=self.outfile)
@@ -289,10 +290,10 @@ class TaggedXMLContentHandler(xml.sax.ContentHandler):
                 # first level where it appears: store in map and append to the resulting list
                 map[name] = cnt
                 flat.append((name, attrs))
+                cnt += 1
             else:
                 # already seen before: just append new attributes to the first (level) occurence
                 self.merge_attrs(name, flat[index][1], attrs)
-            cnt += 1
         return flat
 
     def merge_attrs(self, name, baseattrs, newattrs):
