@@ -4,6 +4,11 @@
 
 - Fixes for pre-tokenized input (vertical/conllu)
 
+### xml2vrt
+
+- Fix removing tags within token strings
+- Remove support for flattening of nested structures: in more complex cases it did not work and it remains unclear how to actually deal with such situations
+
 ## 1.2.1 - 2025-10-08
 
 ### tag_ud
