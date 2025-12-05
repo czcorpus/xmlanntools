@@ -4,10 +4,14 @@
 
 - Fixes for pre-tokenized input (vertical/conllu)
 
+### standoff2xml
+
+- Fix bug caused by empty elements
+
 ### xml2vrt
 
 - Fix removing tags within token strings
-- Remove support for flattening of nested structures: in more complex cases it did not work and it remains unclear how to actually deal with such situations
+- Remove support for flattening of nested structures: in more complex cases it remains unclear how to actually deal with such situations in a reasonable way
 
 ## 1.2.1 - 2025-10-08
 

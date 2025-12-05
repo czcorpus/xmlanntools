@@ -107,16 +107,16 @@ def merge_xml(text, annotation, out):
                     (not i['name'].endswith('/') and not i['contents'].endswith('/')
                      and not (i['name'].startswith('!') or i['name'].startswith('?')))):
                 openels.append(i)
-                # also return the last fetched unclosed element back to the heap!
-                if nextclose:
-                    openels.append(nextclose)
-                # re-sort the list of open elements by order
-                openels = sorted(openels, key=itemgetter('order'))
-                nextclose = None
             # for zero length elements try to output the 'tail'
             else:
                 if 'tail' in i:
                     out.write(i['tail'])
+            # also return the last fetched unclosed element back to the heap!
+            if nextclose:
+                openels.append(nextclose)
+            # re-sort the list of open elements by order
+            openels = sorted(openels, key=itemgetter('order'))
+            nextclose = None
             # skip characters to be skipped
             if 'skip' in i:
                 curpos += i['skip']
