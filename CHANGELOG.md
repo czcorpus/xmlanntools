@@ -10,8 +10,8 @@
 
 ### xml2vrt
 
+- BREAKING CHANGE: flattening of nested structures is not a default anyway, it must be turned on explicitly (it may have surprising consequences when dealing with complex nesting, which the used might prefer to solve by other means within pre- or post-processing)
 - Fix removing tags within token strings
-- Remove support for flattening of nested structures: in more complex cases it remains unclear how to actually deal with such situations in a reasonable way
 
 ## 1.2.1 - 2025-10-08
 

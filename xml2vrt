@@ -56,7 +56,7 @@ class TaggedXMLContentHandler(xml.sax.ContentHandler):
         self.exclude_elements = config.get('vrt_exclude_elements', '').replace(',',' ').split()
         self.include_elements = config.get('vrt_include_elements', '').replace(',',' ').split()
         self.wrapper_tag = wrapper_tag
-        self.no_flattening = True # config.getboolean('vrt_no_flattening')
+        self.no_flattening = not config.getboolean('vrt_flatten_nested')
         self.flat_override = self.config.get('vrt_flat_override')
         self.flat_separator = self.config.get('vrt_flat_separator', ' ')
         self.flat_levelattr = self.config.get('vrt_flat_level_attribute', 'nested_level')
@@ -393,8 +393,8 @@ if __name__ == "__main__":
         
              '-F' Input file is a XML fragment (needing a wrapping root element).
 
+    #        '-fl' Flatten nested XML structures.
     """
-    #        '-nf' Do NOT flatten nested XML structures
     
     import os
     import argparse
@@ -417,7 +417,7 @@ if __name__ == "__main__":
     parser.add_argument("-ng", "--no-glue", help="do not insert glue element (indicating missing space between tokens)", action="store_true", dest="vrt_no_glue")
     parser.add_argument("-g", "--glue", help="name of the glue element (default: 'g')", type=str, dest="vrt_glue")
     parser.add_argument("-F", "--fragment", help="input file is a XML fragment (needing a wrapping root element)", action="store_true", dest='xml_fragment')
-    #parser.add_argument("-nf", "--no-flattening", help="do not flatten nested XML structures", action="store_true", dest="vrt_no_flattening")
+    parser.add_argument("-fl", "--flatten", help="flatten nested XML structures", action="store_true", dest="vrt_flatten_nested")
     args = parser.parse_args()
 
     # read configuration from files
