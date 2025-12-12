@@ -3,6 +3,7 @@
 ### tag_ud
 
 - Fixes for pre-tokenized input (vertical/conllu)
+- allow specification of custom URL for UDpipe and NameTag API
 
 ### standoff2xml
 

@@ -22,7 +22,7 @@ UDPIPE_API_URL = "http://lindat.mff.cuni.cz/services/udpipe/api/process"
 NAMETAG_API_URL = "http://lindat.mff.cuni.cz/services/nametag/api/recognize"
 DEFAULT_MODEL = 'en'
 
-def udpipe_lindat(model, text, ner=None, tokenizer="", tagger="", parser="", input=None, output=None):
+def udpipe_lindat(model, text, ner=None, tokenizer="", tagger="", parser="", input=None, output=None, udpipe_url=UDPIPE_API_URL, nametag_url=NAMETAG_API_URL):
     """
     Send a text to UDPipe2 web service and return the result
     
@@ -62,7 +62,7 @@ def udpipe_lindat(model, text, ner=None, tokenizer="", tagger="", parser="", inp
         params["input"] = input
     if output is not None:
         params["output"] = output
-    response = requests.post(UDPIPE_API_URL, params)
+    response = requests.post(udpipe_url, params)
     if not response.ok:
         error_type = (
             "TAGGER NOT AVAILABLE: "
@@ -79,7 +79,7 @@ def udpipe_lindat(model, text, ner=None, tokenizer="", tagger="", parser="", inp
             "input": "conllu",
             "output": "conllu-ne"
         }
-        response = requests.post(NAMETAG_API_URL, params)
+        response = requests.post(nametag_url, params)
         if not response.ok:
             error_type = (
                 "NAMETAG NOT AVAILABLE: "
@@ -111,7 +111,9 @@ def process(config, infile, outfile, verbose=False):
             tagger= None if config.getboolean('no_analysis') else config.get('tagger_options', ''),
             parser= None if config.getboolean('no_parsing') or config.getboolean('no_analysis') else config.get('parser_options', ''),
             input= None if config.get('tagger_input', 'plaintext')=='plaintext' else config.get('tagger_input'),
-            output= config.get('tagger_output')
+            output= config.get('tagger_output'),
+            udpipe_url= config.get('udpipe_url'),
+            nametag_url= config.get('nametag_url'),
             ),
             file = output)
         if verbose:
@@ -190,6 +192,8 @@ if __name__ == '__main__':
     parser.add_argument("-p", "--profile", help="config profile to use", type=str, default='DEFAULT')
     parser.add_argument("-m", "--model", help="UD language model to use", type=str)
     parser.add_argument("-ner", "--named-entities", help="apply NameTag NER with the specified (optional) model", type=str, nargs='?', const='auto')
+    parser.add_argument("--nametag-url", help="specify NameTag API URL (default: public LINDAT API)", type=str, default=NAMETAG_API_URL)
+    parser.add_argument("--udpipe-url", help="specify UDpipe API URL (default: public LINDAT API)", type=str, default=UDPIPE_API_URL)
     parser.add_argument("-i", "-f", "--infile", help="input file (default=STDIN)", type=str)
     parser.add_argument("-o", "--outfile", help="output file (default=STDOUT)", type=str)
     parser.add_argument("-if", "--input-format", help="input format (if pre-tokenized; by default just plaintext to be tokenized internally)", type=str, default="plaintext", dest="tagger_input")
