@@ -73,10 +73,12 @@ def ann2standoff(vrtann, reftext, config, replacements=[], matchlist=[]):
     punct_rule = config.get('punctuation', '').split('=')
     punct_element = config.get('punct_element', 'pc')
     sentence_element = config.get('sentence_element', 's')
+    ne_column = config.getboolean('ne_column')
     ne_element = config.get('ne_element', 'ne')
     ne_type_attr = config.get('ne_type_attr', 'type')
     virtual_token = config.get('virtual_tokens')
     virtual_token_attr = config.get('virtual_token_attr', 'form')
+    is_conllu = config.get('preprocess', 'none') == 'conllu'
     # named entities
     nentities = []
     # counters
@@ -114,7 +116,14 @@ def ann2standoff(vrtann, reftext, config, replacements=[], matchlist=[]):
 
         while len(pattrs) > attrcnt:
             if attrcnt > len(attrnames):
-                attrname = 'attr_' + str(attrcnt)
+                # no attribute name configured for this column
+                if ne_column and attrcnt == len(pattrs)-1:
+                    # if extraction of named entities is active
+                    # ignore the column for named entities (i.e. the last column)
+                    attrname = '_'
+                else:
+                    # otherwise generate a default attibute name
+                    attrname = 'attr_' + str(attrcnt)
             else:
                 attrname = attrnames[attrcnt-1]
             if len(punct_rule)>1:
@@ -171,8 +180,8 @@ def ann2standoff(vrtann, reftext, config, replacements=[], matchlist=[]):
         if sstart < 0:
             sstart = curpos
 
-        # names entities from CoNLL-U+NE input (if provided)
-        if config.get('preprocess', 'none') == 'conllu':
+        # named entities from CoNLL-U+NE or vertical+NE input (if provided)
+        if ne_column or is_conllu:
             last_attr = pattrs[attrcnt-1]
             ne = list(filter(lambda x: x.startswith('NE='), last_attr.split('|')))
             negroups = ne[0][3:].split('-') if len(ne) else []
@@ -184,7 +193,7 @@ def ann2standoff(vrtann, reftext, config, replacements=[], matchlist=[]):
                 curlevel -= 1
             # new entities starting with this token
             for i in range(len(nentities), len(negroups)):
-                (enttype, entlevel) = negroups[i].split('_')
+                (enttype, entlevel) = negroups[i].rsplit('_',1)
                 curlevel += 1
                 newent = {"name": ne_element, "contents": f'{ne_type_attr}="{enttype}"', "start": curpos, "level": curlevel, "order": order}
                 order += 1
@@ -383,6 +392,9 @@ if __name__ == '__main__':
              Config setting: 'sentence_element'.
              Default: 's'.
 
+             '-nc' Last (unnamed) column of the vertical input contains annotation of named entities.
+             Config setting: 'ne_column'.
+
              '-ne <element_name>' Name of the resulting XML elemenent for named entities.
              Config setting: 'ne_element'.
              Default: 'ne'.
@@ -422,6 +434,7 @@ if __name__ == '__main__':
     parser.add_argument("-pe", "--punct-element", help="name of punctuation element", type=str)
     parser.add_argument("-pc", "--punctuation", help="identification of punctuation", type=str)
     parser.add_argument("-se", "--sentence-element", help="name of sentence element", type=str)
+    parser.add_argument("-nc", "--ne-column", help="extract named entities from the last column (applied automatically to CoNLL-U input)", action="store_true")
     parser.add_argument("-ne", "--ne-element", help="name of element marking named entities", type=str)
     parser.add_argument("-nt", "--ne-type-attr", help="name of type attribute for named entities", type=str)
     parser.add_argument("-vt", "--virtual-tokens", help="name of virtual subtokens for CoNLL-U second level tokenization", type=str)

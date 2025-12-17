@@ -220,13 +220,13 @@ This error indicates an invalid XML input file. It occurs if some XML element is
 
 (reported by `tag_ud`)
 
-The LINDAT UD Pipe API cannot be reached. Either there is a problem with your network connection or the LINDAT server is down.
+The UD Pipe API cannot be reached. Either there is a problem with your network connection or the LINDAT server is down.
 
 ### TAGGING FAILED [...]
 
 (reported by `tag_ud`)
 
-The LINDAT UD Pipe API returned an error as reported.
+The UD Pipe API returned an error as reported.
 
 ### Unexpected end of reference text file. Expecting token 'X'.
 

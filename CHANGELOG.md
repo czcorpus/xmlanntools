@@ -1,9 +1,17 @@
 # Changelog
 
+### process
+
+- Support calling custom external tagger command via shell
+
 ### tag_ud
 
 - Fixes for pre-tokenized input (vertical/conllu)
 - Allow specification of custom URL for UDpipe and NameTag API
+
+### ann2standoff
+
+- Support vertical with an optional additional column with named entities created by tag_nametag
 
 ### standoff2xml
 
@@ -13,6 +21,10 @@
 
 - BREAKING CHANGE: flattening of nested structures is not a default anymore, it must be turned on explicitly (it may have surprising consequences when dealing with complex nesting, which the user might prefer to solve by other means within pre- or post-processing)
 - Fix removing tags within token strings
+
+## tag_nametag
+
+- An independent client for the NameTag NER API, which can also add named entity annotation to an existing vertical
 
 ## 1.2.1 - 2025-10-08
 

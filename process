@@ -59,7 +59,8 @@ def process_single(config, filename):
 
     # load modules
     xml2standoff = load_module('xml2standoff')
-    tagger = load_module('tag_'+config.get('tagger', 'ud'))
+    tagger_ext = config.get('tagger_cmd', None)
+    tagger = None if tagger_ext else load_module('tag_'+config.get('tagger', 'ud'))
     ann2standoff = load_module('ann2standoff')
     standoff2xml = load_module('standoff2xml')
     xml2vrt = load_module('xml2vrt')
@@ -81,7 +82,11 @@ def process_single(config, filename):
     # process single file
     try:
         xml2standoff.process(config, infile, txtout=txtfile, jsonout=jsonfile)
-        tagger.process(config, txtfile, annfile)
+        if tagger_ext:
+            cmd = tagger_ext.replace('{INFILE}', str(txtfile.absolute())).replace('{OUTFILE}', str(annfile.absolute()))
+            os.system(cmd)
+        else:
+            tagger.process(config, txtfile, annfile)
         ann2standoff.process(config, annfile, txtin=txtfile, jsonout=annjsonfile,
                             replacements=replacements, matchlist=matchlist)
         standoff2xml.process(config, txtfile, jsonin=jsonfile, annjsonin=annjsonfile, xmlout=annxmlfile)
@@ -159,6 +164,7 @@ if __name__ == '__main__':
     parser.add_argument("-p", "--profile", help="config profile to use", type=str, default='DEFAULT')
     parser.add_argument("-m", "--model", help="UD language model to use", type=str)
     parser.add_argument("-t", "--tagger", help="tagger to use (default='ud')", type=str)
+    parser.add_argument("-tc", "--tagger-cmd", help="external tagger shell command (overrides -t/--tagger)", type=str)
     parser.add_argument("-O", "--output-path", help="output annotated files to the specified directory", type=str)
     parser.add_argument("-V", "--vrt-path", help="run also xml2vrt and output vertical files to the specified directory", type=str)
     parser.add_argument("-T", "--temp-dir", help="temporary directory to use", type=str)
