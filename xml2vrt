@@ -164,7 +164,7 @@ class TaggedXMLContentHandler(xml.sax.ContentHandler):
                     # print out openTagBuffer
                     closed = self.output_tag_buffer(lastName=name)
                 if self.token:
-                    if not self.strip_word_xml:
+                    if not (closed or self.strip_word_xml):
                         self.token['word'] += '</'+name+'>'
                 else:
                     if not closed:

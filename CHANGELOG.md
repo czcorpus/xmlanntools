@@ -21,6 +21,7 @@
 
 - BREAKING CHANGE: flattening of nested structures is not a default anymore, it must be turned on explicitly (it may have surprising consequences when dealing with complex nesting, which the user might prefer to solve by other means within pre- or post-processing)
 - Fix removing tags within token strings
+- Fix additional closing tag after empty elements
 
 ## tag_nametag
 
