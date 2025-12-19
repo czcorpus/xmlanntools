@@ -153,6 +153,7 @@ class TaggedXMLContentHandler(xml.sax.ContentHandler):
         else:
             # other XML element
             if self.no_flattening:
+                closed = False
                 # there are elements in the buffer of open elements
                 if not self.keep_empty and len(self.openTagBuffer) and name == self.openTagBuffer[-1][0] \
                     and (len(self.discard_empty) == 0 or name in self.discard_empty):
@@ -161,12 +162,13 @@ class TaggedXMLContentHandler(xml.sax.ContentHandler):
                     return
                 else:
                     # print out openTagBuffer
-                    self.output_tag_buffer(lastName=name)
+                    closed = self.output_tag_buffer(lastName=name)
                 if self.token:
                     if not self.strip_word_xml:
                         self.token['word'] += '</'+name+'>'
                 else:
-                    print('</'+name+'>', file=self.outfile)
+                    if not closed:
+                        print('</'+name+'>', file=self.outfile)
                     self.last_was_token = False
             else:
                 first = self.close_flat_element(name, original=True)
@@ -201,6 +203,7 @@ class TaggedXMLContentHandler(xml.sax.ContentHandler):
             self.whitespace += contents
 
     def output_tag_buffer(self, lastName=None):
+        lastClosed = False
         # print out openTagBuffer
         for i, (tname, tcontents, _) in enumerate(self.openTagBuffer):
             if lastName is not None and i == len(self.openTagBuffer)-1:
@@ -209,6 +212,7 @@ class TaggedXMLContentHandler(xml.sax.ContentHandler):
                     # this should never happen (unless there is a bug)!
                     raise Exception(f"Unexpected situation: End of '{lastName}', but last open element was '{tname}'.")
                 tag = '<'+tname+tcontents+'/>'
+                lastClosed = True
             else:
                 tag = '<'+tname+tcontents+'>'
             if self.token:
@@ -219,6 +223,7 @@ class TaggedXMLContentHandler(xml.sax.ContentHandler):
                 # just print out
                 print(tag, file=self.outfile)
         self.openTagBuffer = []
+        return lastClosed
 
     def close_flat_element(self, name, original=False):
         """
