@@ -1,5 +1,7 @@
 # Changelog
 
+## 1.3 - 2026-01-16
+
 ### process
 
 - Support calling custom external tagger command via shell
