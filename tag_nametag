@@ -110,7 +110,7 @@ if __name__ == '__main__':
     parser.add_argument("-b", "--batch", help="batch size in lines (default=1000)", type=int, default="1000", dest="tagger_batch")
     parser.add_argument("-va", "--vertical-append", help="append to the vertical input as a new column (overrides input and output format)", action="store_true")
     parser.add_argument("-v", "--verbose", help="report progress", action="store_true")
-    parser.add_argument("-nd", "--no-double-lb", help="do NOT double line breaks (UDPipe requires a sequence of two as paragraph break)", action="store_true")
+    parser.add_argument("-nd", "--no-double-lb", help="do NOT double line breaks in untokenized input (a sequence of two linebreaks enforces a paragraph break)", action="store_true")
     args = parser.parse_args()
     
     infile = Path(args.infile) if args.infile else None

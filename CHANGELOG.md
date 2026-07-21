@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.3.1 - 2026-07-21
+
+- Add documentation for `tag_nametag` and NE extraction from common vertical within `ann2standoff`.
+
 ## 1.3 - 2026-01-16
 
 ### process
