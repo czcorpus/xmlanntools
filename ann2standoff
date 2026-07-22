@@ -186,18 +186,24 @@ def ann2standoff(vrtann, reftext, config, replacements=[], matchlist=[]):
             ne = list(filter(lambda x: x.startswith('NE='), last_attr.split('|')))
             negroups = ne[0][3:].split('-') if len(ne) else []
             # entities that ended with the last (=previous) token
-            while len(negroups) < len(nentities):
-                lastent = nentities.pop()
-                lastent['end'] = last_token_end_pos
-                annotation.append(lastent)
-                curlevel -= 1
+            continuing = []
+            for e in nentities:
+                if e['ne_label'] in negroups:
+                    continuing.append(e)
+                else:
+                    e['end'] = last_token_end_pos
+                    annotation.append(e)
+                    curlevel -= 1
+            nentities = continuing
             # new entities starting with this token
-            for i in range(len(nentities), len(negroups)):
-                (enttype, entlevel) = negroups[i].rsplit('_',1)
-                curlevel += 1
-                newent = {"name": ne_element, "contents": f'{ne_type_attr}="{enttype}"', "start": curpos, "level": curlevel, "order": order}
-                order += 1
-                nentities.append(newent)
+            nelabels = [e['ne_label'] for e in nentities]
+            for g in negroups:
+                if g not in nelabels:
+                    (enttype, entlevel) = g.rsplit('_',1)
+                    curlevel += 1
+                    newent = {"name": ne_element, "contents": f'{ne_type_attr}="{enttype}"', "start": curpos, "level": curlevel, "order": order, 'ne_label': g}
+                    order += 1
+                    nentities.append(newent)
 
         token = {"name": token_element_name, "contents": attrstr, "start": curpos, "end": curpos+wlen, "level": curlevel+1, 'order': order}
         order += 1
@@ -205,13 +211,19 @@ def ann2standoff(vrtann, reftext, config, replacements=[], matchlist=[]):
         curpos += wlen
         last_token_end_pos = curpos
 
+    # any named entities left?
+    for e in nentities:
+        e['end'] = last_token_end_pos
+        annotation.append(e)
+        curlevel -= 1
+
     # add/close final sentence
     if 0 <= sstart < curpos:
         linecnt += 1
         s = {"name": sentence_element, "contents": "", "start": sstart, "end": curpos, "level": 1, 'order': order}
         order += 1
         annotation.append(s)
-    
+
     # no more annotation available - anything else left in the source text?
     token = reftext.read(1)
     while token != '':
