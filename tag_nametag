@@ -16,6 +16,7 @@ import sys
 import http
 import requests
 
+
 NAMETAG_API_URL = "http://lindat.mff.cuni.cz/services/nametag/api/recognize"
 DEFAULT_MODEL = 'en'
 
@@ -47,13 +48,15 @@ def process(config, infile, outfile, url, verbose=False):
 
     def analyze(buffer):
         analyze.counter += 1
+        text = "\n".join([l.split('\t', 1)[0] for l in buffer]) if config.vertical_append or config.input_format=='vertical' else \
+            "".join(buffer) if nodblb else "\n".join(buffer)+"\n"
         if verbose:
             sys.stderr.write(f"[{analyze.counter}] Sending {len(buffer)} lines to NameTag. ")
             sys.stderr.flush()
         result = nametag_lindat(
             model= config.model,
             # UD Pipe needs double "\n\n" to enforce paragraph breaks!
-            text= "".join(buffer) if nodblb else "\n".join(buffer)+"\n",
+            text= text,
             informat= config.input_format if not config.vertical_append else 'vertical',
             outformat= config.output_format if not config.vertical_append else 'vertical',
             url=url
@@ -82,14 +85,20 @@ def process(config, infile, outfile, url, verbose=False):
     with infile.open() if infile else sys.stdin as input_file:
         cnt = 0
         informat = config.input_format
+        lastempty = False
         for line in input_file:
-            if not line.strip() or informat=='untokenized':
+            # eliminate multiple empty lines, it makes NameTag linecounting broken for vertical input
+            # (also empty line at the start of a vertical batch)
+            if lastempty and not line.strip():
+                continue
+            lastempty = not line.strip()
+            if not line.strip() or (informat=='untokenized' and not config.vertical_append):
                 cnt += 1
+            buffer.append(line)
             if cnt >= int(config.tagger_batch):
                 analyze(buffer)
                 buffer.clear()
                 cnt = 0
-            buffer.append(line)
         analyze(buffer)
 
     output.close()
