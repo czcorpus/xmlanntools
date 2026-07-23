@@ -62,16 +62,15 @@ def process(config, infile, outfile, url, verbose=False):
             print(result, file=output)
         else:
             ne_map = {}
-            for ne_line in result.split("\n"):
+            for idx, ne_line in enumerate(result.split("\n")):
                 if not ne_line.strip():
                     continue
-                #sys.stderr.write(ne_line+"\n")
                 (linenums, netype, _) = ne_line.split('\t', 2)
                 for linenum in linenums.split(','):
                     linenum = int(linenum)
                     if linenum not in ne_map:
                         ne_map[linenum] = []
-                    ne_map[linenum].append(f"{netype}_{len(ne_map[linenum])+1}")
+                    ne_map[linenum].append(f"{netype}_{idx+1}")
             for i, line in enumerate(buffer):
                 ne_str = "NE="+"-".join(ne_map[i+1]) if i+1 in ne_map else ''
                 print(line.rstrip()+'\t'+ne_str, file=output)

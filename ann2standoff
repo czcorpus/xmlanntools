@@ -95,12 +95,6 @@ def ann2standoff(vrtann, reftext, config, replacements=[], matchlist=[]):
         line = line.rstrip(" \t\r\n")
         linecnt += 1
         if not len(line):
-            # force interrupt named entities (they should not cross sentence breaks)
-            for e in nentities:
-                e['end'] = last_token_end_pos
-                annotation.append(e)
-                curlevel -= 1
-            nentities = []
             # empty line: sentence boundary
             if 0 <= sstart < curpos:
                 s = {"name": sentence_element, "contents": "", "start": sstart, "end": curpos, "level": 1, 'order': order}
