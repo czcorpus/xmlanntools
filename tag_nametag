@@ -75,8 +75,14 @@ def process(config, infile, outfile, url, verbose=False):
                         ne_map[linenum] = []
                     ne_map[linenum].append(f"{netype}_{idx+1}")
             for i, line in enumerate(buffer):
+                line = line.rstrip('\n\r')
                 ne_str = "NE="+"-".join(ne_map[i+1]) if i+1 in ne_map else ''
-                print(line.rstrip()+'\t'+ne_str, file=output)
+                if not line:
+                    if ne_str:
+                        sys.stderr.write(f"ERROR: NE tag on empty line!\n")
+                    print(line, file=output)
+                else:
+                    print(line+'\t'+ne_str, file=output)
         if verbose:
             sys.stderr.write(f"Analyzed.\n")
 
