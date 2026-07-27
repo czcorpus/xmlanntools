@@ -55,7 +55,6 @@ def process(config, infile, outfile, url, verbose=False):
             sys.stderr.flush()
         result = nametag_lindat(
             model= config.model,
-            # UD Pipe needs double "\n\n" to enforce paragraph breaks!
             text= text,
             informat= config.input_format if not config.vertical_append else 'vertical',
             outformat= config.output_format if not config.vertical_append else 'vertical',
@@ -79,7 +78,8 @@ def process(config, infile, outfile, url, verbose=False):
                 ne_str = "NE="+"-".join(ne_map[i+1]) if i+1 in ne_map else ''
                 if not line:
                     if ne_str:
-                        sys.stderr.write(f"ERROR: NE tag on empty line!\n")
+                        sys.stderr.write(f"ERROR: Named entity assigned to an empty line! Ignoring.\n")
+                        sys.stderr.flush()
                     print(line, file=output)
                 else:
                     print(line+'\t'+ne_str, file=output)
