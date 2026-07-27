@@ -42,13 +42,13 @@ def nametag_lindat(model, text, informat, outformat, url):
     return result
 
 def process(config, infile, outfile, url, verbose=False):
-    nodblb = config.no_double_lb or config.input_format != 'untokenized' or config.vertical_append
+    nodblb = config.no_double_lb or config.input_format != 'untokenized'
     output = outfile.open('w', encoding='utf-8') if outfile else sys.stdout
     buffer = []
 
     def analyze(buffer):
         analyze.counter += 1
-        text = "\n".join([l.split('\t', 1)[0] for l in buffer]) if config.vertical_append or config.input_format=='vertical' else \
+        text = "\n".join([l.split('\t', 1)[0] for l in buffer]) if config.input_format=='vertical' else \
             "".join(buffer) if nodblb else "\n".join(buffer)+"\n"
         if verbose:
             sys.stderr.write(f"[{analyze.counter}] Sending {len(buffer)} lines to NameTag. ")
@@ -56,8 +56,8 @@ def process(config, infile, outfile, url, verbose=False):
         result = nametag_lindat(
             model= config.model,
             text= text,
-            informat= config.input_format if not config.vertical_append else 'vertical',
-            outformat= config.output_format if not config.vertical_append else 'vertical',
+            informat= config.input_format,
+            outformat= config.output_format,
             url=url
         )
         if not config.vertical_append:
@@ -98,7 +98,8 @@ def process(config, infile, outfile, url, verbose=False):
             if lastempty and not line.strip():
                 continue
             lastempty = not line.strip()
-            if not line.strip() or (informat=='untokenized' and not config.vertical_append):
+            # count text lines for untokenized text and sentences for tokenized text
+            if not line.strip() or informat=='untokenized':
                 cnt += 1
             buffer.append(line)
             if cnt >= int(config.tagger_batch):
@@ -126,7 +127,10 @@ if __name__ == '__main__':
     parser.add_argument("-v", "--verbose", help="report progress", action="store_true")
     parser.add_argument("-nd", "--no-double-lb", help="do NOT double line breaks in untokenized input (a sequence of two linebreaks enforces a paragraph break)", action="store_true")
     args = parser.parse_args()
-    
+    if args.vertical_append:
+        args.input_format = 'vertical'
+        args.output_format = 'vertical'
+
     infile = Path(args.infile) if args.infile else None
     outfile = Path(args.outfile) if args.outfile else None
 
