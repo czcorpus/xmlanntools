@@ -106,7 +106,8 @@ def process(config, infile, outfile, url, verbose=False):
                 analyze(buffer)
                 buffer.clear()
                 cnt = 0
-        analyze(buffer)
+        if len(buffer):
+            analyze(buffer)
 
     output.close()
 
