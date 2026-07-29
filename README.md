@@ -192,11 +192,17 @@ Named entities are later automatically detected in the enriched "CoNLL-U+NE" out
 
 A standalone full-featured client for the [NameTag]((https://lindat.mff.cuni.cz/services/nametag/api-reference.php)) NER API (besides the client integrated into `tag_ud`). This script currently does not read the common configuration files and all options must be specified explicitly.
 
- You can specify the input and output file names using the options `-i` (or `-f`) and `-o` if you do not want to use standard input and output. You can specify the input format using the option `-if` ("untokenized" by default or "vertical" or "conllu") and the output format using the option `-of` ("conllu-ne" by default or "xml", "vertical" or "conll"). Alternatively, using the single option `-va` (or `--vertical-append`), the expected input will be a general "vertical" and the output will be the same vertical with one more column added, containing the NE annotation in a form expected by the script `ann2standoff` with the option `-nc`. (Using just "vertical" as output format, the API returns only extracted named entities, not the original vertical!)
+ You can specify the input and output file names using the options `-i` (or `-f`) and `-o` if you do not want to use standard input and output. You can specify the input format using the option `-if` ("untokenized" by default or "vertical" or "conllu") and the output format using the option `-of` ("conllu-ne" by default or "xml", "vertical" or "conll").
+
+ Alternatively, you can also enrich an existing general vertical with named entities in several ways: appending the NE attribute to the end of the vertical (additional column) using the option `-va` (or `--vertical-append`), inserting it into the vertical using the option `-vi <column>` (or `--vertical-insert`) or replacing the existing contents of some column with it using the option `-vr <column>` (or `--vertical-replace`). The expected input will be a general "vertical" and the output will be the same vertical with one more column added, inserted or an existing column replaced with the NE annotation. If appended with the default settings, it will produce a form expected by the script `ann2standoff` with the option `-nc`. (Using just "vertical" as output format, the API returns only extracted named entities, not the original vertical!)
+
+ The vertical insert and replace mode options expect the humber of the column to be inserted or replaced. Negative numbers can also be used and refer to columns counted from the end. If the number is positive and some lines in the vertical do not contain enough columns, the script will add necessary columns automatically. Nothing is guaranteed for negative numbers, though. In case of need, you can also "normalize" the amount of columns in the input vertical using the option `-cc <number>` (or `--column-count`). Missing columns will be added with empty values and any additional columns will be silently truncated. The normalization is done *before* the vertical is processed. That means the resulting number of columns on the output will actually be `<number> + 1` in the vertical insert or append mode.
 
 The annotation model should be specified using the option `-m` (or `--model`): see [official documentation on models](https://lindat.mff.cuni.cz/services/nametag/api-reference.php#models) and the note above within the description of `tag_ud`. The API can only process limited amount of data in a single batch, therefore the batches are limited to 1000 lines of untokenized text by default. For "vertical" and "conllu" input, the size does not apply to the number of lines, but to the number of blocks separated by an empty line (usually sentences). The batch size can be specified usin the option `-b <number>`. Since the API expects two line breaks (i.e. an empty line) to enforce a paragraph-break, the script doubles all line breaks within an untokenized text, unless the option `-nd` is specified.
 
 Using the option `-v`, the progress will be reported. Using the option `-u <URL>` (or `--url`), a custom URL for the NameTage API may be specified, as NameTag is also [available for local deployment](https://github.com/ufal/nametag3) (the public [LINDAT API](https://lindat.mff.cuni.cz/services/nametag/api-reference.php) is used by default).
+
+The format of the NE attribute in the vertical append/insert/replace mode can be further customized using the options `-nep <string>` (or `--ne-prefix`), `-nes <string>` (or `--ne-separator`) and `-nns <string>` (or `--ne-num-separator`). The default values are `NE=`, `-` and `_` respectively, corresponding to the format used in the CoNLL-U+NE format.
 
 ### xml2vrt
 
@@ -281,3 +287,9 @@ Mismatch in the JSON data: arrived at an XML element which should already have s
 (reported by `standoff2xml`)
 
 Mismatch in the JSON data: either the JSON data or the reference text have been damaged (or truncated). If you are not aware of any possible cause, please, report to the authors and provide all the input and temporary files.
+
+### ERROR: Named entity assigned to an empty line! Ignoring.
+
+(reported by `tag_nametag`)
+
+The NameTag seems to have assigned  a named entity to an empty line (line break). This should never happen and indicates a bug either in Nametag or in `tag_nametag`. The NE is just discarded, but more errors in the NE annotation can be expected.

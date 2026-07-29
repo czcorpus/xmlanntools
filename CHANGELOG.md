@@ -1,5 +1,19 @@
 # Changelog
 
+## 1.3.2 - 2026-07-29
+
+### ann2stanodff
+
+- FIX: reimplement parsing of named entites
+
+### tag_nametag
+
+- add support for vertical-replace and vertical-insert mode
+- support custom format of NE attribute in the vertical append/insert/replace mode
+- fix batch size counting in the vertical append/insert/replace mode
+- avoid issues with superfluous empty lines in vertical input breaking NameTag results
+- avoid merging of entities of the same type following each other immediately
+
 ## 1.3.1 - 2026-07-21
 
 - Add documentation for `tag_nametag` and NE extraction from common vertical within `ann2standoff`.

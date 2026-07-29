@@ -20,7 +20,7 @@ import requests
 NAMETAG_API_URL = "http://lindat.mff.cuni.cz/services/nametag/api/recognize"
 DEFAULT_MODEL = 'en'
 
-def nametag_lindat(model, text, informat, outformat, url):
+def nametag(model, text, informat, outformat, url):
     """
     Send a text to NameTag web service and return the results
     """
@@ -53,14 +53,14 @@ def process(config, infile, outfile, url, verbose=False):
         if verbose:
             sys.stderr.write(f"[{analyze.counter}] Sending {len(buffer)} lines to NameTag. ")
             sys.stderr.flush()
-        result = nametag_lindat(
+        result = nametag(
             model= config.model,
             text= text,
             informat= config.input_format,
             outformat= config.output_format,
             url=url
         )
-        if not config.vertical_append:
+        if not (config.vertical_append or config.vertical_replace or config.vertical_insert):
             print(result, file=output)
         else:
             ne_map = {}
@@ -72,17 +72,38 @@ def process(config, infile, outfile, url, verbose=False):
                     linenum = int(linenum)
                     if linenum not in ne_map:
                         ne_map[linenum] = []
-                    ne_map[linenum].append(f"{netype}_{idx+1}")
+                    ne_map[linenum].append(f"{netype}{config.ne_num_separator}{idx+1}")
             for i, line in enumerate(buffer):
                 line = line.rstrip('\n\r')
-                ne_str = "NE="+"-".join(ne_map[i+1]) if i+1 in ne_map else ''
+                ne_str = config.ne_prefix+config.ne_separator.join(ne_map[i+1]) if i+1 in ne_map else ''
                 if not line:
                     if ne_str:
                         sys.stderr.write(f"ERROR: Named entity assigned to an empty line! Ignoring.\n")
                         sys.stderr.flush()
                     print(line, file=output)
                 else:
-                    print(line+'\t'+ne_str, file=output)
+                    cols = line.split('\t')
+                    if config.column_count:
+                        cols = cols[:config.column_count]
+                        if len(cols) < config.column_count:
+                            cols.extend(['']  * (config.column_count - len(cols)))
+                    column = config.vertical_replace or config.vertical_insert
+                    if config.vertical_replace or config.vertical_insert:
+                        column = config.vertical_replace or config.vertical_insert
+                        if len(cols) < column:
+                            cols.extend(['']  * (column - len(cols)))
+                        idx = column-1 if column > 0 else column
+                        try:
+                            if config.vertical_replace:
+                                cols[idx] = ne_str
+                            else:
+                                cols.insert(idx, ne_str)
+                        except IndexError:
+                            sys.stderr.write(f"ERROR: column {column} not available! Keeping original line contents. Consider using positive column number or the option -cc/--column-count.\n")
+                            sys.stderr.flush()
+                    else:
+                        cols.append(ne_str)
+                    print('\t'.join(cols), file=output)
         if verbose:
             sys.stderr.write(f"Analyzed.\n")
 
@@ -116,6 +137,12 @@ if __name__ == '__main__':
     import argparse
     from pathlib import Path
 
+    def positive_int(value: str) -> int:
+        ivalue = int(value)
+        if ivalue <= 0:
+            raise argparse.ArgumentTypeError(f"{value!r} is not a positive integer")
+        return ivalue
+
     parser = argparse.ArgumentParser(description="Analyze text with NameTag (https://lindat.mff.cuni.cz/services/nametag/api-reference.php)")
     parser.add_argument("-m", "--model", help="UD language model to use", type=str, default=DEFAULT_MODEL)
     parser.add_argument("-i", "-f", "--infile", help="input file (default=STDIN)", type=str)
@@ -124,13 +151,22 @@ if __name__ == '__main__':
     parser.add_argument("-if", "--input-format", help="input format (untokenized/vertical/conllu)", type=str, default="untokenized")
     parser.add_argument("-of", "--output-format", help="output format (xml/vertical/conll/conllu-ne)", type=str, default="conllu-ne")
     parser.add_argument("-b", "--batch", help="batch size in lines (default=1000)", type=int, default="1000", dest="tagger_batch")
-    parser.add_argument("-va", "--vertical-append", help="append to the vertical input as a new column (overrides input and output format)", action="store_true")
+    vgroup = parser.add_mutually_exclusive_group()
+    vgroup.add_argument("-va", "--vertical-append", help="append to the vertical input as a new column (overrides input and output format)", action="store_true")
+    vgroup.add_argument("-vr", "--vertical-replace", help="replace given column in the vertical input (overrides input and output format)", type=int)
+    vgroup.add_argument("-vi", "--vertical-insert", help="insert given column in the vertical input (overrides input and output format)", type=int)
+    parser.add_argument("-cc", "--column-count", help="normalize vertical to the given amount of columns (in vertical-append/insert/replace mode)", type=positive_int)
+    parser.add_argument("-nep", "--ne-prefix", help="NE prefix (default='NE=')", type=str, default='NE=')
+    parser.add_argument("-nes", "--ne-separator", help="NE separator (default='-')", type=str, default='-')
+    parser.add_argument("-nns", "--ne-num-separator", help="NE number separator (default='_')", type=str, default='_')
     parser.add_argument("-v", "--verbose", help="report progress", action="store_true")
     parser.add_argument("-nd", "--no-double-lb", help="do NOT double line breaks in untokenized input (a sequence of two linebreaks enforces a paragraph break)", action="store_true")
     args = parser.parse_args()
-    if args.vertical_append:
+    if args.vertical_append or args.vertical_replace or args.vertical_insert:
         args.input_format = 'vertical'
         args.output_format = 'vertical'
+    if args.column_count and not (args.vertical_append or args.vertical_replace or args.vertical_insert):
+        parser.error('The -cc/--culomn-count can only be applied in vertical-append/insert/replace mode.')
 
     infile = Path(args.infile) if args.infile else None
     outfile = Path(args.outfile) if args.outfile else None
