@@ -30,8 +30,8 @@ DEFAULT_THREADS = 10
 
 def load_module(name):
     """
-    Load externals scripts as modules
-    (they don't the extension `.py`, so they can't be simply imported)
+    Load external scripts as modules
+    (they don't have the extension `.py`, so they can't be simply imported)
     """
     spec = spec_from_loader(name, SourceFileLoader(name, scriptpath+name))
     module = module_from_spec(spec)

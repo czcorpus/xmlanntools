@@ -15,7 +15,7 @@
 import sys
 import http
 import requests
-
+from pathlib import Path
 
 NAMETAG_API_URL = "http://lindat.mff.cuni.cz/services/nametag/api/recognize"
 DEFAULT_MODEL = 'en'
@@ -41,7 +41,11 @@ def nametag(model, text, informat, outformat, url):
     result = response.json()["result"]
     return result
 
-def process(config, infile, outfile, url, verbose=False):
+def process(config):
+    url = config.url
+    verbose = config.verbose
+    infile = Path(config.infile) if config.infile else None
+    outfile = Path(config.outfile) if config.outfile else None
     nodblb = config.no_double_lb or config.input_format != 'untokenized'
     output = outfile.open('w', encoding='utf-8') if outfile else sys.stdout
     buffer = []
@@ -135,7 +139,6 @@ def process(config, infile, outfile, url, verbose=False):
 
 if __name__ == '__main__':
     import argparse
-    from pathlib import Path
 
     def positive_int(value: str) -> int:
         ivalue = int(value)
@@ -168,7 +171,4 @@ if __name__ == '__main__':
     if args.column_count and not (args.vertical_append or args.vertical_replace or args.vertical_insert):
         parser.error('The -cc/--culomn-count can only be applied in vertical-append/insert/replace mode.')
 
-    infile = Path(args.infile) if args.infile else None
-    outfile = Path(args.outfile) if args.outfile else None
-
-    process(args, infile, outfile, args.url, args.verbose)
+    process(args)
