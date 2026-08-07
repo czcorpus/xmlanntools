@@ -1,5 +1,16 @@
 # Changelog
 
+## 1.3.3 - 2026-08-07
+
+### process
+
+- provide documenation on the `-tc` (`tagger_cmd`) option
+- replace the soft deprecated `os.system()` call with `subprocess.run()`
+
+### tag_nametag
+
+- support parallel batch processing of files distributed to multiple NameTag servers
+
 ## 1.3.2 - 2026-07-29
 
 ### ann2stanodff

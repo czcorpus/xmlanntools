@@ -14,6 +14,7 @@
 # GNU General Public License for more details.
 
 import os
+import subprocess
 import sys
 from pathlib import Path
 import argparse
@@ -84,7 +85,7 @@ def process_single(config, filename):
         xml2standoff.process(config, infile, txtout=txtfile, jsonout=jsonfile)
         if tagger_ext:
             cmd = tagger_ext.replace('{INFILE}', str(txtfile.absolute())).replace('{OUTFILE}', str(annfile.absolute()))
-            os.system(cmd)
+            subprocess.run(cmd, shell=True, check=True)
         else:
             tagger.process(config, txtfile, annfile)
         ann2standoff.process(config, annfile, txtin=txtfile, jsonout=annjsonfile,

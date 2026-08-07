@@ -17,7 +17,7 @@ The tagger may ignore any whitespace, but all other types of characters must be 
 
 ## Requirements of the scripts
 
-The basic scripts should work with any version of Python >= 3.6. No additional libraries beyond the ones included with Python by default are necessary. The supplementary scripts may have additional dependencies (e.g. `tag_ud` requires the package `requests`).
+The basic scripts should work with any version of Python >= 3.6. No additional libraries beyond the ones included with Python by default are necessary. The supplementary scripts may have additional dependencies (e.g. `tag_ud` or `tag_nametag` require the package `requests`).
 
 ## The result
 
@@ -56,6 +56,8 @@ The resulting file will have the same name as the input file and the extension `
 The script can also override language model configured for the tagger by explicitly specifying the option `-m <model>`.
 
 If you create your own tagger wrapper script called `tag_<tagger_name>`, it can also be called by `process` instead of the provided `tag_ud` by specifying the option `-t <tagger_name>` (or configuration option `tagger`). But it has to mimic the same behaviour and options and fullfill the requirements for taggers described above.
+
+Alternatively, you can also specify a custom (shell) tagger command or pipeline using the option `-tc <command>` (configuration option `tagger_cmd`). The command should include the strings `{INFILE}` and `{OUTFILE}` as arguments to be replaced by the actual filenames (see `xmlanntools.ini` for example).
 
 The option `-P` (configuration option `progress`) displays a simple progress bar showing the percentage of successfully processed files.
 
@@ -170,7 +172,7 @@ In the process of plain text extraction within `xml2standoff`, the standard Pyth
 
 In the reverse conversion within `standoff2xml`, the corresponding method [`html.escape()`](https://docs.python.org/3/library/html.html) is applied to the text contents. However, this conversion does NOT reverse the process to reconstruct all the original entities! It only converts the basic characters conflicting with XML mark-up (i.e. `<`, `>` and `&`) into their corresponding entities.
 
-## Additional scripts
+## Supplementary scripts
 
 ### tag_ud
 
@@ -190,19 +192,27 @@ Named entities are later automatically detected in the enriched "CoNLL-U+NE" out
 
 ### tag_nametag
 
-A standalone full-featured client for the [NameTag]((https://lindat.mff.cuni.cz/services/nametag/api-reference.php)) NER API (besides the client integrated into `tag_ud`). This script currently does not read the common configuration files and all options must be specified explicitly.
+A standalone full-featured client for the [NameTag]((https://lindat.mff.cuni.cz/services/nametag/api-reference.php)) NER API (besides the client integrated into `tag_ud`). This script currently does not read the common configuration files and all options must be specified explicitly. The script can either process a single file only or it can process a batch of files in parallel, distributing them to multiple NameTag servers (if available).
 
- You can specify the input and output file names using the options `-i` (or `-f`) and `-o` if you do not want to use standard input and output. You can specify the input format using the option `-if` ("untokenized" by default or "vertical" or "conllu") and the output format using the option `-of` ("conllu-ne" by default or "xml", "vertical" or "conll").
+For *single file processing*, you can specify the input and output file names using the options `-i` (or `-f`) and `-o` if you do not want to use standard input and output.
 
- Alternatively, you can also enrich an existing general vertical with named entities in several ways: appending the NE attribute to the end of the vertical (additional column) using the option `-va` (or `--vertical-append`), inserting it into the vertical using the option `-vi <column>` (or `--vertical-insert`) or replacing the existing contents of some column with it using the option `-vr <column>` (or `--vertical-replace`). The expected input will be a general "vertical" and the output will be the same vertical with one more column added, inserted or an existing column replaced with the NE annotation. If appended with the default settings, it will produce a form expected by the script `ann2standoff` with the option `-nc`. (Using just "vertical" as output format, the API returns only extracted named entities, not the original vertical!)
+For *batch file processing*, you should provide a list of input file names either in form of a text file using the option `-fb <filelist>` (or `--file-batch`) or by sending them to the standard input of the script by specifying `-fb -` (e.g. by running `ls *.txt | tag_nametag -fb -`). The output files will keep the same name with their extension replaced as specified by the option `-e <extension>` (or `--extension`), by default `.ne`. Multiple NameTag servers can be specified by the option `-u` (or `--url`) described below in order to make the script distribute the files evenly to all the provided servers in parallel. However, each server will always be provided (sequentially) with a single file at once only, as parallel processing of multiple data batches at the same time by NameTag seems rather inefficient, especially when their GPU is used intensively by some models.
 
- The vertical insert and replace mode options expect the humber of the column to be inserted or replaced. Negative numbers can also be used and refer to columns counted from the end. If the number is positive and some lines in the vertical do not contain enough columns, the script will add necessary columns automatically. Nothing is guaranteed for negative numbers, though. In case of need, you can also "normalize" the amount of columns in the input vertical using the option `-cc <number>` (or `--column-count`). Missing columns will be added with empty values and any additional columns will be silently truncated. The normalization is done *before* the vertical is processed. That means the resulting number of columns on the output will actually be `<number> + 1` in the vertical insert or append mode.
+In both modes, the annotation model should be specified using the option `-m <model_name>` (or `--model`): see [official documentation on models](https://lindat.mff.cuni.cz/services/nametag/api-reference.php#models) and the note above within the description of `tag_ud`.
 
-The annotation model should be specified using the option `-m` (or `--model`): see [official documentation on models](https://lindat.mff.cuni.cz/services/nametag/api-reference.php#models) and the note above within the description of `tag_ud`. The API can only process limited amount of data in a single batch, therefore the batches are limited to 1000 lines of untokenized text by default. For "vertical" and "conllu" input, the size does not apply to the number of lines, but to the number of blocks separated by an empty line (usually sentences). The batch size can be specified usin the option `-b <number>`. Since the API expects two line breaks (i.e. an empty line) to enforce a paragraph-break, the script doubles all line breaks within an untokenized text, unless the option `-nd` is specified.
+You can specify the input format using the option `-if` ("untokenized" by default or "vertical" or "conllu") and the output format using the option `-of` ("conllu-ne" by default or "xml", "vertical" or "conll").
 
-Using the option `-v`, the progress will be reported. Using the option `-u <URL>` (or `--url`), a custom URL for the NameTage API may be specified, as NameTag is also [available for local deployment](https://github.com/ufal/nametag3) (the public [LINDAT API](https://lindat.mff.cuni.cz/services/nametag/api-reference.php) is used by default).
+In addition to the input/output formats provided by NameTag itself, you can also enrich an existing general vertical with named entities in several ways: appending the NE attribute to the end of the vertical (additional column) using the option `-va` (or `--vertical-append`), inserting it into the vertical using the option `-vi <column>` (or `--vertical-insert`) or replacing the existing contents of some column with it using the option `-vr <column>` (or `--vertical-replace`). The expected input will be a general "vertical" and the output will be the same vertical with one more column added, inserted or an existing column replaced with the NE annotation. If appended with the default settings, it will produce a form expected by the script `ann2standoff` with the option `-nc`. (Using just "vertical" as output format, the API returns only extracted named entities, not the original vertical!)
+
+The vertical insert and replace mode options expect the number of the column to be inserted or replaced. Negative numbers can also be used and refer to columns counted from the end. If the number is positive and some lines in the vertical do not contain enough columns, the script will add necessary columns automatically. Nothing is guaranteed for negative numbers, though. In case of need, you can also "normalize" the amount of columns in the input vertical using the option `-cc <number>` (or `--column-count`). Missing columns will be added with empty values and any additional columns will be silently truncated. The normalization is done *before* the vertical is processed. That means the resulting number of columns on the output will actually be `<number> + 1` in the vertical insert or append mode.
+
+The NameTag API can only process a limited amount of data in a single request, therefore the requests are limited to batches of 1000 lines of untokenized text by default. For "vertical" and "conllu" input, the size does not apply to the number of lines, but to the number of blocks separated by an empty line (usually sentences). This batch size (do not confuse with the "batch processing" of multiple files provided by this script!) can be specified usin the option `-b <number>`. Since the API expects two line breaks (i.e. an empty line) to enforce a paragraph-break, the script doubles all line breaks within an untokenized text, unless the option `-nd` is specified.
+
+Using the option `-u <URL>` (or `--url`), a custom URL for the NameTage API may be specified, as NameTag is also [available for local deployment](https://github.com/ufal/nametag3) (the public [LINDAT API](https://lindat.mff.cuni.cz/services/nametag/api-reference.php) is used by default). The URL can either be provided in full (starting with `http(s)://`) or as a server name only (expecting the URL to have the default form `http://<server_name>:8001/recognize`) or eventually as a combination `<server_name>:<port>` (if just the port number differs from the default). This option can be provided multiple times to specify multiple NameTag servers for parallel batch processing, as described above.
 
 The format of the NE attribute in the vertical append/insert/replace mode can be further customized using the options `-nep <string>` (or `--ne-prefix`), `-nes <string>` (or `--ne-separator`) and `-nns <string>` (or `--ne-num-separator`). The default values are `NE=`, `-` and `_` respectively, corresponding to the format used in the CoNLL-U+NE format.
+
+Using the option `-v`, information about the progress will be reported. However, this option is not very useful in the parallel batch processing mode.
 
 ### xml2vrt
 

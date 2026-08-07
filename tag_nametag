@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 
 # Copyright (c) 2025 Pavel Vondřička <pavel.vondricka@ff.cuni.cz>
 #
@@ -16,8 +17,9 @@ import sys
 import http
 import requests
 from pathlib import Path
+from multiprocessing import Process, Queue
 
-NAMETAG_API_URL = "http://lindat.mff.cuni.cz/services/nametag/api/recognize"
+LINDAT_API_URL = "http://lindat.mff.cuni.cz/services/nametag/api/recognize"
 DEFAULT_MODEL = 'en'
 
 def nametag(model, text, informat, outformat, url):
@@ -41,11 +43,16 @@ def nametag(model, text, informat, outformat, url):
     result = response.json()["result"]
     return result
 
-def process(config):
-    url = config.url
+def process_file(config, infile=None, outfile=None, url=None):
+    """
+    Process a single file with NameTag
+
+    Direct arguments (files as Path objects) override the config object filename (str) settings.
+    """
+    url = url or (config.url[0] if isinstance(config.url, list) else config.url)
     verbose = config.verbose
-    infile = Path(config.infile) if config.infile else None
-    outfile = Path(config.outfile) if config.outfile else None
+    infile = infile or Path(config.infile) if infile or config.infile else None
+    outfile = outfile or Path(config.outfile) if outfile or config.outfile else None
     nodblb = config.no_double_lb or config.input_format != 'untokenized'
     output = outfile.open('w', encoding='utf-8') if outfile else sys.stdout
     buffer = []
@@ -55,7 +62,7 @@ def process(config):
         text = "\n".join([l.split('\t', 1)[0] for l in buffer]) if config.input_format=='vertical' else \
             "".join(buffer) if nodblb else "\n".join(buffer)+"\n"
         if verbose:
-            sys.stderr.write(f"[{analyze.counter}] Sending {len(buffer)} lines to NameTag. ")
+            sys.stderr.write(f"[{analyze.counter}] Sending {len(buffer)} lines to {url}.")
             sys.stderr.flush()
         result = nametag(
             model= config.model,
@@ -136,6 +143,36 @@ def process(config):
 
     output.close()
 
+def batch_worker(url, config, q):
+    filename = q.get()
+    while(filename is not None):
+        infile = Path(filename)
+        outfile = infile.with_suffix(config.extension)
+        process_file(config, infile, outfile, url)
+        filename = q.get()
+
+def batch_process(config):
+    q = Queue()
+    processes = []
+
+    servers = config.url if isinstance(config.url, list) else [config.url]
+
+    for s in servers:
+        if not s.startswith('http'):
+            if ':' not in s:
+                s = f"{s}:8001"
+            s = f"http://{s}/recognize"
+        proc = Process(target=batch_worker, args=(s, config, q))
+        processes.append(proc)
+        proc.start()
+
+    filelist = Path(config.file_batch) if config.file_batch and config.file_batch != '-' else None
+    with filelist.open() if filelist else sys.stdin as flist:
+        for filename in flist:
+            q.put(filename.strip())
+
+    for s in servers:
+        q.put(None)
 
 if __name__ == '__main__':
     import argparse
@@ -150,7 +187,9 @@ if __name__ == '__main__':
     parser.add_argument("-m", "--model", help="UD language model to use", type=str, default=DEFAULT_MODEL)
     parser.add_argument("-i", "-f", "--infile", help="input file (default=STDIN)", type=str)
     parser.add_argument("-o", "--outfile", help="output file (default=STDOUT)", type=str)
-    parser.add_argument("-u", "--url", help="NameTag API URL (default=LINDAT API)", type=str, default=NAMETAG_API_URL)
+    parser.add_argument("-fb", "--file-batch", help="list of files for batch processing (use '-' for STDIN)", type=str)
+    parser.add_argument("-e", "--extension", help="new extension for output files in the batch processing mode (default='.ne')", type=str, default='.ne')
+    parser.add_argument("-u", "--url", help="NameTag API URL (default=LINDAT API)", type=str, action='append')
     parser.add_argument("-if", "--input-format", help="input format (untokenized/vertical/conllu)", type=str, default="untokenized")
     parser.add_argument("-of", "--output-format", help="output format (xml/vertical/conll/conllu-ne)", type=str, default="conllu-ne")
     parser.add_argument("-b", "--batch", help="batch size in lines (default=1000)", type=int, default="1000", dest="tagger_batch")
@@ -165,10 +204,19 @@ if __name__ == '__main__':
     parser.add_argument("-v", "--verbose", help="report progress", action="store_true")
     parser.add_argument("-nd", "--no-double-lb", help="do NOT double line breaks in untokenized input (a sequence of two linebreaks enforces a paragraph break)", action="store_true")
     args = parser.parse_args()
+    if not args.url:
+        args.url = [LINDAT_API_URL]
     if args.vertical_append or args.vertical_replace or args.vertical_insert:
         args.input_format = 'vertical'
         args.output_format = 'vertical'
     if args.column_count and not (args.vertical_append or args.vertical_replace or args.vertical_insert):
-        parser.error('The -cc/--culomn-count can only be applied in vertical-append/insert/replace mode.')
+        parser.error('The -cc/--column-count can only be applied in vertical-append/insert/replace mode.')
 
-    process(args)
+    if args.file_batch:
+        if args.infile or args.outfile:
+            parser.error("The -i/--infile and -o/--outfile options are not available in batch processing mode.")
+        batch_process(args)
+    else:
+        if args.extension and args.extension != '.ne':
+            parser.error("The -e/--extension option is only available in batch processing mode.")
+        process_file(args)
