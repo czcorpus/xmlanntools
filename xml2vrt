@@ -56,7 +56,8 @@ class TaggedXMLContentHandler(xml.sax.ContentHandler):
         self.exclude_elements = config.get('vrt_exclude_elements', '').replace(',',' ').split()
         self.include_elements = config.get('vrt_include_elements', '').replace(',',' ').split()
         self.wrapper_tag = wrapper_tag
-        self.no_flattening = not config.getboolean('vrt_flatten_nested')
+        self.no_flattening = not config.getboolean('vrt_flatten_nested') and not config.getboolean('vrt_dirty_flatten_nested')
+        self.dirty_flatten = config.getboolean('vrt_dirty_flatten_nested')
         self.flat_override = self.config.get('vrt_flat_override')
         self.flat_separator = self.config.get('vrt_flat_separator', ' ')
         self.flat_levelattr = self.config.get('vrt_flat_level_attribute', 'nested_level')
@@ -92,12 +93,18 @@ class TaggedXMLContentHandler(xml.sax.ContentHandler):
                 self.token[key] = value
         else:
             # other XML element
-            if self.no_flattening:
+            if self.no_flattening or self.token:
                 # no flattening: append to the tag buffer
                 contents = " " + " ".join([f'{a}="{html.escape(attrs.getValue(a))}"' for a in attrs.keys()]) if len(attrs) else ''
-                self.openTagBuffer.append((name, contents, True))
+                self.openTagBuffer.append((name, contents, True, False))
                 if not self.token:
                     self.last_was_token = False
+            elif self.dirty_flatten:
+                # flatten nested elements
+                last = self.close_dirty_flat_element(name)
+                # append element to the levels heap (hierarchy)
+                self.levels.append((name, attrs))
+                self.reopen_dirty_flat_elements(name)
             else:
                 # flatten nested elements
                 first = self.close_flat_element(name)
@@ -152,7 +159,7 @@ class TaggedXMLContentHandler(xml.sax.ContentHandler):
             self.last_was_token = True
         else:
             # other XML element
-            if self.no_flattening:
+            if self.no_flattening or self.token:
                 closed = False
                 # there are elements in the buffer of open elements
                 if not self.keep_empty and len(self.openTagBuffer) and name == self.openTagBuffer[-1][0] \
@@ -170,6 +177,17 @@ class TaggedXMLContentHandler(xml.sax.ContentHandler):
                     if not closed:
                         print('</'+name+'>', file=self.outfile)
                     self.last_was_token = False
+            elif self.dirty_flatten:
+                first = self.close_dirty_flat_element(name)
+                # remove the element from the levels heap (hierarchy)
+                ename, _ = self.levels.pop()
+                if name != ename:
+                    # this should never happen (unless there is a bug)!
+                    raise Exception(f"Unexpected situation: End of '{name}', but last open element was '{ename}'.")
+                self.reopen_dirty_flat_elements(name)
+                # for dirty flattening, print out the openTagBuffer at the end of the document
+                if not len(self.levels):
+                    self.output_tag_buffer()
             else:
                 first = self.close_flat_element(name, original=True)
                 # remove the element from the levels heap (hierarchy)
@@ -205,7 +223,7 @@ class TaggedXMLContentHandler(xml.sax.ContentHandler):
     def output_tag_buffer(self, lastName=None):
         lastClosed = False
         # print out openTagBuffer
-        for i, (tname, tcontents, _) in enumerate(self.openTagBuffer):
+        for i, (tname, tcontents, _, close) in enumerate(self.openTagBuffer):
             if lastName is not None and i == len(self.openTagBuffer)-1:
                 # the last element (lastName) is empty and shall be closed immediately
                 if tname != lastName:
@@ -214,7 +232,9 @@ class TaggedXMLContentHandler(xml.sax.ContentHandler):
                 tag = '<'+tname+tcontents+'/>'
                 lastClosed = True
             else:
-                tag = '<'+tname+tcontents+'>'
+                # closing tags apply to dirty flattening only, otherwise they are printed at the end of the element scope
+                closing = '/' if close else ''
+                tag = '<'+closing+tname+tcontents+'>'
             if self.token:
                 # inside a token: append to its string contents ('word')
                 if not self.strip_word_xml:
@@ -269,9 +289,49 @@ class TaggedXMLContentHandler(xml.sax.ContentHandler):
             # add to the tag buffer
             contents = " " + " ".join([f'{a}="{html.escape(str(v))}"' for a, v in attrs.items()]) if len(attrs) else ''
             is_original = original and name == curname
-            self.openTagBuffer.append((curname, contents, is_original))
+            self.openTagBuffer.append((curname, contents, is_original, False))
             if not self.token:
                 self.last_was_token = False
+
+    def close_dirty_flat_element(self, name):
+        """
+        Close the XML element of the given name
+        """
+        flat_levels = self.flat_levels()
+        last = next((i for i, x in enumerate(reversed(flat_levels)) if x[0] == name), None)
+        if last is None:
+            return None
+        # reverse index again to get the original index in the flattened hierarchy
+        last = len(flat_levels) - 1 - last
+        curname, _ = flat_levels[last]
+        if self.token:
+            if not self.strip_word_xml:
+                self.token['word'] += '</'+curname+'>'
+        else:
+            if self.keep_empty or (len(self.discard_empty) and curname not in self.discard_empty) or curname not in [x[0] for x in list(filter(lambda x: x[3] == False, self.openTagBuffer))]:
+                self.openTagBuffer.append((curname, '', False, True))
+            else:
+                self.openTagBuffer = list(filter(lambda x: not(x[0] == curname and x[3] == False    ), self.openTagBuffer))
+            self.last_was_token = False
+        return last
+
+    def reopen_dirty_flat_elements(self, name):
+        """
+        Reopen XML element of the given name
+        """
+        # reopen XML element and its subelements to the current level of depth again
+        flat_levels = self.flat_levels()
+        last = next((i for i, x in enumerate(reversed(flat_levels)) if x[0] == name), None)
+        if last is None:
+            return
+        # reverse index again to get the original index in the flattened hierarchy
+        last = len(flat_levels) - 1 - last
+        curname, attrs = flat_levels[last]
+        # add to the tag buffer
+        contents = " " + " ".join([f'{a}="{html.escape(str(v))}"' for a, v in attrs.items()]) if len(attrs) else ''
+        self.openTagBuffer.append((curname, contents, False, False))
+        if not self.token:
+            self.last_was_token = False
 
     def flat_levels(self):
         """
@@ -297,11 +357,20 @@ class TaggedXMLContentHandler(xml.sax.ContentHandler):
                 flat.append((name, attrs))
                 cnt += 1
             else:
-                # already seen before: just append new attributes to the first (level) occurence
-                self.merge_attrs(name, flat[index][1], attrs)
+                # already seen before
+                if self.dirty_flatten:
+                    # prepend attributes from the last level seen
+                    last = next((i for i, x in enumerate(reversed(flat)) if x[0] == name), None)
+                    _, lastattrs = flat[len(flat) - 1 - last]
+                    lastattrs = {k: v for k, v in lastattrs.items()}
+                    self.merge_attrs(name, attrs, lastattrs, prepend=True)
+                    flat.append((name, attrs))
+                else:
+                    # just append new attributes to the first (level) occurence
+                    self.merge_attrs(name, flat[index][1], attrs)
         return flat
 
-    def merge_attrs(self, name, baseattrs, newattrs):
+    def merge_attrs(self, name, baseattrs, newattrs, prepend=False):
         """
         Merge (add, overwrite or concatenate) attributes of elements of the same type
         (modifies the baseattrs with newattrs in place)
@@ -311,7 +380,7 @@ class TaggedXMLContentHandler(xml.sax.ContentHandler):
         baseattrs : dict of str
             base attributes (key: value) to merge the new attributes with
         newattrs : dict of str
-            new attributes from a depper nested level to append to the baseattrs
+            new attributes from another level to append to the baseattrs
         """
         for (key, value) in newattrs.items():
             # allow configuration to override attribute values instead of concatenating them
@@ -321,7 +390,10 @@ class TaggedXMLContentHandler(xml.sax.ContentHandler):
             else:
                 # not new and not to be overriden: concatenate values using default (or more specific, if specified) separator
                 sep = self.config.get(f'vrt_flat_separator_{name}_{key}', self.flat_separator)
-                baseattrs[key] += sep + value
+                if prepend:
+                    baseattrs[key] = value + sep + baseattrs[key]
+                else:
+                    baseattrs[key] += sep + value
         # always add counter of nested level for all nested elements
         baseattrs[self.flat_levelattr] = baseattrs.get(self.flat_levelattr, 0) + 1
 
@@ -423,6 +495,7 @@ if __name__ == "__main__":
     parser.add_argument("-g", "--glue", help="name of the glue element (default: 'g')", type=str, dest="vrt_glue")
     parser.add_argument("-F", "--fragment", help="input file is a XML fragment (needing a wrapping root element)", action="store_true", dest='xml_fragment')
     parser.add_argument("-fl", "--flatten", help="flatten nested XML structures", action="store_true", dest="vrt_flatten_nested")
+    parser.add_argument("-dfl", "--dirty_flatten", help="dirty flatten nested XML structures only by breaking XML rules", action="store_true", dest="vrt_dirty_flatten_nested")
     args = parser.parse_args()
 
     # read configuration from files
