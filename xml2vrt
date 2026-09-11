@@ -505,7 +505,7 @@ if __name__ == "__main__":
     parser.add_argument("-g", "--glue", help="name of the glue element (default: 'g')", type=str, dest="vrt_glue")
     parser.add_argument("-F", "--fragment", help="input file is a XML fragment (needing a wrapping root element)", action="store_true", dest='xml_fragment')
     parser.add_argument("-fl", "--flatten", help="flatten nested XML structures", action="store_true", dest="vrt_flatten_nested")
-    parser.add_argument("-dfl", "--dirty_flatten", help="dirty flatten nested XML structures by breaking XML nesting rules", action="store_true", dest="vrt_dirty_flatten_nested")
+    parser.add_argument("-dfl", "--dirty-flatten", help="dirty flatten nested XML structures by breaking XML nesting rules", action="store_true", dest="vrt_dirty_flatten_nested")
     parser.add_argument("-Wb", "--warn-breaking-except", type=str,
                         help="raise warning when flattening breaks elements other than the specified ones (comma-separated list of element names, e.g. `-Wb hi,i,b,u`)")
     args = parser.parse_args()
