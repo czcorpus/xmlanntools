@@ -61,6 +61,7 @@ class TaggedXMLContentHandler(xml.sax.ContentHandler):
         self.flat_override = self.config.get('vrt_flat_override')
         self.flat_separator = self.config.get('vrt_flat_separator', ' ')
         self.flat_levelattr = self.config.get('vrt_flat_level_attribute', 'nested_level')
+        self.breakable = config.get('warn_breaking_except').replace(',',' ').split() if config.get('warn_breaking_except', None) else None
         # if no included elements configured, just extract everything (i.e. the whole root element) by default
         self.include_scope = not len(self.include_elements)
         # excluded elements may be nested, check correct level at the end
@@ -273,6 +274,9 @@ class TaggedXMLContentHandler(xml.sax.ContentHandler):
                     if not self.strip_word_xml:
                         self.token['word'] += '</'+curname+'>'
                 else:
+                    if self.breakable and curname not in self.breakable and i != first:
+                        print("Warning: Element <{0}> broken by flattening the element <{1}>."
+                                .format(curname, name), file=sys.stderr)
                     print('</'+curname+'>', file=self.outfile)
                     self.last_was_token = False
         return first
@@ -470,7 +474,13 @@ if __name__ == "__main__":
         
              '-F' Input file is a XML fragment (needing a wrapping root element).
 
-    #        '-fl' Flatten nested XML structures.
+             '-fl' Flatten nested XML structures.
+
+             '-dfl' Dirty flatten nested XML structures (breaks XML nesting rules).
+
+             `-Wb <elements>` to issue warning whenever flattening breaks another element than
+             one of the listed ones (comma-separated list of element names, e.g. `-Wb hi,u,i,b`);
+             no warnings are issued if `-Wb` is omitted
     """
     
     import os
@@ -495,7 +505,9 @@ if __name__ == "__main__":
     parser.add_argument("-g", "--glue", help="name of the glue element (default: 'g')", type=str, dest="vrt_glue")
     parser.add_argument("-F", "--fragment", help="input file is a XML fragment (needing a wrapping root element)", action="store_true", dest='xml_fragment')
     parser.add_argument("-fl", "--flatten", help="flatten nested XML structures", action="store_true", dest="vrt_flatten_nested")
-    parser.add_argument("-dfl", "--dirty_flatten", help="dirty flatten nested XML structures only by breaking XML rules", action="store_true", dest="vrt_dirty_flatten_nested")
+    parser.add_argument("-dfl", "--dirty_flatten", help="dirty flatten nested XML structures by breaking XML nesting rules", action="store_true", dest="vrt_dirty_flatten_nested")
+    parser.add_argument("-Wb", "--warn-breaking-except", type=str,
+                        help="raise warning when flattening breaks elements other than the specified ones (comma-separated list of element names, e.g. `-Wb hi,i,b,u`)")
     args = parser.parse_args()
 
     # read configuration from files
