@@ -327,7 +327,13 @@ class TaggedXMLContentHandler(xml.sax.ContentHandler):
                 ):
                     self.openTagBuffer.append((curname, '', original, True))
             else:
-                self.openTagBuffer = list(filter(lambda x: not(x[0] == curname and x[3] == False), self.openTagBuffer))
+                # only remove the last starting tag of this type (if there is any in the buffer), do not remove possible other original empty elements of the same type
+                last_idx = next((i for i, x in enumerate(reversed(self.openTagBuffer)) if x[0] == curname), None)
+                last_idx = len(self.openTagBuffer) - 1 - last_idx
+                last = self.openTagBuffer[last_idx]
+                # is it a starting tag?
+                if last[3] == False:
+                    self.openTagBuffer.pop(last_idx)
             self.last_was_token = False
         return last
 
