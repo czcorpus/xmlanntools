@@ -410,10 +410,16 @@ if __name__ == '__main__':
     parser.add_argument("infile", help="input XML file name (UTF-8)")
     parser.add_argument("-c", "--config", help="additional config file", type=str)
     parser.add_argument("-p", "--profile", help="config profile to use", type=str, default='DEFAULT')
-    parser.add_argument("-t", "--text-elements", help="text elements to extract contents from", type=str)
-    parser.add_argument("-e", "--exclude-elements", help="elements to ignore", type=str)
+    parser.add_argument("-t", "--text-elements", help="text elements to extract contents from", type=str, action='append')
+    parser.add_argument("-e", "--exclude-elements", help="elements to ignore", type=str, action='append')
     parser.add_argument("-kl", "--keep-linebreaks", help="keep line breaks within text elements", action="store_true")
     args = parser.parse_args()
+
+    PARAM_SEP = ' '
+    if isinstance(args.text_elements, list):
+        args.text_elements = PARAM_SEP.join(args.text_elements)
+    if isinstance(args.exclude_elements, list):
+        args.exclude_elements = PARAM_SEP.join(args.exclude_elements)
 
     # read configuration from files
     scriptpath = path = os.path.dirname(os.path.realpath(__file__))

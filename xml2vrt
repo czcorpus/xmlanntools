@@ -510,21 +510,21 @@ if __name__ == "__main__":
     parser.add_argument("infile", help="input XML file name")
     parser.add_argument("-c", "--config", help="additional config file", type=str)
     parser.add_argument("-p", "--profile", help="config profile to use", type=str, default='DEFAULT')
-    parser.add_argument("-a", "--attributes", help="attribute names (except first position, separated by comma)", type=str)
+    parser.add_argument("-a", "--attributes", help="attribute names (except first position, separated by comma)", type=str, action='append')
     parser.add_argument("-te", "--token-element", help="name of token element", type=str)
     parser.add_argument("-pe", "--punct-element", help="name of punctuation element", type=str)
-    parser.add_argument("-i", "--include-elements", help="(sub)elements to extract (default: document root)", type=str, dest='vrt_include_elements')
-    parser.add_argument("-e", "--exclude-elements", help="elements to skip (exclude from the extraction)", type=str, dest='vrt_exclude_elements')
+    parser.add_argument("-i", "--include-elements", help="(sub)elements to extract (default: document root)", type=str, dest='vrt_include_elements', action='append')
+    parser.add_argument("-e", "--exclude-elements", help="elements to skip (exclude from the extraction)", type=str, dest='vrt_exclude_elements', action='append')
     parser.add_argument("-kt", "--keep-token-tags", help="keep tags within tokens", action="store_true", dest="vrt_keep_token_tags")
     parser.add_argument("-ke", "--keep-empty", help="keep empty elements", action="store_true", dest="vrt_keep_empty")
-    parser.add_argument("-de", "--discard-empty", help="elements to discard if they are empty", type=str, dest='vrt_discard_empty')
+    parser.add_argument("-de", "--discard-empty", help="elements to discard if they are empty", type=str, dest='vrt_discard_empty', action='append')
     parser.add_argument("-df", "--discard-freetext", help="discard free (non-token) text contents", action="store_true", dest="vrt_discard_freetext")
     parser.add_argument("-ng", "--no-glue", help="do not insert glue element (indicating missing space between tokens)", action="store_true", dest="vrt_no_glue")
     parser.add_argument("-g", "--glue", help="name of the glue element (default: 'g')", type=str, dest="vrt_glue")
     parser.add_argument("-F", "--fragment", help="input file is a XML fragment (needing a wrapping root element)", action="store_true", dest='xml_fragment')
     parser.add_argument("-fl", "--flatten", help="flatten nested XML structures", action="store_true", dest="vrt_flatten_nested")
     parser.add_argument("-dfl", "--dirty-flatten", help="dirty flatten nested XML structures by breaking XML nesting rules", action="store_true", dest="vrt_dirty_flatten_nested")
-    parser.add_argument("-Wb", "--warn-breaking-except", type=str,
+    parser.add_argument("-Wb", "--warn-breaking-except", type=str, action='append',
                         help="raise warning when flattening breaks elements other than the specified ones (comma-separated list of element names, e.g. `-Wb hi,i,b,u`)")
     args = parser.parse_args()
 
@@ -535,6 +535,18 @@ if __name__ == "__main__":
 
     if args.vrt_keep_empty and args.vrt_discard_empty:
         parser.error("Options '-ke/--keep-empty' and '-de/--discard-empty' are mutually exclusive. The option '-de' already implies keeping of empty elements other than those specified.")
+
+    PARAM_SEP = ' '
+    if isinstance(args.vrt_discard_empty, list):
+        args.vrt_discard_empty = PARAM_SEP.join(args.vrt_discard_empty)
+    if isinstance(args.warn_breaking_except, list):
+        args.warn_breaking_except = PARAM_SEP.join(args.warn_breaking_except)
+    if isinstance(args.vrt_include_elements, list):
+        args.vrt_include_elements = PARAM_SEP.join(args.vrt_include_elements)
+    if isinstance(args.vrt_exclude_elements, list):
+        args.vrt_exclude_elements = PARAM_SEP.join(args.vrt_exclude_elements)
+    if isinstance(args.attributes, list):
+        args.attributes = PARAM_SEP.join(args.attributes)
 
     # read configuration from files
     scriptpath = path = os.path.dirname(os.path.realpath(__file__))

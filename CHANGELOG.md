@@ -1,5 +1,24 @@
 # Changelog
 
+
+### xml2standoff
+
+- allow multiple specification of CLI options -t, -e
+
+### ann2standoff
+
+- allow multiple specification of CLI options -a, -ea
+
+### standoff2xml
+
+- allow multiple specification of CLI options -me, -ne, -Wb
+
+### xml2vrt
+
+- implementation of "dirty flattening" (breaks XML rules in the vertical, but keeps structures)
+- allow multiple specification of CLI options -a, -i, -e, -de, -Wb
+- fail on specification of conflicting CLI options (configuration options not checked!)
+
 ## 1.3.3 - 2026-08-07
 
 ### process

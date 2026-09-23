@@ -372,12 +372,20 @@ if __name__ == '__main__':
     parser.add_argument("-c", "--config", help="additional config file", type=str)
     parser.add_argument("-p", "--profile", help="config profile to use", type=str, default='DEFAULT')
     parser.add_argument("-t", "--tokens-only", help="ignore sentence boundaries from the `.ann.json` annotation", action="store_true")
-    parser.add_argument("-Wb", "--warn-breaking-except", type=str,
+    parser.add_argument("-Wb", "--warn-breaking-except", type=str, action='append',
                         help="raise warning when breaking elements other than the specified ones (comma-separated list of element names, e.g. `-Wb hi,stage,foreign`)")
     parser.add_argument("-kb", "--keep-between-sentences", help="keep broken elements between sentences", action="store_true")
-    parser.add_argument("-ne", "--nest-elements", help="elements to be preferably nested inside the annotation elements", type=str)
-    parser.add_argument("-me", "--merge-elements", help="contraints on elements to be merged wherever possible", type=str)
+    parser.add_argument("-ne", "--nest-elements", help="elements to be preferably nested inside the annotation elements", type=str, action='append')
+    parser.add_argument("-me", "--merge-elements", help="constraints on elements to be merged wherever possible", type=str, action='append')
     args = parser.parse_args()
+
+    PARAM_SEP = ' '
+    if isinstance(args.warn_breaking_except, list):
+        args.warn_breaking_except = PARAM_SEP.join(args.warn_breaking_except)
+    if isinstance(args.nest_elements, list):
+        args.nest_elements = PARAM_SEP.join(args.nest_elements)
+    if isinstance(args.merge_elements, list):
+        args.merge_elements = PARAM_SEP.join(args.merge_elements)
 
     # read configuration from files
     scriptpath = path = os.path.dirname(os.path.realpath(__file__))

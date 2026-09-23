@@ -440,8 +440,8 @@ if __name__ == '__main__':
     parser.add_argument("-P", "--preprocess", help="preprocessing to use", type=str, choices=PREPROCESSORS.keys())
     parser.add_argument("-r", "--replacements", help="file with replacements (TSV)", type=str)
     parser.add_argument("-m", "--matches", help="file with matches (TSV)", type=str)
-    parser.add_argument("-a", "--attributes", help="attribute names (except first position, separated by comma)", type=str)
-    parser.add_argument("-ea", "--exclude-attributes", help="attribute names (except first position, separated by comma)", type=str)
+    parser.add_argument("-a", "--attributes", help="attribute names (except first position, separated by comma)", type=str, action='append')
+    parser.add_argument("-ea", "--exclude-attributes", help="attribute names (except first position, separated by comma)", type=str, action='append')
     parser.add_argument("-te", "--token-element", help="name of token element", type=str)
     parser.add_argument("-pe", "--punct-element", help="name of punctuation element", type=str)
     parser.add_argument("-pc", "--punctuation", help="identification of punctuation", type=str)
@@ -452,6 +452,12 @@ if __name__ == '__main__':
     parser.add_argument("-vt", "--virtual-tokens", help="name of virtual subtokens for CoNLL-U second level tokenization", type=str)
     parser.add_argument("-va", "--virtual-token-attr", help="name of virtual subtoken attribute to capture form", type=str)
     args = parser.parse_args()
+
+    PARAM_SEP = ' '
+    if isinstance(args.attributes, list):
+        args.attributes = PARAM_SEP.join(args.attributes)
+    if isinstance(args.exclude_attributes, list):
+        args.exclude_attributes = PARAM_SEP.join(args.exclude_attributes)
 
     # read configuration from files
     scriptpath = path = os.path.dirname(os.path.realpath(__file__))
