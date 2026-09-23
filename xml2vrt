@@ -528,6 +528,14 @@ if __name__ == "__main__":
                         help="raise warning when flattening breaks elements other than the specified ones (comma-separated list of element names, e.g. `-Wb hi,i,b,u`)")
     args = parser.parse_args()
 
+    if args.vrt_flatten_nested and args.vrt_dirty_flatten_nested:
+        parser.error("Options '-fl/--flatten' and '-dfl/--dirty-flatten' are mutually exclusive.")
+    if args.warn_breaking_except and not args.vrt_flatten_nested:
+        parser.error("Option '-Wb/--warn-breaking-except' is only relevant when flattening is enabled ('-fl/--flatten').")
+
+    if args.vrt_keep_empty and args.vrt_discard_empty:
+        parser.error("Options '-ke/--keep-empty' and '-de/--discard-empty' are mutually exclusive. The option '-de' already implies keeping of empty elements other than those specified.")
+
     # read configuration from files
     scriptpath = path = os.path.dirname(os.path.realpath(__file__))
     curpath = os.getcwd()
