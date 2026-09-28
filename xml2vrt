@@ -31,8 +31,8 @@ class TaggedXMLContentHandler(xml.sax.ContentHandler):
         self.token = None
         # temporary buffer of open elements
         self.openTagBuffer = []
-        # current whitespace buffer (relevant for glue)
-        self.whitespace = ''
+        # current whitespace buffer (relevant for glue): never start with a glue
+        self.whitespace = ' '
         # token counter (any use?)
         self.tokencnt = 0
         # tracking the XML hierarchy of elements from the root to the currently open element
