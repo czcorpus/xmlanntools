@@ -33,8 +33,6 @@ class TaggedXMLContentHandler(xml.sax.ContentHandler):
         self.openTagBuffer = []
         # current whitespace buffer (relevant for glue)
         self.whitespace = ''
-        # was last element a token? (relevant for glue)
-        self.last_was_token = False
         # token counter (any use?)
         self.tokencnt = 0
         # tracking the XML hierarchy of elements from the root to the currently open element
@@ -98,8 +96,6 @@ class TaggedXMLContentHandler(xml.sax.ContentHandler):
                 # no flattening: append to the tag buffer
                 contents = " " + " ".join([f'{a}="{html.escape(attrs.getValue(a))}"' for a in attrs.keys()]) if len(attrs) else ''
                 self.openTagBuffer.append((name, contents, True, False))
-                if not self.token:
-                    self.last_was_token = False
             elif self.dirty_flatten:
                 # flatten nested elements
                 last = self.close_dirty_flat_element(name)
@@ -132,7 +128,7 @@ class TaggedXMLContentHandler(xml.sax.ContentHandler):
             # print out openTagBuffer
             self.output_tag_buffer()
             # print glue element?
-            if self.glue_element is not None and self.whitespace == '' and self.last_was_token:
+            if self.glue_element is not None and self.whitespace == '':
                 print("<{0}/>".format(self.glue_element), file=self.outfile)
             if self.token is None:
                 raise Exception(f"Nesting of token elements ('{', '.join(self.token_elements)}') is not supported.")
@@ -157,7 +153,6 @@ class TaggedXMLContentHandler(xml.sax.ContentHandler):
             print(file=self.outfile)
             self.token = None
             self.whitespace = ''
-            self.last_was_token = True
         else:
             # other XML element
             if self.no_flattening or self.token:
@@ -177,7 +172,6 @@ class TaggedXMLContentHandler(xml.sax.ContentHandler):
                 else:
                     if not closed:
                         print('</'+name+'>', file=self.outfile)
-                    self.last_was_token = False
             elif self.dirty_flatten:
                 first = self.close_dirty_flat_element(name, original=True)
                 # remove the element from the levels heap (hierarchy)
@@ -218,7 +212,7 @@ class TaggedXMLContentHandler(xml.sax.ContentHandler):
             # if non-token (free) text contents allowed, output it as one single line "token"
             print(self.lbre.sub(" ", contents.strip()), file=self.outfile)
         elif self.glue_element is not None:
-            # just whitespace: relevant for glue insertion
+            # whitespace or other content discarded: relevant for glue insertion
             self.whitespace += contents
 
     def output_tag_buffer(self, lastName=None):
@@ -284,7 +278,6 @@ class TaggedXMLContentHandler(xml.sax.ContentHandler):
                         print("Warning: Element <{0}> broken by flattening the element <{1}>."
                                 .format(curname, name), file=sys.stderr)
                     print('</'+curname+'>', file=self.outfile)
-                    self.last_was_token = False
         return first
 
     def reopen_flat_elements(self, name, first=None, original=False):
@@ -300,8 +293,6 @@ class TaggedXMLContentHandler(xml.sax.ContentHandler):
             contents = " " + " ".join([f'{a}="{html.escape(str(v))}"' for a, v in attrs.items()]) if len(attrs) else ''
             is_original = original and name == curname
             self.openTagBuffer.append((curname, contents, is_original, False))
-            if not self.token:
-                self.last_was_token = False
 
     def close_dirty_flat_element(self, name, original=False):
         """
@@ -334,7 +325,6 @@ class TaggedXMLContentHandler(xml.sax.ContentHandler):
                 # is it a starting tag?
                 if last[3] == False:
                     self.openTagBuffer.pop(last_idx)
-            self.last_was_token = False
         return last
 
     def reopen_dirty_flat_elements(self, name, original=False):
@@ -352,8 +342,6 @@ class TaggedXMLContentHandler(xml.sax.ContentHandler):
         # add to the tag buffer
         contents = " " + " ".join([f'{a}="{html.escape(str(v))}"' for a, v in attrs.items()]) if len(attrs) else ''
         self.openTagBuffer.append((curname, contents, original, False))
-        if not self.token:
-            self.last_was_token = False
 
     def flat_levels(self):
         """
