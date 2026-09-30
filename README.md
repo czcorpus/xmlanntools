@@ -246,7 +246,9 @@ The script can optionally **flatten any nested XML structures**, since nesting o
 
 2) Dirty flattening by using the option `-dfl` or `--dirty-flatten` (configuration option `vrt_dirty_flatten_nested`) avoids the risk of breaking other structural annotation by ignoring the XML rules for nesting elements (which are irrelevant for search engines based on the vertical format anyway). This method seems therefore more preferable for the vertical output format. The same configuration options for dealing with attributes mentioned above apply here as well.
 
-NOTE: Flattening is *never* applied to XML tags *inside* tokens, if these are preserved using the option `-kt/--keep-token-tags` mentioned above. As probably expected, the option `-ke/--keep-empty` is always applied to original annotation only, but never to empty fragments of annotation created in the process of flattening nested elements - these are always discarded.
+NOTE: Flattening is *never* applied to XML tags *inside* tokens, if these are preserved using the option `-kt/--keep-token-tags` mentioned above.
+
+NOTE: As probably expected, the option `-ke/--keep-empty` is always applied to original annotation only, but never to empty fragments of annotation created in the process of flattening nested elements - these are always discarded.
 
 If there are text contents found within elements other than the specified token element (`w` by default, can be specified using the option `-te <name>`, configuration option `token_element`) or the specified punctuation element (`pc` by default, can be specified using the option `-pe <name>` or configuration option `punct_element`), the whole text fragments are output as single line "tokens" by default. (We call them "free text" contents here.) By using the option `-df` (or `--discard-freetext`, configuration option `vrt_discard_freetext`), such contents will be completely discarded from the output vertical.
 
