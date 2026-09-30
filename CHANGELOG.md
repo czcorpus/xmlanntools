@@ -18,6 +18,7 @@
 - implementation of "dirty flattening" (breaks XML rules in the vertical, but keeps structures)
 - allow multiple specification of CLI options -a, -i, -e, -de, -Wb
 - fail on specification of conflicting CLI options (configuration options not checked!)
+- FIX glue insertion to be applied everywhere where appropriate (incl. free text)
 
 ## 1.3.3 - 2026-08-07
 
