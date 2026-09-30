@@ -209,8 +209,17 @@ class TaggedXMLContentHandler(xml.sax.ContentHandler):
             # add contents to current token
             self.token['word'] += contents
         elif not self.discard_freetext and contents.strip():
+            lstrip = contents.lstrip()
+            if len(lstrip) < len(contents):
+                self.whitespace = ' '
+            if self.glue_element is not None and self.whitespace == '':
+                print("<{0}/>".format(self.glue_element), file=self.outfile)
+            self.whitespace = ''
+            lrstrip = lstrip.rstrip()
+            if len(lrstrip) < len(lstrip):
+                self.whitespace = ' '
             # if non-token (free) text contents allowed, output it as one single line "token"
-            print(self.lbre.sub(" ", contents.strip()), file=self.outfile)
+            print(self.lbre.sub(" ", lrstrip), file=self.outfile)
         elif self.glue_element is not None:
             # whitespace or other content discarded: relevant for glue insertion
             self.whitespace += contents
