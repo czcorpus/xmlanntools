@@ -1,5 +1,6 @@
 # Changelog
 
+## 1.4 - 2026-10-12
 
 ### xml2standoff
 
